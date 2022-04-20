@@ -76,6 +76,8 @@ int main(int argc, char* argv[])
     PDBFile outfile(arg_out, ios::out);
     outfile << s;
     outfile.close();
+    
+    cout <<  BWHITE <<  "\n   ==> File created:  " << BBLUE << arg_out << "\n" << RESET ;
 
     /*
                  (meow!)
