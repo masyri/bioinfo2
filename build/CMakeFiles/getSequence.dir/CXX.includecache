@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/masy00001/Documents/bioinfo2/Uebung01/getSequence.C
+BALL/FORMAT/PDBFile.h
+-
+BALL/STRUCTURE/peptides.h
+-
+BALL/STRUCTURE/fragmentDB.h
+-
+BALL/KERNEL/system.h
+-
+BALL/KERNEL/chain.h
+-
+BALL/KERNEL/protein.h
+-
+BALL/KERNEL/selector.h
+-
+BALL/KERNEL/PTE.h
+-
+iostream
+-
+

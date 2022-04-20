@@ -1,0 +1,17 @@
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/test.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/createH2O.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/getSequence.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/example1.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles/Uebung01.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/CMakeFiles/test.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/CMakeFiles/TestSuite1_tests.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/CMakeFiles/test_driver.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/gtest/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/gtest/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/gtest/CMakeFiles/test.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/gtest/CMakeFiles/gtest_main.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/build/tests/gtest/CMakeFiles/gtest.dir

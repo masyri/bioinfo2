@@ -1,0 +1,16 @@
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/Uebung01.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/example1.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/getSequence.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/test.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/test_driver.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/TestSuite1_tests.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/test.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/rebuild_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/gtest.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/gtest_main.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/edit_cache.dir
+/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/test.dir
