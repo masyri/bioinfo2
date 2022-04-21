@@ -80,7 +80,7 @@ void letterCodes(ChainIterator ch_it){
 
 int main(int argc, char* argv[]) {
 
-    std::string arg_In  = argv[1];
+    std::string arg_In = argv[1];
 // read the PDB-file into a BALL::System
     PDBFile f(arg_In);
     System S;
@@ -129,6 +129,17 @@ int main(int argc, char* argv[]) {
         }
 
 // water molekules
-    waterMolekules(S);
+        waterMolekules(S);
+
+
+        String ball2_seq = "";
+        for (ChainIterator ch_it = protein->beginChain(); +ch_it; ++ch_it) {
+            for (ResidueIterator r_it = ch_it->beginResidue(); +r_it; r_it++) {
+                if ((r_it->isAminoAcid()) && (r_it->getName() != String("ACE"))) {
+                    ball2_seq += Peptides::OneLetterCode(r_it->getName());
+                }
+            }
+        }
+        std::cout << "\ncode: " << ball2_seq << std::endl;
     }
 }

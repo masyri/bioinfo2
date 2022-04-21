@@ -45,7 +45,6 @@ int main(int argc, char* argv[])
     m.insert(H1);
     m.insert(H2);
 
-
     double angle_input  = atof(argv[1]);
     Angle angle(angle_input, false);
     Vector3 rotationaxis(1., 0., 0.);
