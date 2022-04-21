@@ -38,33 +38,29 @@ if(NOT Boost_FOUND)
 endif()
 
 SET(Boost_LIBRARIES
-	${Boost_IOSTREAMS_LIBRARY}
-	${Boost_FILESYSTEM_LIBRARY}
-	${Boost_SYSTEM_LIBRARY}
-	${Boost_PROGRAM_OPTIONS_LIBRARY}
-)
+		${Boost_IOSTREAMS_LIBRARY}
+		${Boost_FILESYSTEM_LIBRARY}
+		${Boost_SYSTEM_LIBRARY}
+		${Boost_PROGRAM_OPTIONS_LIBRARY}
+		)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-# Add a new library, which is used for the executable below and
-# for the tests in test/CMakeLists.txt
-# Here, you can also add new files to your project
-add_library(Uebung01 SHARED
-        Test.hpp
-        Test.cpp
-)
 
-target_link_libraries(Uebung01 BALL)
+
+target_link_libraries( BALL)
 
 # Add new program example1
 # Here, you can also add new programs
-add_executable(example1 example.C)
-target_link_libraries(example1 Uebung01 BALL)
+# add_executable(example1 example.C)
+# target_link_libraries(example1 Uebung01 BALL)
 
-add_executable(getSequence getSequence.C)
-target_link_libraries(getSequence Uebung01 BALL)
+# add_executable(getSequence getSequence.C)
+# target_link_libraries(getSequence Uebung01 BALL)
 
-add_executable(createH2O createH2O.C)
-target_link_libraries(createH2O Uebung01 BALL)
+add_executable(dssp Main.cpp DSSP.cpp DSSP.h console/console.h console/console.cpp console/Color.h console/Color.cpp)
+target_link_libraries(dssp BALL)
 
 add_subdirectory(tests)
+
+
