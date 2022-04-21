@@ -20,7 +20,11 @@ public:
     IJ_Tuple(NH_Group NH,CO_Group CO) {this->NH = &NH;this->CO = &CO;}
     NH_Group *NH;
     CO_Group *CO;
-    std::string toString() { return ""; }
+    std::string toString() { 
+        std::stringstream s("");
+        s << "\n ( " << NH->indices << " , " << CO->indices << " )";
+        return s.str();
+    }
 
 };
 
