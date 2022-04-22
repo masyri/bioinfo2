@@ -14,7 +14,10 @@
 #include "Groups.h"
 
 
-
+/*
+    This Class is a H-Bond and 
+    contains the NH and CO Group and their indices
+*/
 class IJ_Tuple { // H-Bond in (i,j) - Format
 public:
     IJ_Tuple(NH_Group NH,CO_Group CO) {this->NH = &NH;this->CO = &CO;}
