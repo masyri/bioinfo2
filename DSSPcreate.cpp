@@ -16,6 +16,10 @@ DSSP::DSSP(BALL::System S) {
     /* S.addHydrogens() */
 
 
+    // ToDo: Space3D erstellen und alle Groups einsortieren, dazu berechnen wie groß die max-Koordinaten sind
+
+
+
     // iterate over all atoms to find NH- and CO-Groups
     for(auto iter=S.atoms().begin();iter!=S.atoms().end();iter++) // Hoffe der Iterator wird so initialisiert und funktioniert so
         {
@@ -81,4 +85,40 @@ void DSSP::startAlgorithm() {
             }
         }
     }
+
+
+    //
+    //
+    // Alternative Box-Suche
+    //
+
+        for(CO_Group CO : CO_Groups) {
+
+        // look for the position of the O-Atom of this Group
+        Vector3 pos = CO.O->getPosition();
+        double x = pos.x;
+        double y = pos.y;
+        double z = pos.z; 
+
+        // look for all near NH-Groups/H-Atoms
+        std::vector<NH_Group*> near_NHgroups = Space.search( x,  y,  z);
+
+        // Iteriere über alle NH-Gruppen, die in den Koordinatenboxen liegen
+        for(NH_Group NH : near_NHgroups) {
+            if (CO.checkDistance(NH,2.5)) {
+                found_NH = &NH;
+                // check for the other values:
+                bool energy = CO.checkEnergy(NH,1.0);
+                bool angle = CO.checkAngle(NH,120.0);
+                if (energy && angle) { // if all values correct add this as a Hydrogen-Bond to results
+                    IJ_Tuple ij(NH,CO);
+                    this->result.push_back(ij);
+                }
+            }
+        }
+    }
+
+
+
+
 }
