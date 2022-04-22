@@ -58,7 +58,19 @@ target_link_libraries( BALL)
 # add_executable(getSequence getSequence.C)
 # target_link_libraries(getSequence Uebung01 BALL)
 
-add_executable(dssp Main.cpp DSSP.cpp DSSP.h console/console.h console/console.cpp console/Color.h console/Color.cpp)
+add_executable(dssp 
+			Main.cpp 
+			DSSPbonds.cpp 
+			DSSPcreate.cpp 
+			DSSP.h 
+			console/console.h 
+			console/console.cpp 
+			console/Color.h 
+			console/Color.cpp
+			Groups.cpp
+			Groups.h
+			Space3D.cpp
+			Space3D.h)
 target_link_libraries(dssp BALL)
 
 add_subdirectory(tests)
