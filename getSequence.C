@@ -110,7 +110,16 @@ int main(int argc, char* argv[]) {
         Protein *protein = S.getProtein(0);
 
 // get the protein's sequence
-        std::cout << Peptides::GetSequence(*protein) << std::endl;
+        String ball2_seq = "";
+        for (ChainIterator ch_it = protein->beginChain(); +ch_it; ++ch_it) {
+            for (ResidueIterator r_it = ch_it->beginResidue(); +r_it; r_it++) {
+                if ((r_it->isAminoAcid()) && (r_it->getName() != String("ACE"))) {
+                    ball2_seq += Peptides::OneLetterCode(r_it->getName());
+                }
+            }
+        }
+        std::cout << "\nSequence: " << ball2_seq << std::endl;
+        
 
 // get the number of chains in the protein
         std::cout << "\nNumber of chains in the protein: " << protein->countChains() << std::endl;
@@ -120,7 +129,6 @@ int main(int argc, char* argv[]) {
         int number = 1;
         for (ChainIterator ch_it = protein->beginChain(); +ch_it; ++ch_it) {
 // get the number of residues per chain
-// ATOME ZÄHLEN FEHLT
             std::cout << "\n\nCHAIN " << number << std::endl;
             std::cout << "\nNumber of residues: " << ch_it->countResidues() << std::endl;
             letterCodes(ch_it);
@@ -131,15 +139,5 @@ int main(int argc, char* argv[]) {
 // water molekules
         waterMolekules(S);
 
-
-        String ball2_seq = "";
-        for (ChainIterator ch_it = protein->beginChain(); +ch_it; ++ch_it) {
-            for (ResidueIterator r_it = ch_it->beginResidue(); +r_it; r_it++) {
-                if ((r_it->isAminoAcid()) && (r_it->getName() != String("ACE"))) {
-                    ball2_seq += Peptides::OneLetterCode(r_it->getName());
-                }
-            }
-        }
-        std::cout << "\ncode: " << ball2_seq << std::endl;
     }
 }
