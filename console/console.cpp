@@ -22,7 +22,7 @@ void console::ShowHeader() {
     std::cout << b << "\n    /   \\   /   \\   /   \\                  ";
     std::cout << B << "\n         D S     S P     Protein Structure ";
     std::cout << B << "\n                         Assignment        ";
-    std::cout << B << "\n\n";
+    std::cout << B << "\n";
 
 
 }

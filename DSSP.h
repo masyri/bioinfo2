@@ -12,11 +12,14 @@
 #include <BALL/KERNEL/PTE.h>
 #include <BALL/FORMAT/PDBFile.h>
 #include "Groups.h"
+#include <sstream>
 
 
 /*
+
     This Class is a H-Bond and 
     contains the NH and CO Group and their indices
+
 */
 class IJ_Tuple { // H-Bond in (i,j) - Format
 public:
@@ -33,22 +36,33 @@ public:
 
 
 
+
+/*
+
+    This Class reads all NH/CO Groups from a given System 
+    and create a List of H-Bonds 'results'
+
+*/
 class DSSP {
 public:
 
     DSSP(BALL::System S);
 
-    BALL::Atom* returnCNeighbor(Atom* Source);
-
     void startAlgorithm();
 
     int printResults() {int i = 0; for(IJ_Tuple T : result) {cout << "\n" << T.toString();i++;} return i;};
+
+    void removeHBonds();
+
+    void computeHelices(std::string file_out);
+
+    static void createAS_File(std::vector<char> AS, std::vector<char> TY,std::string file_out);
 
     BALL::System S;
     
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
-    std::vector<IJ_Tuple> result;
+    std::vector<IJ_Tuple> result;    // List of H-Bonds
 
 };
 

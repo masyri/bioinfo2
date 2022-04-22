@@ -44,8 +44,6 @@ using namespace BALL;
 class NH_Group {
 public:
 
-
-
     NH_Group(Atom *H, Atom *N) {
         this->H = H;
         this->N = N;
@@ -57,7 +55,6 @@ public:
     Atom *N;
     int indices = -1;
 
-
     std::string Group2String() {
         std::stringstream s("");
 
@@ -68,8 +65,6 @@ public:
         return s.str();
 
     }
-
-
 
 };
 
