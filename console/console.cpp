@@ -49,15 +49,17 @@ void console::Help(std::string message) {
  *
  * statistics
  **/
-void console::ShowInputs(std::string file, int atoms, int NH, int CO, int hbonds) {
+void console::ShowInputs(std::string file_in, std::string file_out, int atoms, int NH, int CO, int hbonds_all, int hbonds_after_removing) {
 
-    std::cout << C::BWHITE  <<    "";
-    std::cout << C::BWHITE  <<            "\n  | file:               "<< C::BCYAN  << file ;
-    std::cout << C::BWHITE  <<            "\n  | count all atoms:    "<< C::BMAGENTA  << atoms ;
-    std::cout << C::BWHITE  <<            "\n  | count NH-Groups:    "<< C::BBLUE  << NH ;
-    std::cout << C::BWHITE  <<            "\n  | count CO-Groups:    "<< C::BBLUE  << CO ;
-    std::cout << C::BWHITE  <<            "\n  | -> H-Bonds     :    "<< C::BCYAN  << hbonds ;
-    std::cout << C::BWHITE  <<    "\n\n";
+    std::cout << C::BRED    <<    "\n  | PDB file in            ->  " << C::BCYAN  << file_in ;
+    std::cout << C::BRED    <<    "\n  | created File helices   ->  " << C::BCYAN  << file_out ;
+
+    std::cout << C::BGREEN   << "\n\n   count all atoms   " << C::BWHITE << " :   " << C::GREEN    << atoms ;
+    std::cout << C::BYELLOW  <<   "\n   count NH-Groups   " << C::BWHITE << " :   " << C::YELLOW   << NH ;
+    std::cout << C::BYELLOW  <<   "\n   count CO-Groups   " << C::BWHITE << " :   " << C::YELLOW   << CO ;
+    std::cout << C::BBLUE    <<   "\n   count H-Bonds     " << C::BWHITE << " :   " << C::BLUE     << hbonds_all ;
+    std::cout << C::BMAGENTA <<   "\n   -> after deleting " << C::BWHITE << " :   " << C::BMAGENTA << hbonds_after_removing ;
+    std::cout << C::RESET    << "\n\n";
 
 }
 
