@@ -55,6 +55,13 @@ std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
 std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 
 // IMPLEMENT THIS
+
+// Checks if the WSBB are 5,4,3 AS away from eachother 
+// and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
+// 3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
+// 4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
+// 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
+
 //iteration over bonds
 for(IJ_Tuple bond :result){
 
@@ -65,6 +72,9 @@ for(IJ_Tuple bond :result){
 
         int i2 = bond2.NH->indices;
         int j2 = bond2.CO->indices;
+
+        // check ob die WSBB auch jeweils 5,4or3 auseinander liegen
+        // -> index check der WSBB fehlt
 
         // Helix check      Ist es am ende wichtig zu wissen ob es eine 5,4 oder 3 helix ist? 
         // woher bekommt man die passende Aminosäure zu den Gruppen?
