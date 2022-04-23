@@ -23,9 +23,12 @@ void DSSP::removeHBonds() {
 
         int i = bond.NH->indices;
         int j = bond.CO->indices;
-
+        // würde diese Art von überprüfung nicht auch die Fälle (i,i+1)(i,i+2) akzeptieren?
+        // zb. (1,3) -> abs(3-1)-3 = 2-3 = -1 < 3 --> wahr obwohl removed werden sollte
         bool distance = abs(j - i) - 3 < 3; 
-
+        // 
+        int abstand = abs(j - i);
+        bool distance = abstand == 3 ||abstand == 4||abstand == 5;
         if (!distance) { 
                 // delete this bond from result if j not i + 3 , i + 4 , i + 5
                 bond = result.erase(bond);}
