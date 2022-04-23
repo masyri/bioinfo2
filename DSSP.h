@@ -11,6 +11,7 @@
 #include <BALL/KERNEL/bond.h>
 #include <BALL/KERNEL/PTE.h>
 #include <BALL/FORMAT/PDBFile.h>
+#include <BALL/STRUCTURE/fragmentDB.h>
 #include "Groups.h"
 #include <sstream>
 

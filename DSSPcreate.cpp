@@ -11,9 +11,11 @@ DSSP::DSSP(BALL::System S) {
 
     this->S = S;
 
-    // Wie füge ich die H-Atome hinzu? Das soll vor dem Iterator passieren.
+    // open a fragment database
+    FragmentDB fragment_db("");
 
-    /* S.addHydrogens() */
+    // add hydrogens
+    S.apply(fragment_db.add_hydrogens);
 
 
     // ToDo: Space3D erstellen und alle Groups einsortieren, dazu berechnen wie groß die max-Koordinaten sind
