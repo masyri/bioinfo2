@@ -15,9 +15,7 @@ void DSSP::removeHBonds() {
     
 //  !!! noch nicht getestet ob es baut und funktioniert!!!
 
-    IJ_Tuple bond = std::begin(result);
-
-    while (bond != std::end(result)) { // iterate over the H-Bond-List 'result'
+    for(IJ_Tuple bond :result){ // iterate over the H-Bond-List 'result'
 
         // (i,j) = (NH-Groud.indicy = i , CO-Group.indicy = j)   <- Welche Gruppe ist i und welche j? ist das egal und es muss nur der Abstand stimmen?
 
@@ -33,7 +31,6 @@ void DSSP::removeHBonds() {
         if (!distance) { 
                 // delete this bond from result if j not i + 3 , i + 4 , i + 5
                 bond = result.erase(bond);}
-            else { ++bond;}
         }
 
 }
@@ -58,7 +55,30 @@ std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
 std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 
 // IMPLEMENT THIS
+//iteration over bonds
+for(IJ_Tuple bond :result){
 
+    int i = bond.NH->indices;
+    int j = bond.CO->indices;
+    // check the indieces from the other bonds
+    for(IJ_Tuple bond2 :result){
+
+        int i2 = bond2.NH->indices;
+        int j2 = bond2.CO->indices;
+
+        // Helix check      Ist es am ende wichtig zu wissen ob es eine 5,4 oder 3 helix ist? 
+        // woher bekommt man die passende Aminosäure zu den Gruppen?
+        if (j-i == 4 && j2-i2 == 4){
+            // füg H zu beiden Aminosäuren hinzu                
+        } else if (j-i == 3 && j2-i2 == 3){
+            // füg H zu beiden Aminosäuren hinzu
+        }else if (j-i == 2 && j2-i2 == 2){
+        // füg H zu beiden Aminosäuren hinzu 
+        }
+        
+    }
+    
+}
 
 
 createAS_File(result_AS,result_Type,file_out);
