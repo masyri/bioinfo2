@@ -59,7 +59,7 @@ std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
 //
 //
-foreach(AminoAcid AS : where_ever_molecules) { 
+foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien?
 
     result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
 
