@@ -54,7 +54,20 @@ void DSSP::computeHelices(std::string file_out) {
 std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
 std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 
-// IMPLEMENT THIS
+
+// Initialisieren der beiden Listen damit alle Indexe der Liste schonmal existieren und 
+// die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
+//
+//
+foreach(AminoAcid AS : where_ever_molecules) { 
+
+    result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
+
+    result_Type.push_back('-');
+
+}
+
+
 
 // Checks if the WSBB are 5,4,3 AS away from eachother 
 // and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
@@ -76,21 +89,36 @@ for(IJ_Tuple bond :result){
         // check ob die WSBB auch jeweils 5,4or3 auseinander liegen
         // -> index check der WSBB fehlt
 
-        // Helix check      Ist es am ende wichtig zu wissen ob es eine 5,4 oder 3 helix ist? 
+        // Helix check      Ist es am ende wichtig zu wissen ob es eine 5,4 oder 3 helix ist? <- glaube es ist egal in dem Fall
         // woher bekommt man die passende Aminosäure zu den Gruppen?
         if (j-i == 4 && j2-i2 == 4){
-            // füg H zu beiden Aminosäuren hinzu                
+            // füg H zu beiden Aminosäuren hinzu     
+            result_Type[i]  = 'H';
+            result_Type[i2] = 'H';
+            result_Type[j]  = 'H';
+            result_Type[j2] = 'H';
+
         } else if (j-i == 3 && j2-i2 == 3){
             // füg H zu beiden Aminosäuren hinzu
-        }else if (j-i == 2 && j2-i2 == 2){
-        // füg H zu beiden Aminosäuren hinzu 
+            result_Type[i]  = 'H';
+            result_Type[i2] = 'H';
+            result_Type[j]  = 'H';
+            result_Type[j2] = 'H';
+
+        } else if (j-i == 2 && j2-i2 == 2){
+            // füg H zu beiden Aminosäuren hinzu 
+            result_Type[i]  = 'H';
+            result_Type[i2] = 'H';
+            result_Type[i]  = 'H';
+            result_Type[i2] = 'H';
+
         }
         
     }
     
 }
 
-
+// Write results to file:
 createAS_File(result_AS,result_Type,file_out);
 
 }
