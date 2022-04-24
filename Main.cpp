@@ -38,6 +38,7 @@ int main(int argc, char* argv[])
     int count_atoms = S.countAtoms();
     int count_NH    = dssp.NH_Groups.size();
     int count_CO    = dssp.NH_Groups.size();
+    dssp.findWSBB();
 
     // ## >> 1b) << delete all != ( i , i+3 4 5 ) from the list of H-Bonds
 

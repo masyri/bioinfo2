@@ -12,6 +12,8 @@
 #include <BALL/KERNEL/PTE.h>
 #include <BALL/FORMAT/PDBFile.h>
 #include <BALL/STRUCTURE/fragmentDB.h>
+#include <BALL/KERNEL/residueIterator.h>
+#include <vector>
 #include "Groups.h"
 #include <sstream>
 
@@ -35,7 +37,12 @@ public:
 
 };
 
-
+class WSBB_Tuple { // H-Bond in (i,j) - Format
+public:
+    WSBB_Tuple(BALL::Residue* i,BALL::Residue* j) {this->i = i;this->j = j;}
+    Residue *i; //aminosäure 1 mit Nh gruppe
+    Residue *j; //aminosäure 2 mit oh gruppe
+};
 
 
 /*
@@ -48,6 +55,14 @@ class DSSP {
 public:
 
     DSSP(BALL::System S);
+
+    void findWSBB();
+
+    bool checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, BALL::Atom* atomC);
+   
+    bool checkDistance(BALL::Atom* atomH, BALL::Atom* atomO);
+
+    bool checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH);
 
     void startAlgorithm();
 
@@ -65,7 +80,7 @@ public:
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
-
+    std::vector<WSBB_Tuple> wsbb;
 };
 
 

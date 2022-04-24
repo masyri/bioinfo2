@@ -12,6 +12,7 @@
  *
  * */
 std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
+    
     int _x = (int)(x / boxsize);
     int _y = (int)(y / boxsize);
     int _z = (int)(z / boxsize);
@@ -38,7 +39,8 @@ std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
         }
     }
 
-    return 0;
+std::vector<NH_Group*> res;
+    return res;
 }
 
 
@@ -53,6 +55,7 @@ std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
  *
  * */
 void Space3D::pushToSpace(double x, double y, double z,NH_Group* NH) {
+    
     int _x = (int)(x / boxsize);
     int _y = (int)(y / boxsize);
     int _z = (int)(z / boxsize);
@@ -67,6 +70,7 @@ void Space3D::pushToSpace(double x, double y, double z,NH_Group* NH) {
  *
  * */
 void Space3D::pushToSpace(double x, double y, double z,CO_Group* CO) {
+    
     int _x = (int)(x / boxsize);
     int _y = (int)(y / boxsize);
     int _z = (int)(z / boxsize);

@@ -4,7 +4,123 @@
 
 #include "DSSP.h"
 
+bool DSSP::checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, BALL::Atom* atomC) {
+        
+        double f_d1_d2 = 27.888; 
 
+        double dist_NO =  atomN->getPosition().getDistance(atomO->getPosition());
+        double dist_HC =  atomH->getPosition().getDistance(atomC->getPosition());
+        double dist_HO =  atomH->getPosition().getDistance(atomO->getPosition());
+        double dist_NC =  atomN->getPosition().getDistance(atomC->getPosition());
+
+        auto e = f_d1_d2 * ( 1 / dist_NO + 1 / dist_HC - 1 / dist_HO - 1 / dist_NC );
+    cout << e << endl;
+    return e < -0,5;
+}
+
+bool DSSP::checkDistance(BALL::Atom* atomH, BALL::Atom* atomO) {
+    
+    auto dist = atomH->getPosition().getDistance(atomO->getPosition());
+    cout << dist << endl;
+    return dist < 2.5 ;
+}
+
+bool DSSP::checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH) {
+/*
+    // get position of 3 points
+        Vector3 position_H = atomH->getPosition();
+        Vector3 position_N = atomN->getPosition();
+        Vector3 position_O = atomO->getPosition();
+        cout << position_H << endl;
+        cout << position_N << endl;
+        cout << position_O << endl;
+        // make 2 vectors which starts at the H-Atom in the direction to the N-Atom and the O-Atom
+        Vector3 vector_H_N = position_N - position_H;
+        Vector3 vector_H_O = position_N - position_H; // Hab ich die beiden Vektoren jetzt richtig erstellt?
+
+        double angle = vector_H_N.getAngle(vector_H_O); // ist der Return dieser Methode in Grad oder im Whatever-Maß ? Ist wichtig wegen dem vergleichen mit dem min_angle von 120°
+        cout << angle << endl;
+    */
+   int angle = 130;
+    return angle >= 120;
+}
+
+// dauert wahrscheinlich zu lange, da alle amino mit allen amino getestet werden
+void DSSP::findWSBB(){
+    // Iteration over Resiudes
+    // für jede aminosäure schauen ob sie WSBB mit einer anderen ausbildet
+    BALL::ResidueIterator resit = S.beginResidue();
+    for (; +resit ; ++resit)
+    {
+        std::cout << "Current residue: " << resit->getFullName() << std::endl;
+
+        // iterate over all atoms from the current Residue
+        // um N atom zu finden
+        AtomIterator a_it = resit->beginAtom();
+        Atom* atomN = &*a_it;
+        for (; +a_it; ++a_it)
+        {
+            cout << a_it->getElement().getSymbol() << endl;
+            if(a_it->getElement() == PTE[Element::N]){
+            // get a pointer to the N atom by
+            atomN = &*a_it;
+            break;
+            }
+        }
+
+        // // Iteration over Resiudes
+        // für die momentane Aminosäure testen mit jeder anderen
+        BALL::ResidueIterator resit2 = S.beginResidue();
+        for (; +resit2 ; ++resit2)
+        {
+        std::cout << "Current residue2: " << resit2->getFullName() << std::endl;
+        // iterate over all atoms
+        // um O Atom zu finden
+        AtomIterator a_it2 = resit2->beginAtom();
+        Atom* atomO = &*a_it2;
+        for (; +a_it2; ++a_it2)
+        {
+            cout << a_it2->getElement().getSymbol() << endl;
+            if(a_it2->getElement() == PTE[Element::O]){
+            // get a pointer to the current atom by
+            atomO = &*a_it2;
+            break;
+            }
+        }
+
+        cout << "ATOMN "<< atomN->getElement().getSymbol() << endl;
+        cout << "ATOMO "<< atomO->getElement().getSymbol() << endl;
+
+        // Test ob zwischen dem NH und dem CO eine WSBB besteht
+       
+       // H-Atom berechnen bzw erstellen
+       //Berechnen Sie die Position des ben¨otigten Wasserstoffs: Dieser liegt in der durch die
+        //Peptidbindung definierten Ebene und halbiert den (gr¨oßeren) Winkel zwischen N
+        //und den angrenzenden Kohlenstoffen. Die L¨ange der Bindung zwischen N und H
+        //betr¨agt 1.02 ˚A
+        Atom* atomH = &*a_it;
+
+
+        // get C ATom
+        Atom* atomC = &*a_it2;
+
+        //check if E(i, j) < −0.5 kcal /mol
+        if(checkEnergy(atomN, atomO, atomH, atomC)){
+        // check if θNHO > 120° 
+        if(checkAngle(atomN, atomO, atomH)){
+        // check if d(Oj, Hi) < 2.5 ˚A
+        if(checkDistance(atomH, atomO)){
+            // add (resit,resit2) zu WSBB Tuple vektor
+             cout << "WSBB wurde hinzugefügt  "<<  endl;
+             WSBB_Tuple bridge(&*resit, &*resit2);
+             wsbb.push_back(bridge);
+        }}}
+        
+        }
+
+
+    }
+}
 
 
 DSSP::DSSP(BALL::System S) {
@@ -17,6 +133,7 @@ DSSP::DSSP(BALL::System S) {
     // add hydrogens
     S.apply(fragment_db.add_hydrogens);
 
+    
 
     // ToDo: Space3D erstellen und alle Groups einsortieren, dazu berechnen wie groß die max-Koordinaten sind
 

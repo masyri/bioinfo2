@@ -14,7 +14,7 @@
 void DSSP::removeHBonds() {
     
 //  !!! noch nicht getestet ob es baut und funktioniert!!!
-
+/*
     for(IJ_Tuple bond :result){ // iterate over the H-Bond-List 'result'
 
         // (i,j) = (NH-Groud.indicy = i , CO-Group.indicy = j)   <- Welche Gruppe ist i und welche j? ist das egal und es muss nur der Abstand stimmen?
@@ -32,7 +32,23 @@ void DSSP::removeHBonds() {
                 // delete this bond from result if j not i + 3 , i + 4 , i + 5
                 bond = result.erase(bond);}
         }
+*/
 
+int position = 0;
+for(WSBB_Tuple bond : wsbb){
+    // ist die ID der Index ? oder woher bekommt man den index der Aminosäure
+    int i = atoi(bond.i->getID().c_str());
+    int j = atoi(bond.j->getID().c_str());
+
+    int abstand = abs(j - i);
+    cout << abstand << endl;
+    bool distance = abstand == 3 ||abstand == 4||abstand == 5;
+    if (!distance) { 
+        // delete this bond from wsbb if j not i + 3 , i + 4 , i + 5
+        wsbb.erase(wsbb.begin() + position);
+    }
+    position++;
+}
 }
 
 
@@ -59,7 +75,8 @@ std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
 //
 //
-foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien?
+
+foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
 
     result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
 
@@ -76,15 +93,15 @@ foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste 
 // 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
 
 //iteration over bonds
-for(IJ_Tuple bond :result){
+for(WSBB_Tuple bond : wsbb){
 
-    int i = bond.NH->indices;
-    int j = bond.CO->indices;
+    int i = atoi(bond.i->getID().c_str());
+    int j = atoi(bond.j->getID().c_str());
     // check the indieces from the other bonds
-    for(IJ_Tuple bond2 :result){
+    for(WSBB_Tuple bond2 : wsbb){
 
-        int i2 = bond2.NH->indices;
-        int j2 = bond2.CO->indices;
+        int i2 = atoi(bond2.i->getID().c_str());
+        int j2 = atoi(bond2.j->getID().c_str());
 
         // check ob die WSBB auch jeweils 5,4or3 auseinander liegen
         // -> index check der WSBB fehlt
