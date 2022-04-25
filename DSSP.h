@@ -64,6 +64,8 @@ public:
 
     bool checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH);
 
+    BALL::Vector3 getHydrogenPos(BALL::Atom* atomC_N, BALL::Atom* atomC_O, BALL::Atom* atomN);
+
     void startAlgorithm();
 
     int printResults() {int i = 0; for(IJ_Tuple T : result) {cout << "\n" << T.toString();i++;} return i;};

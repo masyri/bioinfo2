@@ -45,6 +45,16 @@ bool DSSP::checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH) {
     return angle >= 120;
 }
 
+BALL::Vector3 DSSP::getHydrogenPos(BALL::Atom* atomC_N, BALL::Atom* atomC_O, BALL::Atom* atomN) {
+      
+      Vector3 position_N = atomN->getPosition();  
+      Vector3 position_C_N = atomC_N->getPosition();
+      Vector3 position_C_O = atomC_O->getPosition();
+
+      auto dist = position_C_N.getDistance(position_C_O);
+
+}
+
 // dauert wahrscheinlich zu lange, da alle amino mit allen amino getestet werden
 void DSSP::findWSBB(){
     // Iteration over Resiudes
