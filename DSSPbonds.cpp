@@ -36,7 +36,7 @@ void DSSP::removeHBonds() {
 
 int position = 0;
 for(WSBB_Tuple bond : wsbb){
-    // ist die ID der Index ? oder woher bekommt man den index der Aminosäure
+   
     int i = atoi(bond.i->getID().c_str());
     int j = atoi(bond.j->getID().c_str());
 
@@ -75,7 +75,7 @@ std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
 //
 //
-
+/*
 foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
 
     result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
@@ -83,7 +83,7 @@ foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste 
     result_Type.push_back('-');
 
 }
-
+*/
 
 
 // Checks if the WSBB are 5,4,3 AS away from eachother 
@@ -103,11 +103,11 @@ for(WSBB_Tuple bond : wsbb){
         int i2 = atoi(bond2.i->getID().c_str());
         int j2 = atoi(bond2.j->getID().c_str());
 
-        // check ob die WSBB auch jeweils 5,4or3 auseinander liegen
-        // -> index check der WSBB fehlt
-
-        // Helix check      Ist es am ende wichtig zu wissen ob es eine 5,4 oder 3 helix ist? <- glaube es ist egal in dem Fall
-        // woher bekommt man die passende Aminosäure zu den Gruppen?
+        // schauen ob die Amonisäuren nachbarn sind
+        if(j-i == 1){
+        
+        // falls ja check ob die WSBB auch jeweils 5,4or3 auseinander liegen
+        // Helix check
         if (j-i == 4 && j2-i2 == 4){
             // füg H zu beiden Aminosäuren hinzu     
             result_Type[i]  = 'H';
@@ -130,7 +130,7 @@ for(WSBB_Tuple bond : wsbb){
             result_Type[i2] = 'H';
 
         }
-        
+        }
     }
     
 }

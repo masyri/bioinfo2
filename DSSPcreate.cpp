@@ -15,7 +15,7 @@ bool DSSP::checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, 
 
         auto e = f_d1_d2 * ( 1 / dist_NO + 1 / dist_HC - 1 / dist_HO - 1 / dist_NC );
     cout << e << endl;
-    return e < -0,5;
+    return e < -0.5;
 }
 
 bool DSSP::checkDistance(BALL::Atom* atomH, BALL::Atom* atomO) {
@@ -54,18 +54,15 @@ void DSSP::findWSBB(){
     {
         std::cout << "Current residue: " << resit->getFullName() << std::endl;
 
-        // iterate over all atoms from the current Residue
-        // um N atom zu finden
+        // get N Atom
         AtomIterator a_it = resit->beginAtom();
+        if(a_it->getElement() == PTE[Element::N]){
         Atom* atomN = &*a_it;
-        for (; +a_it; ++a_it)
-        {
-            cout << a_it->getElement().getSymbol() << endl;
-            if(a_it->getElement() == PTE[Element::N]){
-            // get a pointer to the N atom by
-            atomN = &*a_it;
-            break;
-            }
+         cout << "ATOMN "<< atomN->getElement().getSymbol() << endl;
+        // get C Atom
+        a_it++;
+        Atom* atomC_N = &*a_it;     //c atom von N gruppe
+        cout << "ATOMC "<< atomC_N->getElement().getSymbol() << endl;
         }
 
         // // Iteration over Resiudes
@@ -73,25 +70,20 @@ void DSSP::findWSBB(){
         BALL::ResidueIterator resit2 = S.beginResidue();
         for (; +resit2 ; ++resit2)
         {
-        std::cout << "Current residue2: " << resit2->getFullName() << std::endl;
-        // iterate over all atoms
-        // um O Atom zu finden
-        AtomIterator a_it2 = resit2->beginAtom();
-        Atom* atomO = &*a_it2;
-        for (; +a_it2; ++a_it2)
-        {
-            cout << a_it2->getElement().getSymbol() << endl;
-            if(a_it2->getElement() == PTE[Element::O]){
-            // get a pointer to the current atom by
-            atomO = &*a_it2;
-            break;
-            }
+            std::cout << "Current residue2: " << resit2->getFullName() << std::endl;
+            // get C atom
+            AtomIterator a_it2 = resit2->beginAtom();
+            if(a_it2->getElement() == PTE[Element::N]){
+            a_it2++;
+            a_it2++;
+            Atom* atomC_O = &*a_it2;
+            cout << "ATOM C O "<< atomC_O->getElement().getSymbol() << endl;
+            // get O atom
+            a_it2++;
+            Atom* atomO = &*a_it2;
+            cout << "ATOMO "<< atomO->getElement().getSymbol() << endl;
         }
 
-        cout << "ATOMN "<< atomN->getElement().getSymbol() << endl;
-        cout << "ATOMO "<< atomO->getElement().getSymbol() << endl;
-
-        // Test ob zwischen dem NH und dem CO eine WSBB besteht
        
        // H-Atom berechnen bzw erstellen
        //Berechnen Sie die Position des ben¨otigten Wasserstoffs: Dieser liegt in der durch die
@@ -100,12 +92,10 @@ void DSSP::findWSBB(){
         //betr¨agt 1.02 ˚A
         Atom* atomH = &*a_it;
 
-
-        // get C ATom
-        Atom* atomC = &*a_it2;
-
+        // Test ob zwischen dem NH und dem CO eine WSBB besteht
+        /*
         //check if E(i, j) < −0.5 kcal /mol
-        if(checkEnergy(atomN, atomO, atomH, atomC)){
+        if(checkEnergy(atomN, atomO, atomH, atomC_O)){
         // check if θNHO > 120° 
         if(checkAngle(atomN, atomO, atomH)){
         // check if d(Oj, Hi) < 2.5 ˚A
@@ -115,7 +105,7 @@ void DSSP::findWSBB(){
              WSBB_Tuple bridge(&*resit, &*resit2);
              wsbb.push_back(bridge);
         }}}
-        
+        break;*/
         }
 
 
