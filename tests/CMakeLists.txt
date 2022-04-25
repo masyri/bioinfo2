@@ -23,3 +23,4 @@ add_library(test_driver main_test.cpp)
 # Füge einen Test hinzu. Sie können die folgende
 # Zeile für neue Tests einfach kopieren und anpassen.
 add_gtest(TestSuite1_tests LIBRARIES Uebung01 BALL)
+add_gtest(DSSP_Test LIBRARIES Uebung01 BALL)
