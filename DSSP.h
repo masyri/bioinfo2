@@ -50,15 +50,9 @@ public:
 
     DSSP(BALL::System S);
 
-    void findWSBB();
+    void getGroups();
 
-    bool checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, BALL::Atom* atomC);
-   
-    bool checkDistance(BALL::Atom* atomH, BALL::Atom* atomO);
-
-    bool checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH);
-
-    BALL::Vector3 getHydrogenPos(BALL::Atom* atomC_N, BALL::Atom* atomC_O, BALL::Atom* atomN);
+    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom );
 
     void startAlgorithm();
 
