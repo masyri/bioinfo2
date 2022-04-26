@@ -4,6 +4,32 @@
 
 #include "DSSP.h"
 
+
+
+/**
+ * Calculates the position from the H-Atom
+ * @C_start The first C-Atom
+ * @C_end   The second C-Atom
+ * @N_Mid   The N-Atom
+ * @return  H-Atom position in N-Direction
+ */
+Vector3 DSSP::calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom ) {
+    Vector3 M_Point = C_end - C_start / 2.0;
+    Vector3 direction = N_Atom - M_Point;
+    return direction.normalize * 1.02;
+
+}
+
+
+
+
+
+
+
+
+
+
+
 bool DSSP::checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, BALL::Atom* atomC) {
         
         double f_d1_d2 = 27.888; 
