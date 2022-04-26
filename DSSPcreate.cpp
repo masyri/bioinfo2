@@ -55,24 +55,82 @@ BALL::Vector3 DSSP::getHydrogenPos(BALL::Atom* atomC_N, BALL::Atom* atomC_O, BAL
 
 }
 
+
+
+Space3D create(System S) {
+
+    double max_x = 0;
+    double max_y = 0;
+    double max_z = 0;
+
+    double min_x = 0;
+    double min_y = 0;
+    double min_z = 0;
+
+    BALL::ResidueIterator resit = S.beginResidue();
+    for (; +resit ; ++resit) {
+        AtomIterator a_it = resit->beginAtom();
+        if (a_it->getElement() == PTE[Element::N]) {
+
+            Atom *atomN = &*a_it;
+
+            double px = atomN->getPosition().x;
+            double py = atomN->getPosition().y;
+            double pz = atomN->getPosition().z;
+
+            if (px > max_x) {max_x = px;}
+            if (py > max_y) {max_y = py;}
+            if (pz > max_z) {max_z = pz;}
+
+            if (px < min_x) {min_x = px;}
+            if (py < min_y) {min_y = py;}
+            if (pz < min_z) {min_z = pz;}
+
+            a_it++;
+        }
+    }
+
+    std::cout << "\n x " << min_x << " " << max_x;
+    std::cout << "\n y " << min_y << " " << max_y;
+    std::cout << "\n z " << min_z << " " << max_z;
+    std::cout << "\n z ";
+
+
+
+}
+
+
+
+
 // dauert wahrscheinlich zu lange, da alle amino mit allen amino getestet werden
 void DSSP::findWSBB(){
+
+
+
+
+
+
+
     // Iteration over Resiudes
     // für jede aminosäure schauen ob sie WSBB mit einer anderen ausbildet
     BALL::ResidueIterator resit = S.beginResidue();
     for (; +resit ; ++resit)
     {
-        std::cout << "Current residue: " << resit->getFullName() << std::endl;
+        //std::cout << "Current residue: " << resit->getFullName() << std::endl;
 
         // get N Atom
         AtomIterator a_it = resit->beginAtom();
         if(a_it->getElement() == PTE[Element::N]){
         Atom* atomN = &*a_it;
-         cout << "ATOMN "<< atomN->getElement().getSymbol() << endl;
+
+        //cout << "ATOMN "<< atomN->getPosition().x << endl;
+
         // get C Atom
         a_it++;
         Atom* atomC_N = &*a_it;     //c atom von N gruppe
-        cout << "ATOMC "<< atomC_N->getElement().getSymbol() << endl;
+       // cout << "ATOMC "<< atomC_N->getElement().getSymbol() << endl;
+            //IJ_Tuple ij(atomC_N, atomN);
+            //result.push_back(ij);
         }
 
         // // Iteration over Resiudes
@@ -80,21 +138,23 @@ void DSSP::findWSBB(){
         BALL::ResidueIterator resit2 = S.beginResidue();
         for (; +resit2 ; ++resit2)
         {
-            std::cout << "Current residue2: " << resit2->getFullName() << std::endl;
+           // std::cout << "Current residue2: " << resit2->getFullName() << std::endl;
             // get C atom
             AtomIterator a_it2 = resit2->beginAtom();
             if(a_it2->getElement() == PTE[Element::N]){
             a_it2++;
             a_it2++;
             Atom* atomC_O = &*a_it2;
-            cout << "ATOM C O "<< atomC_O->getElement().getSymbol() << endl;
+            //cout << "ATOM C O "<< atomC_O->getElement().getSymbol() << endl;
             // get O atom
             a_it2++;
             Atom* atomO = &*a_it2;
-            cout << "ATOMO "<< atomO->getElement().getSymbol() << endl;
+           // cout << "ATOMO "<< atomO->getElement().getSymbol() << endl;
+            //IJ_Tuple ij(atomC_O, atomO);
+            //result.push_back(ij);
         }
 
-       
+
        // H-Atom berechnen bzw erstellen
        //Berechnen Sie die Position des ben¨otigten Wasserstoffs: Dieser liegt in der durch die
         //Peptidbindung definierten Ebene und halbiert den (gr¨oßeren) Winkel zwischen N
@@ -106,7 +166,7 @@ void DSSP::findWSBB(){
         /*
         //check if E(i, j) < −0.5 kcal /mol
         if(checkEnergy(atomN, atomO, atomH, atomC_O)){
-        // check if θNHO > 120° 
+        // check if θNHO > 120°
         if(checkAngle(atomN, atomO, atomH)){
         // check if d(Oj, Hi) < 2.5 ˚A
         if(checkDistance(atomH, atomO)){
@@ -131,13 +191,17 @@ DSSP::DSSP(BALL::System S) {
     FragmentDB fragment_db("");
 
     // add hydrogens
-    S.apply(fragment_db.add_hydrogens);
-
-    
+    //S.apply(fragment_db.add_hydrogens);
 
     // ToDo: Space3D erstellen und alle Groups einsortieren, dazu berechnen wie groß die max-Koordinaten sind
 
+    create(S);
 
+    //Space3D sss(100,100,100,10);
+
+    //this->Space =  sss;
+
+    return;
 
     // iterate over all atoms to find NH- and CO-Groups
     for(auto iter=S.atoms().begin();iter!=S.atoms().end();iter++) // Hoffe der Iterator wird so initialisiert und funktioniert so
@@ -167,7 +231,7 @@ DSSP::DSSP(BALL::System S) {
             Atom *C;
 
             // Add found Atoms to Group and add to List
-            CO_Group co(&C,&O);
+            CO_Group co(C,O);
             this->CO_Groups.push_back(co);
         }
         }
@@ -179,37 +243,7 @@ DSSP::DSSP(BALL::System S) {
 
 void DSSP::startAlgorithm() {
 
-    //
-    // Dieser Algorithmus sollte funktionieren (Wenn die beiden Listen korrekt gefüttert worden)
-    //
-    // (ist wahrscheinlich nicht schnell genug, da bei jedem CO jedesmal alle NHs abgesucht werden)
-    //
-
-    // run over all CO-Groups
-
-    for(CO_Group CO : CO_Groups) {
-
-        // look for a NH-group with correct distance / run over all NH-Group and calc distances
-        NH_Group *found_NH;
-        for(NH_Group NH : NH_Groups) {
-            if (CO.checkDistance(NH,2.5)) {
-                found_NH = &NH;
-                // check for the other values:
-                bool energy = CO.checkEnergy(NH,1.0);
-                bool angle = CO.checkAngle(NH,120.0);
-                if (energy && angle) { // if all values correct add this as a Hydrogen-Bond to results
-                    IJ_Tuple ij(NH,CO);
-                    this->result.push_back(ij);
-                }
-            }
-        }
-    }
-
-
-    //
-    //
-    // Alternative Box-Suche
-    //
+    Space3D Space(100,100,100,10);
 
         for(CO_Group CO : CO_Groups) {
 
@@ -223,21 +257,20 @@ void DSSP::startAlgorithm() {
         std::vector<NH_Group*> near_NHgroups = Space.search( x,  y,  z);
 
         // Iteriere über alle NH-Gruppen, die in den Koordinatenboxen liegen
-        for(NH_Group NH : near_NHgroups) {
-            if (CO.checkDistance(NH,2.5)) {
-                found_NH = &NH;
+
+        for(NH_Group *NH : near_NHgroups) {
+
+            if (CO.checkDistance(*NH,2.5)) {
+
                 // check for the other values:
-                bool energy = CO.checkEnergy(NH,1.0);
-                bool angle = CO.checkAngle(NH,120.0);
+                bool energy = CO.checkEnergy(*NH,1.0);
+                bool angle = CO.checkAngle(*NH,120.0);
                 if (energy && angle) { // if all values correct add this as a Hydrogen-Bond to results
-                    IJ_Tuple ij(NH,CO);
+                    IJ_Tuple ij(*NH,CO);
                     this->result.push_back(ij);
                 }
             }
         }
+
     }
-
-
-
-
 }

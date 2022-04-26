@@ -15,6 +15,7 @@
 #include <BALL/KERNEL/residueIterator.h>
 #include <vector>
 #include "Groups.h"
+#include "Space3D.h"
 #include <sstream>
 
 
@@ -35,13 +36,6 @@ public:
         return s.str();
     }
 
-};
-
-class WSBB_Tuple { // H-Bond in (i,j) - Format
-public:
-    WSBB_Tuple(BALL::Residue* i,BALL::Residue* j) {this->i = i;this->j = j;}
-    Residue *i; //aminosäure 1 mit Nh gruppe
-    Residue *j; //aminosäure 2 mit oh gruppe
 };
 
 
@@ -78,11 +72,10 @@ public:
 
     BALL::System S;
     
-    //Space3D Space; // Coordinate-Space with all Groups
+    //Space3D Space(1,1,1,1); // Coordinate-Space with all Groups
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
-    std::vector<WSBB_Tuple> wsbb;
 };
 
 

@@ -75,16 +75,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/snap/clion/164/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-.PHONY : test/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -94,6 +84,16 @@ edit_cache:
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 .PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/snap/clion/164/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -154,6 +154,44 @@ TestSuite1_tests/fast:
 	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/build
 .PHONY : TestSuite1_tests/fast
 
+# Convenience name for target.
+tests/CMakeFiles/DSSP_Test.dir/rule:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/DSSP_Test.dir/rule
+.PHONY : tests/CMakeFiles/DSSP_Test.dir/rule
+
+# Convenience name for target.
+DSSP_Test: tests/CMakeFiles/DSSP_Test.dir/rule
+.PHONY : DSSP_Test
+
+# fast build rule for target.
+DSSP_Test/fast:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
+.PHONY : DSSP_Test/fast
+
+DSSP_Test.o: DSSP_Test.cpp.o
+.PHONY : DSSP_Test.o
+
+# target to build an object file
+DSSP_Test.cpp.o:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.o
+.PHONY : DSSP_Test.cpp.o
+
+DSSP_Test.i: DSSP_Test.cpp.i
+.PHONY : DSSP_Test.i
+
+# target to preprocess a source file
+DSSP_Test.cpp.i:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.i
+.PHONY : DSSP_Test.cpp.i
+
+DSSP_Test.s: DSSP_Test.cpp.s
+.PHONY : DSSP_Test.s
+
+# target to generate assembly for a file
+DSSP_Test.cpp.s:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.s
+.PHONY : DSSP_Test.cpp.s
+
 TestSuite1_tests.o: TestSuite1_tests.cpp.o
 .PHONY : TestSuite1_tests.o
 
@@ -211,8 +249,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... DSSP_Test"
 	@echo "... TestSuite1_tests"
 	@echo "... test_driver"
+	@echo "... DSSP_Test.o"
+	@echo "... DSSP_Test.i"
+	@echo "... DSSP_Test.s"
 	@echo "... TestSuite1_tests.o"
 	@echo "... TestSuite1_tests.i"
 	@echo "... TestSuite1_tests.s"

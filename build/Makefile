@@ -122,56 +122,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named createH2O
+# Target rules for targets named dssp
 
 # Build rule for target.
-createH2O: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 createH2O
-.PHONY : createH2O
+dssp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 dssp
+.PHONY : dssp
 
 # fast build rule for target.
-createH2O/fast:
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/build
-.PHONY : createH2O/fast
+dssp/fast:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/build
+.PHONY : dssp/fast
 
 #=============================================================================
-# Target rules for targets named getSequence
+# Target rules for targets named DSSP_Test
 
 # Build rule for target.
-getSequence: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 getSequence
-.PHONY : getSequence
+DSSP_Test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DSSP_Test
+.PHONY : DSSP_Test
 
 # fast build rule for target.
-getSequence/fast:
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/build
-.PHONY : getSequence/fast
-
-#=============================================================================
-# Target rules for targets named example1
-
-# Build rule for target.
-example1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 example1
-.PHONY : example1
-
-# fast build rule for target.
-example1/fast:
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/build
-.PHONY : example1/fast
-
-#=============================================================================
-# Target rules for targets named Uebung01
-
-# Build rule for target.
-Uebung01: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Uebung01
-.PHONY : Uebung01
-
-# fast build rule for target.
-Uebung01/fast:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/build
-.PHONY : Uebung01/fast
+DSSP_Test/fast:
+	$(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
+.PHONY : DSSP_Test/fast
 
 #=============================================================================
 # Target rules for targets named TestSuite1_tests
@@ -225,113 +199,194 @@ gtest/fast:
 	$(MAKE) -f tests/gtest/CMakeFiles/gtest.dir/build.make tests/gtest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-Test.o: Test.cpp.o
+DSSPbonds.o: DSSPbonds.cpp.o
 
-.PHONY : Test.o
-
-# target to build an object file
-Test.cpp.o:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/Test.cpp.o
-.PHONY : Test.cpp.o
-
-Test.i: Test.cpp.i
-
-.PHONY : Test.i
-
-# target to preprocess a source file
-Test.cpp.i:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/Test.cpp.i
-.PHONY : Test.cpp.i
-
-Test.s: Test.cpp.s
-
-.PHONY : Test.s
-
-# target to generate assembly for a file
-Test.cpp.s:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/Test.cpp.s
-.PHONY : Test.cpp.s
-
-createH2O.o: createH2O.C.o
-
-.PHONY : createH2O.o
+.PHONY : DSSPbonds.o
 
 # target to build an object file
-createH2O.C.o:
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/createH2O.C.o
-.PHONY : createH2O.C.o
+DSSPbonds.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPbonds.cpp.o
+.PHONY : DSSPbonds.cpp.o
 
-createH2O.i: createH2O.C.i
+DSSPbonds.i: DSSPbonds.cpp.i
 
-.PHONY : createH2O.i
+.PHONY : DSSPbonds.i
 
 # target to preprocess a source file
-createH2O.C.i:
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/createH2O.C.i
-.PHONY : createH2O.C.i
+DSSPbonds.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPbonds.cpp.i
+.PHONY : DSSPbonds.cpp.i
 
-createH2O.s: createH2O.C.s
+DSSPbonds.s: DSSPbonds.cpp.s
 
-.PHONY : createH2O.s
+.PHONY : DSSPbonds.s
 
 # target to generate assembly for a file
-createH2O.C.s:
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/createH2O.C.s
-.PHONY : createH2O.C.s
+DSSPbonds.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPbonds.cpp.s
+.PHONY : DSSPbonds.cpp.s
 
-example.o: example.C.o
+DSSPcreate.o: DSSPcreate.cpp.o
 
-.PHONY : example.o
+.PHONY : DSSPcreate.o
 
 # target to build an object file
-example.C.o:
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/example.C.o
-.PHONY : example.C.o
+DSSPcreate.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPcreate.cpp.o
+.PHONY : DSSPcreate.cpp.o
 
-example.i: example.C.i
+DSSPcreate.i: DSSPcreate.cpp.i
 
-.PHONY : example.i
+.PHONY : DSSPcreate.i
 
 # target to preprocess a source file
-example.C.i:
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/example.C.i
-.PHONY : example.C.i
+DSSPcreate.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPcreate.cpp.i
+.PHONY : DSSPcreate.cpp.i
 
-example.s: example.C.s
+DSSPcreate.s: DSSPcreate.cpp.s
 
-.PHONY : example.s
+.PHONY : DSSPcreate.s
 
 # target to generate assembly for a file
-example.C.s:
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/example.C.s
-.PHONY : example.C.s
+DSSPcreate.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/DSSPcreate.cpp.s
+.PHONY : DSSPcreate.cpp.s
 
-getSequence.o: getSequence.C.o
+Groups.o: Groups.cpp.o
 
-.PHONY : getSequence.o
+.PHONY : Groups.o
 
 # target to build an object file
-getSequence.C.o:
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/getSequence.C.o
-.PHONY : getSequence.C.o
+Groups.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Groups.cpp.o
+.PHONY : Groups.cpp.o
 
-getSequence.i: getSequence.C.i
+Groups.i: Groups.cpp.i
 
-.PHONY : getSequence.i
+.PHONY : Groups.i
 
 # target to preprocess a source file
-getSequence.C.i:
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/getSequence.C.i
-.PHONY : getSequence.C.i
+Groups.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Groups.cpp.i
+.PHONY : Groups.cpp.i
 
-getSequence.s: getSequence.C.s
+Groups.s: Groups.cpp.s
 
-.PHONY : getSequence.s
+.PHONY : Groups.s
 
 # target to generate assembly for a file
-getSequence.C.s:
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/getSequence.C.s
-.PHONY : getSequence.C.s
+Groups.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Groups.cpp.s
+.PHONY : Groups.cpp.s
+
+Main.o: Main.cpp.o
+
+.PHONY : Main.o
+
+# target to build an object file
+Main.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Main.cpp.o
+.PHONY : Main.cpp.o
+
+Main.i: Main.cpp.i
+
+.PHONY : Main.i
+
+# target to preprocess a source file
+Main.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Main.cpp.i
+.PHONY : Main.cpp.i
+
+Main.s: Main.cpp.s
+
+.PHONY : Main.s
+
+# target to generate assembly for a file
+Main.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Main.cpp.s
+.PHONY : Main.cpp.s
+
+Space3D.o: Space3D.cpp.o
+
+.PHONY : Space3D.o
+
+# target to build an object file
+Space3D.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Space3D.cpp.o
+.PHONY : Space3D.cpp.o
+
+Space3D.i: Space3D.cpp.i
+
+.PHONY : Space3D.i
+
+# target to preprocess a source file
+Space3D.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Space3D.cpp.i
+.PHONY : Space3D.cpp.i
+
+Space3D.s: Space3D.cpp.s
+
+.PHONY : Space3D.s
+
+# target to generate assembly for a file
+Space3D.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/Space3D.cpp.s
+.PHONY : Space3D.cpp.s
+
+console/Color.o: console/Color.cpp.o
+
+.PHONY : console/Color.o
+
+# target to build an object file
+console/Color.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/Color.cpp.o
+.PHONY : console/Color.cpp.o
+
+console/Color.i: console/Color.cpp.i
+
+.PHONY : console/Color.i
+
+# target to preprocess a source file
+console/Color.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/Color.cpp.i
+.PHONY : console/Color.cpp.i
+
+console/Color.s: console/Color.cpp.s
+
+.PHONY : console/Color.s
+
+# target to generate assembly for a file
+console/Color.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/Color.cpp.s
+.PHONY : console/Color.cpp.s
+
+console/console.o: console/console.cpp.o
+
+.PHONY : console/console.o
+
+# target to build an object file
+console/console.cpp.o:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/console.cpp.o
+.PHONY : console/console.cpp.o
+
+console/console.i: console/console.cpp.i
+
+.PHONY : console/console.i
+
+# target to preprocess a source file
+console/console.cpp.i:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/console.cpp.i
+.PHONY : console/console.cpp.i
+
+console/console.s: console/console.cpp.s
+
+.PHONY : console/console.s
+
+# target to generate assembly for a file
+console/console.cpp.s:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/console/console.cpp.s
+.PHONY : console/console.cpp.s
 
 # Help Target
 help:
@@ -342,26 +397,33 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... createH2O"
-	@echo "... getSequence"
-	@echo "... example1"
-	@echo "... Uebung01"
+	@echo "... dssp"
+	@echo "... DSSP_Test"
 	@echo "... TestSuite1_tests"
 	@echo "... test_driver"
 	@echo "... gtest_main"
 	@echo "... gtest"
-	@echo "... Test.o"
-	@echo "... Test.i"
-	@echo "... Test.s"
-	@echo "... createH2O.o"
-	@echo "... createH2O.i"
-	@echo "... createH2O.s"
-	@echo "... example.o"
-	@echo "... example.i"
-	@echo "... example.s"
-	@echo "... getSequence.o"
-	@echo "... getSequence.i"
-	@echo "... getSequence.s"
+	@echo "... DSSPbonds.o"
+	@echo "... DSSPbonds.i"
+	@echo "... DSSPbonds.s"
+	@echo "... DSSPcreate.o"
+	@echo "... DSSPcreate.i"
+	@echo "... DSSPcreate.s"
+	@echo "... Groups.o"
+	@echo "... Groups.i"
+	@echo "... Groups.s"
+	@echo "... Main.o"
+	@echo "... Main.i"
+	@echo "... Main.s"
+	@echo "... Space3D.o"
+	@echo "... Space3D.i"
+	@echo "... Space3D.s"
+	@echo "... console/Color.o"
+	@echo "... console/Color.i"
+	@echo "... console/Color.s"
+	@echo "... console/console.o"
+	@echo "... console/console.i"
+	@echo "... console/console.s"
 .PHONY : help
 
 

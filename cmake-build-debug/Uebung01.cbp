@@ -17,6 +17,16 @@
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
 				<Option type="4"/>
@@ -37,102 +47,8 @@
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Uebung01">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/libUebung01.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 Uebung01"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Uebung01/fast">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/libUebung01.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 Uebung01/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="example1">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/example1" prefix_auto="0" extension_auto="0"/>
+			<Target title="dssp">
+				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/dssp" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -167,14 +83,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 example1"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 dssp"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="example1/fast">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/example1" prefix_auto="0" extension_auto="0"/>
+			<Target title="dssp/fast">
+				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/dssp" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -209,175 +125,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 example1/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="getSequence">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/getSequence" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 getSequence"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="getSequence/fast">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/getSequence" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 getSequence/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="createH2O">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/createH2O" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 createH2O"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="createH2O/fast">
-				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/createH2O" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
-					<Add option="-DBOOST_ALL_NO_LIB"/>
-					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
-					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
-					<Add option="-DBOOST_REGEX_DYN_LINK"/>
-					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
-					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
-					<Add option="-DBOOST_THREAD_DYN_LINK"/>
-					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
-					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NETWORK_LIB"/>
-					<Add option="-DQT_XML_LIB"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
-					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
-					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 createH2O/fast"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 dssp/fast"/>
 					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -523,6 +271,94 @@
 					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="DSSP_Test">
+				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/DSSP_Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_REGEX_DYN_LINK"/>
+					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
+					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add option="-DQT_XML_LIB"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
+					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
+					<Add directory="/usr/src/googletest/googletest/include"/>
+					<Add directory="/usr/src/googletest/googletest"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 DSSP_Test"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DSSP_Test/fast">
+				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/DSSP_Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_CHRONO_DYN_LINK"/>
+					<Add option="-DBOOST_ALL_NO_LIB"/>
+					<Add option="-DBOOST_DATE_TIME_DYN_LINK"/>
+					<Add option="-DBOOST_IOSTREAMS_DYN_LINK"/>
+					<Add option="-DBOOST_REGEX_DYN_LINK"/>
+					<Add option="-DBOOST_SERIALIZATION_DYN_LINK"/>
+					<Add option="-DBOOST_SYSTEM_DYN_LINK"/>
+					<Add option="-DBOOST_THREAD_DYN_LINK"/>
+					<Add option="-DBOOST_ATOMIC_DYN_LINK"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add option="-DQT_XML_LIB"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01"/>
+					<Add directory="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug"/>
+					<Add directory="/usr/src/googletest/googletest/include"/>
+					<Add directory="/usr/src/googletest/googletest"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtNetwork"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtXml"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 DSSP_Test/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="gtest">
 				<Option output="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/lib/libgtestd.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest"/>
@@ -632,20 +468,44 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Test.cpp">
-			<Option target="Uebung01"/>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/DSSP.h">
+			<Option target="dssp"/>
 		</Unit>
-		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Test.hpp">
-			<Option target="Uebung01"/>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/DSSPbonds.cpp">
+			<Option target="dssp"/>
 		</Unit>
-		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/createH2O.C">
-			<Option target="createH2O"/>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/DSSPcreate.cpp">
+			<Option target="dssp"/>
 		</Unit>
-		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/example.C">
-			<Option target="example1"/>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Groups.cpp">
+			<Option target="dssp"/>
 		</Unit>
-		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/getSequence.C">
-			<Option target="getSequence"/>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Groups.h">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Main.cpp">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Space3D.cpp">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/Space3D.h">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/console/Color.cpp">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/console/Color.h">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/console/console.cpp">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/console/console.h">
+			<Option target="dssp"/>
+		</Unit>
+		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/tests/DSSP_Test.cpp">
+			<Option target="DSSP_Test"/>
 		</Unit>
 		<Unit filename="/home/masy00001/Documents/bioinfo2/Uebung01/tests/TestSuite1_tests.cpp">
 			<Option target="TestSuite1_tests"/>

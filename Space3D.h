@@ -60,8 +60,8 @@ public:
 
     std::vector<NH_Group*> search(double x, double y, double z);
 
-    void pushToSpace(double x, double y, double z,NH_Group* NH);
-    void pushToSpace(double x, double y, double z,CO_Group* CO);
+    void pushToSpace(double x, double y, double z,NH_Group &NH);
+    void pushToSpace(double x, double y, double z,CO_Group &CO);
 
     void print(){
         int item_count = 0; int box_count = Space[0][0].size() * Space[0].size() * Space.size();

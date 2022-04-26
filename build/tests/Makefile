@@ -122,6 +122,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+tests/CMakeFiles/DSSP_Test.dir/rule:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/DSSP_Test.dir/rule
+.PHONY : tests/CMakeFiles/DSSP_Test.dir/rule
+
+# Convenience name for target.
+DSSP_Test: tests/CMakeFiles/DSSP_Test.dir/rule
+
+.PHONY : DSSP_Test
+
+# fast build rule for target.
+DSSP_Test/fast:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
+.PHONY : DSSP_Test/fast
+
+# Convenience name for target.
 tests/CMakeFiles/TestSuite1_tests.dir/rule:
 	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/TestSuite1_tests.dir/rule
 .PHONY : tests/CMakeFiles/TestSuite1_tests.dir/rule
@@ -150,6 +165,33 @@ test_driver: tests/CMakeFiles/test_driver.dir/rule
 test_driver/fast:
 	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/build
 .PHONY : test_driver/fast
+
+DSSP_Test.o: DSSP_Test.cpp.o
+
+.PHONY : DSSP_Test.o
+
+# target to build an object file
+DSSP_Test.cpp.o:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.o
+.PHONY : DSSP_Test.cpp.o
+
+DSSP_Test.i: DSSP_Test.cpp.i
+
+.PHONY : DSSP_Test.i
+
+# target to preprocess a source file
+DSSP_Test.cpp.i:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.i
+.PHONY : DSSP_Test.cpp.i
+
+DSSP_Test.s: DSSP_Test.cpp.s
+
+.PHONY : DSSP_Test.s
+
+# target to generate assembly for a file
+DSSP_Test.cpp.s:
+	cd /home/masy00001/Documents/bioinfo2/Uebung01/build && $(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.s
+.PHONY : DSSP_Test.cpp.s
 
 TestSuite1_tests.o: TestSuite1_tests.cpp.o
 
@@ -214,8 +256,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... DSSP_Test"
 	@echo "... TestSuite1_tests"
 	@echo "... test_driver"
+	@echo "... DSSP_Test.o"
+	@echo "... DSSP_Test.i"
+	@echo "... DSSP_Test.s"
 	@echo "... TestSuite1_tests.o"
 	@echo "... TestSuite1_tests.i"
 	@echo "... TestSuite1_tests.s"

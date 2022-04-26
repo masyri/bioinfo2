@@ -53,10 +53,7 @@ CMAKE_BINARY_DIR = /home/masy00001/Documents/bioinfo2/Uebung01/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/createH2O.dir/all
-all: CMakeFiles/getSequence.dir/all
-all: CMakeFiles/example1.dir/all
-all: CMakeFiles/Uebung01.dir/all
+all: CMakeFiles/dssp.dir/all
 all: tests/all
 
 .PHONY : all
@@ -67,10 +64,7 @@ preinstall: tests/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/createH2O.dir/clean
-clean: CMakeFiles/getSequence.dir/clean
-clean: CMakeFiles/example1.dir/clean
-clean: CMakeFiles/Uebung01.dir/clean
+clean: CMakeFiles/dssp.dir/clean
 clean: tests/clean
 
 .PHONY : clean
@@ -79,6 +73,7 @@ clean: tests/clean
 # Directory level rules for directory tests
 
 # Recursive "all" directory target.
+tests/all: tests/CMakeFiles/DSSP_Test.dir/all
 tests/all: tests/CMakeFiles/TestSuite1_tests.dir/all
 tests/all: tests/CMakeFiles/test_driver.dir/all
 tests/all: tests/gtest/all
@@ -91,6 +86,7 @@ tests/preinstall: tests/gtest/preinstall
 .PHONY : tests/preinstall
 
 # Recursive "clean" directory target.
+tests/clean: tests/CMakeFiles/DSSP_Test.dir/clean
 tests/clean: tests/CMakeFiles/TestSuite1_tests.dir/clean
 tests/clean: tests/CMakeFiles/test_driver.dir/clean
 tests/clean: tests/gtest/clean
@@ -118,129 +114,76 @@ tests/gtest/clean: tests/gtest/CMakeFiles/gtest.dir/clean
 .PHONY : tests/gtest/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/createH2O.dir
+# Target rules for target CMakeFiles/dssp.dir
 
 # All Build rule for target.
-CMakeFiles/createH2O.dir/all: CMakeFiles/Uebung01.dir/all
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/depend
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=5,6 "Built target createH2O"
-.PHONY : CMakeFiles/createH2O.dir/all
+CMakeFiles/dssp.dir/all:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/depend
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=5,6,7,8,9,10,11,12 "Built target dssp"
+.PHONY : CMakeFiles/dssp.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/createH2O.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/createH2O.dir/all
+CMakeFiles/dssp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 8
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dssp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 0
-.PHONY : CMakeFiles/createH2O.dir/rule
+.PHONY : CMakeFiles/dssp.dir/rule
 
 # Convenience name for target.
-createH2O: CMakeFiles/createH2O.dir/rule
+dssp: CMakeFiles/dssp.dir/rule
 
-.PHONY : createH2O
+.PHONY : dssp
 
 # clean rule for target.
-CMakeFiles/createH2O.dir/clean:
-	$(MAKE) -f CMakeFiles/createH2O.dir/build.make CMakeFiles/createH2O.dir/clean
-.PHONY : CMakeFiles/createH2O.dir/clean
+CMakeFiles/dssp.dir/clean:
+	$(MAKE) -f CMakeFiles/dssp.dir/build.make CMakeFiles/dssp.dir/clean
+.PHONY : CMakeFiles/dssp.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/getSequence.dir
+# Target rules for target tests/CMakeFiles/DSSP_Test.dir
 
 # All Build rule for target.
-CMakeFiles/getSequence.dir/all: CMakeFiles/Uebung01.dir/all
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/depend
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=9,10 "Built target getSequence"
-.PHONY : CMakeFiles/getSequence.dir/all
+tests/CMakeFiles/DSSP_Test.dir/all: tests/CMakeFiles/test_driver.dir/all
+tests/CMakeFiles/DSSP_Test.dir/all: tests/gtest/CMakeFiles/gtest_main.dir/all
+tests/CMakeFiles/DSSP_Test.dir/all: tests/gtest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/depend
+	$(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=1,2 "Built target DSSP_Test"
+.PHONY : tests/CMakeFiles/DSSP_Test.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/getSequence.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/getSequence.dir/all
+tests/CMakeFiles/DSSP_Test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 8
+	$(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/DSSP_Test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 0
-.PHONY : CMakeFiles/getSequence.dir/rule
+.PHONY : tests/CMakeFiles/DSSP_Test.dir/rule
 
 # Convenience name for target.
-getSequence: CMakeFiles/getSequence.dir/rule
+DSSP_Test: tests/CMakeFiles/DSSP_Test.dir/rule
 
-.PHONY : getSequence
-
-# clean rule for target.
-CMakeFiles/getSequence.dir/clean:
-	$(MAKE) -f CMakeFiles/getSequence.dir/build.make CMakeFiles/getSequence.dir/clean
-.PHONY : CMakeFiles/getSequence.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/example1.dir
-
-# All Build rule for target.
-CMakeFiles/example1.dir/all: CMakeFiles/Uebung01.dir/all
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/depend
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=7,8 "Built target example1"
-.PHONY : CMakeFiles/example1.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/example1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/example1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 0
-.PHONY : CMakeFiles/example1.dir/rule
-
-# Convenience name for target.
-example1: CMakeFiles/example1.dir/rule
-
-.PHONY : example1
+.PHONY : DSSP_Test
 
 # clean rule for target.
-CMakeFiles/example1.dir/clean:
-	$(MAKE) -f CMakeFiles/example1.dir/build.make CMakeFiles/example1.dir/clean
-.PHONY : CMakeFiles/example1.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/Uebung01.dir
-
-# All Build rule for target.
-CMakeFiles/Uebung01.dir/all:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/depend
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=3,4 "Built target Uebung01"
-.PHONY : CMakeFiles/Uebung01.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/Uebung01.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Uebung01.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 0
-.PHONY : CMakeFiles/Uebung01.dir/rule
-
-# Convenience name for target.
-Uebung01: CMakeFiles/Uebung01.dir/rule
-
-.PHONY : Uebung01
-
-# clean rule for target.
-CMakeFiles/Uebung01.dir/clean:
-	$(MAKE) -f CMakeFiles/Uebung01.dir/build.make CMakeFiles/Uebung01.dir/clean
-.PHONY : CMakeFiles/Uebung01.dir/clean
+tests/CMakeFiles/DSSP_Test.dir/clean:
+	$(MAKE) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/clean
+.PHONY : tests/CMakeFiles/DSSP_Test.dir/clean
 
 #=============================================================================
 # Target rules for target tests/CMakeFiles/TestSuite1_tests.dir
 
 # All Build rule for target.
-tests/CMakeFiles/TestSuite1_tests.dir/all: CMakeFiles/Uebung01.dir/all
 tests/CMakeFiles/TestSuite1_tests.dir/all: tests/CMakeFiles/test_driver.dir/all
 tests/CMakeFiles/TestSuite1_tests.dir/all: tests/gtest/CMakeFiles/gtest_main.dir/all
 tests/CMakeFiles/TestSuite1_tests.dir/all: tests/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/depend
 	$(MAKE) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=1,2 "Built target TestSuite1_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=3,4 "Built target TestSuite1_tests"
 .PHONY : tests/CMakeFiles/TestSuite1_tests.dir/all
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/TestSuite1_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/TestSuite1_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles 0
 .PHONY : tests/CMakeFiles/TestSuite1_tests.dir/rule
@@ -262,7 +205,7 @@ tests/CMakeFiles/TestSuite1_tests.dir/clean:
 tests/CMakeFiles/test_driver.dir/all:
 	$(MAKE) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/depend
 	$(MAKE) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=15,16 "Built target test_driver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=17,18 "Built target test_driver"
 .PHONY : tests/CMakeFiles/test_driver.dir/all
 
 # Build rule for subdir invocation for target.
@@ -289,7 +232,7 @@ tests/CMakeFiles/test_driver.dir/clean:
 tests/gtest/CMakeFiles/gtest_main.dir/all: tests/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f tests/gtest/CMakeFiles/gtest_main.dir/build.make tests/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f tests/gtest/CMakeFiles/gtest_main.dir/build.make tests/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=13,14 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=15,16 "Built target gtest_main"
 .PHONY : tests/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -316,7 +259,7 @@ tests/gtest/CMakeFiles/gtest_main.dir/clean:
 tests/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f tests/gtest/CMakeFiles/gtest.dir/build.make tests/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f tests/gtest/CMakeFiles/gtest.dir/build.make tests/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=11,12 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/masy00001/Documents/bioinfo2/Uebung01/build/CMakeFiles --progress-num=13,14 "Built target gtest"
 .PHONY : tests/gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.

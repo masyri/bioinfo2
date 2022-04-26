@@ -30,16 +30,16 @@ std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
                 
                 //std::cout << "\n (x,y,z) " << _x_ << " " << _y_ << " " << _z_;
 
-                for(NH_Group NH : this->Space[_z_][_y_][_x_].NH_Groups) {
+                for(NH_Group *NH : this->Space[_z_][_y_][_x_].NH_Groups) {
                     
-                    res.push_back(NH);                    
+                    res.push_back(NH);
                     
                 }
             }
         }
     }
 
-std::vector<NH_Group*> res;
+
     return res;
 }
 
@@ -54,12 +54,12 @@ std::vector<NH_Group*> res;
  * @CO      the reference of the NH_Group
  *
  * */
-void Space3D::pushToSpace(double x, double y, double z,NH_Group* NH) {
+void Space3D::pushToSpace(double x, double y, double z,NH_Group &NH) {
     
     int _x = (int)(x / boxsize);
     int _y = (int)(y / boxsize);
     int _z = (int)(z / boxsize);
-    this->Space[_z][_y][_x].NH_Groups.push_back(value);
+    this->Space[_z][_y][_x].NH_Groups.push_back(&NH);
 }
 
 /*
@@ -69,10 +69,10 @@ void Space3D::pushToSpace(double x, double y, double z,NH_Group* NH) {
  * @CO      the reference of the CO_Group
  *
  * */
-void Space3D::pushToSpace(double x, double y, double z,CO_Group* CO) {
+void Space3D::pushToSpace(double x, double y, double z,CO_Group &CO) {
     
     int _x = (int)(x / boxsize);
     int _y = (int)(y / boxsize);
     int _z = (int)(z / boxsize);
-    this->Space[_z][_y][_x].CO_Groups.push_back(value);
+    this->Space[_z][_y][_x].CO_Groups.push_back(&CO);
 }

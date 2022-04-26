@@ -186,12 +186,10 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Uebung01.dir/DependInfo.cmake"
-  "CMakeFiles/example1.dir/DependInfo.cmake"
-  "CMakeFiles/getSequence.dir/DependInfo.cmake"
-  "CMakeFiles/createH2O.dir/DependInfo.cmake"
+  "CMakeFiles/dssp.dir/DependInfo.cmake"
   "tests/CMakeFiles/test_driver.dir/DependInfo.cmake"
   "tests/CMakeFiles/TestSuite1_tests.dir/DependInfo.cmake"
+  "tests/CMakeFiles/DSSP_Test.dir/DependInfo.cmake"
   "tests/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
   "tests/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   )

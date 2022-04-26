@@ -82,7 +82,6 @@ tests/TestSuite1_tests: tests/CMakeFiles/TestSuite1_tests.dir/build.make
 tests/TestSuite1_tests: lib/libgtest.a
 tests/TestSuite1_tests: lib/libgtest_main.a
 tests/TestSuite1_tests: tests/libtest_driver.a
-tests/TestSuite1_tests: libUebung01.so
 tests/TestSuite1_tests: /usr/lib/libBALL.so.1.5
 tests/TestSuite1_tests: lib/libgtest.a
 tests/TestSuite1_tests: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0

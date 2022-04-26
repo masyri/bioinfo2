@@ -14,7 +14,7 @@
 void DSSP::removeHBonds() {
     
 //  !!! noch nicht getestet ob es baut und funktioniert!!!
-/*
+    int position = 0;
     for(IJ_Tuple bond :result){ // iterate over the H-Bond-List 'result'
 
         // (i,j) = (NH-Groud.indicy = i , CO-Group.indicy = j)   <- Welche Gruppe ist i und welche j? ist das egal und es muss nur der Abstand stimmen?
@@ -30,10 +30,11 @@ void DSSP::removeHBonds() {
         bool distance = abstand == 3 ||abstand == 4||abstand == 5;
         if (!distance) { 
                 // delete this bond from result if j not i + 3 , i + 4 , i + 5
-                bond = result.erase(bond);}
+                result.erase(result.begin() + position);}
         }
-*/
+    position++;
 
+/*
 int position = 0;
 for(WSBB_Tuple bond : wsbb){
    
@@ -48,7 +49,7 @@ for(WSBB_Tuple bond : wsbb){
         wsbb.erase(wsbb.begin() + position);
     }
     position++;
-}
+}*/
 }
 
 
@@ -93,41 +94,35 @@ foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste 
 // 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
 
 //iteration over bonds
-for(WSBB_Tuple bond : wsbb){
+for(IJ_Tuple bond : result){
 
-    int i = atoi(bond.i->getID().c_str());
-    int j = atoi(bond.j->getID().c_str());
+    int i = bond.NH->indices;
+    int j = bond.CO->indices;
     // check the indieces from the other bonds
-    for(WSBB_Tuple bond2 : wsbb){
+    for(IJ_Tuple bond2 : result){
 
-        int i2 = atoi(bond2.i->getID().c_str());
-        int j2 = atoi(bond2.j->getID().c_str());
+        int i2 = bond2.NH->indices;
+        int j2 = bond2.CO->indices;
 
         // schauen ob die Amonisäuren nachbarn sind
-        if(j-i == 1){
+        if(i2-i == 1){
         
         // falls ja check ob die WSBB auch jeweils 5,4or3 auseinander liegen
         // Helix check
         if (j-i == 4 && j2-i2 == 4){
             // füg H zu beiden Aminosäuren hinzu     
             result_Type[i]  = 'H';
-            result_Type[i2] = 'H';
-            result_Type[j]  = 'H';
-            result_Type[j2] = 'H';
+            result_Type[i2]  = 'H';
 
         } else if (j-i == 3 && j2-i2 == 3){
             // füg H zu beiden Aminosäuren hinzu
             result_Type[i]  = 'H';
-            result_Type[i2] = 'H';
-            result_Type[j]  = 'H';
-            result_Type[j2] = 'H';
+            result_Type[i2]  = 'H';
 
         } else if (j-i == 2 && j2-i2 == 2){
             // füg H zu beiden Aminosäuren hinzu 
             result_Type[i]  = 'H';
-            result_Type[i2] = 'H';
-            result_Type[i]  = 'H';
-            result_Type[i2] = 'H';
+            result_Type[i2]  = 'H';
 
         }
         }
