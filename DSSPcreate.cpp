@@ -29,8 +29,6 @@ void DSSP::getGroups(){
 
     // Iteration over Resiudes
 
-    // für jede aminosäure schauen ob sie WSBB mit einer anderen ausbildet
-
     BALL::ResidueIterator resit = S.beginResidue();
     for (; +resit ; ++resit)
     {
@@ -44,7 +42,7 @@ void DSSP::getGroups(){
 
             // get N Atom
             Atom* atomN = &*a_it;
-
+            
             // get C Atom from NH
             a_it++;
             Atom* atomC_N = &*a_it; 
@@ -59,15 +57,17 @@ void DSSP::getGroups(){
 
             // Get H Atom
             Atom* atomH;
-            auto hyd = PTE[Element::H];
-            atomH->setElement(hyd);
+            //auto hyd = PTE[Element::H];
+            //atomH->setElement(hyd);
 
             Vector3 position_C_N = atomC_N->getPosition();
             Vector3 position_N   = atomN->getPosition();
             Vector3 position_C_O = atomC_O->getPosition();
             Vector3 position_H   = calculate_H_position(position_C_N, position_N, position_C_O);
 
+
             atomH->setPosition(position_H);
+
 
             // indieces in gruppen speichern
 
@@ -75,7 +75,7 @@ void DSSP::getGroups(){
 
             NH_Group nh(atomH,atomN,ID);
             this->NH_Groups.push_back(nh);
-
+            
             // create CO Group
 
             CO_Group co(atomC_O,atomO,ID);
@@ -83,7 +83,7 @@ void DSSP::getGroups(){
 
             // push NH to Space
 
-            space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
+            //space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
 
         }
 
