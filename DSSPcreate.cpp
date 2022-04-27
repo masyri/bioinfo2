@@ -68,9 +68,6 @@ void DSSP::getGroups(){
 
             atomH->setPosition(position_H);
 
-
-            // indieces in gruppen speichern
-
             // create NH Group
 
             NH_Group nh(atomH,atomN,ID);

@@ -66,7 +66,7 @@ public:
 
     BALL::System S;
     
-    Space3D space = Space3D(1,1,1,1); // Coordinate-Space with all Groups
+    Space3D space = Space3D(100,100,100,100); // Coordinate-Space with all Groups
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
