@@ -136,10 +136,10 @@ public:
         //
 
         this->boxsize = boxsize;
-
+/*
         this->count_x = x / boxsize + 1.0;
         this->count_y = y / boxsize + 1.0;
-        this->count_z = z / boxsize + 1.0;
+        this->count_z = z / boxsize + 1.0;*/
 
         for (int Z = 0; Z < count_z ; Z++) {
             std::vector<std::vector<Box3D>> y_axis;

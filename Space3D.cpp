@@ -34,14 +34,14 @@ std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
             for(int _z_ : neighbors_x) {
                 std::cout << "\n (x,y,z) " << _x_ << " " << _y_ << " " << _z_;
 
-                for(NH_Group NH : this->Space[_x][_y][_z].NH_Groups) {
+                for(NH_Group* NH : this->Space[_x][_y][_z].NH_Groups) {
                     res.push_back(NH);                    
                 }
             }
         }
     }
 
-    return 0;
+    return res;
 }
 
 

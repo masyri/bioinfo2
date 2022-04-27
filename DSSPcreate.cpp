@@ -16,7 +16,7 @@
 Vector3 DSSP::calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom ) {
     Vector3 M_Point = (C_end - C_start) / 2.0;
     Vector3 direction = N_Atom - M_Point;
-    return direction.normalize * 1.02;
+    return direction.normalize() * 1.02;
 
 }
 
@@ -36,7 +36,7 @@ void DSSP::getGroups(){
     {
 
         // Read index from this residue
-        int ID = atoi(resit.getID());
+        int ID = atoi(resit->getID().c_str());
        
         AtomIterator a_it = resit->beginAtom();
 
@@ -73,17 +73,17 @@ void DSSP::getGroups(){
 
             // create NH Group
 
-            NH_Group nh(atomH,atomN);
-            this->NH_Groups.push_back(nh,ID);
+            NH_Group nh(atomH,atomN,ID);
+            this->NH_Groups.push_back(nh);
 
             // create CO Group
 
-            CO_Group co(atomC_O,atomO);
-            this->CO_Groups.push_back(co,ID);
+            CO_Group co(atomC_O,atomO,ID);
+            this->CO_Groups.push_back(co);
 
             // push NH to Space
 
-            space.pushToSpace(position_H.x , position_H.y , position_H.z , &nh);
+            space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
 
         }
 
@@ -106,7 +106,7 @@ DSSP::DSSP(BALL::System S) {
 
     // Create Coordinate Space
       
-        this->space =   Space( S , 8.0 );
+        this->space =   Space3D( S , 8.0 );
 
     // iterate over all atoms to find NH- and CO-Groups
 
