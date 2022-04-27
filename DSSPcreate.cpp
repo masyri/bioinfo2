@@ -14,105 +14,81 @@
  * @return  H-Atom position in N-Direction
  */
 Vector3 DSSP::calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom ) {
-    Vector3 M_Point = C_end - C_start / 2.0;
+    Vector3 M_Point = (C_end - C_start) / 2.0;
     Vector3 direction = N_Atom - M_Point;
     return direction.normalize * 1.02;
 
 }
 
 
-Space3D create(System S) {
-
-    double max_x = 0;
-    double max_y = 0;
-    double max_z = 0;
-
-    double min_x = 0;
-    double min_y = 0;
-    double min_z = 0;
-
-    BALL::ResidueIterator resit = S.beginResidue();
-    for (; +resit ; ++resit) {
-        AtomIterator a_it = resit->beginAtom();
-        if (a_it->getElement() == PTE[Element::N]) {
-
-            Atom *atomN = &*a_it;
-
-            double px = atomN->getPosition().x;
-            double py = atomN->getPosition().y;
-            double pz = atomN->getPosition().z;
-
-            if (px > max_x) {max_x = px;}
-            if (py > max_y) {max_y = py;}
-            if (pz > max_z) {max_z = pz;}
-
-            if (px < min_x) {min_x = px;}
-            if (py < min_y) {min_y = py;}
-            if (pz < min_z) {min_z = pz;}
-
-            a_it++;
-        }
-    }
-
-    std::cout << "\n x " << min_x << " " << max_x;
-    std::cout << "\n y " << min_y << " " << max_y;
-    std::cout << "\n z " << min_z << " " << max_z;
-    std::cout << "\n z ";
-
-
-
-}
-
 
 
 
 
 void DSSP::getGroups(){
+
     // Iteration over Resiudes
+
     // für jede aminosäure schauen ob sie WSBB mit einer anderen ausbildet
+
     BALL::ResidueIterator resit = S.beginResidue();
     for (; +resit ; ++resit)
     {
        
         AtomIterator a_it = resit->beginAtom();
-        if(a_it->getElement() == PTE[Element::N]){
-        // get N Atom
-        Atom* atomN = &*a_it;
 
-        // get C Atom from NH
-        a_it++;
-        Atom* atomC_N = &*a_it; 
+        if(a_it->getElement() == PTE[Element::N]) {
 
-        // get C Atom from CO
-        a_it++;
-        Atom* atomC_O = &*a_it;
+            // get N Atom
+            Atom* atomN = &*a_it;
 
-        // get O Atom
-        a_it++;
-        Atom* atomO = &*a_it;
+            // get C Atom from NH
+            a_it++;
+            Atom* atomC_N = &*a_it; 
 
-        // Get H Atom
-        Atom* atomH;
-        auto hyd = PTE[Element::H];
-        atomH->setElement(hyd);
+            // get C Atom from CO
+            a_it++;
+            Atom* atomC_O = &*a_it;
 
-        Vector3 position_C_N = atomC_N->getPosition();
-        Vector3 position_N = atomN->getPosition();
-        Vector3 position_C_O = atomC_O->getPosition();
+            // get O Atom
+            a_it++;
+            Atom* atomO = &*a_it;
 
-        atomH->setPosition(calculate_H_position(position_C_N, position_N, position_C_O));
+            // Get H Atom
+            Atom* atomH;
+            auto hyd = PTE[Element::H];
+            atomH->setElement(hyd);
 
-    // indieces in gruppen speichern
-        // create NH Group
-        NH_Group nh(atomH,atomN);
-        this->NH_Groups.push_back(nh);
-        // create CO Group
-        CO_Group co(atomC_O,atomO);
-        this->CO_Groups.push_back(co);
+            Vector3 position_C_N = atomC_N->getPosition();
+            Vector3 position_N   = atomN->getPosition();
+            Vector3 position_C_O = atomC_O->getPosition();
+            Vector3 position_H   = calculate_H_position(position_C_N, position_N, position_C_O);
+
+            atomH->setPosition(position_H);
+
+            // indieces in gruppen speichern
+
+            // create NH Group
+
+            NH_Group nh(atomH,atomN);
+            this->NH_Groups.push_back(nh);
+
+            // create CO Group
+
+            CO_Group co(atomC_O,atomO);
+            this->CO_Groups.push_back(co);
+
+            // push NH to Space
+
+            space.pushToSpace(position_H.x , position_H.y , position_H.z , &nh);
+
         }
 
     }
 }
+
+
+
 
 
 DSSP::DSSP(BALL::System S) {
@@ -120,20 +96,14 @@ DSSP::DSSP(BALL::System S) {
     this->S = S;
 
     // open a fragment database
-    FragmentDB fragment_db("");
+        FragmentDB fragment_db("");
 
     // add hydrogens
-    //S.apply(fragment_db.add_hydrogens);
+        //S.apply(fragment_db.add_hydrogens);
 
-    // ToDo: Space3D erstellen und alle Groups einsortieren, dazu berechnen wie groß die max-Koordinaten sind
-
-    create(S);
-
-    //Space3D sss(100,100,100,10);
-
-    //this->Space =  sss;
-
-    return;
+    // Create Coordinate Space
+      
+        this->space =   Space( S , 8.0 );
 
     // iterate over all atoms to find NH- and CO-Groups
     for(auto iter=S.atoms().begin();iter!=S.atoms().end();iter++) // Hoffe der Iterator wird so initialisiert und funktioniert so
@@ -166,16 +136,17 @@ DSSP::DSSP(BALL::System S) {
             CO_Group co(C,O);
             this->CO_Groups.push_back(co);
         }
-        }
+    }
 }
 
 
 
 
 
-void DSSP::startAlgorithm() {
 
-    Space3D Space(100,100,100,10);
+
+
+void DSSP::startAlgorithm() {
 
         for(CO_Group CO : CO_Groups) {
 
@@ -186,7 +157,7 @@ void DSSP::startAlgorithm() {
         double z = pos.z; 
 
         // look for all near NH-Groups/H-Atoms
-        std::vector<NH_Group*> near_NHgroups = Space.search( x,  y,  z);
+        std::vector<NH_Group*> near_NHgroups = space.search( x,  y,  z);
 
         // Iteriere über alle NH-Gruppen, die in den Koordinatenboxen liegen
 
