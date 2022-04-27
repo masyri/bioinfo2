@@ -14,7 +14,22 @@
 #include "../DSSP.h"
 #include "../Groups.h"
 
-TEST(DSSP_Test, findWSSB)
+TEST(DSSP_Test, getGroups)
+{
+    
+}
+
+TEST(DSSP_Test, startAlgorithm)
+{
+    
+}
+
+TEST(DSSP_Test, printResults)
+{
+    
+}
+
+TEST(DSSP_Test, createAS_File)
 {
     
 }
