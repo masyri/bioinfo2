@@ -35,7 +35,6 @@ int main(int argc, char* argv[])
 
     DSSP dssp(S);
     dssp.getGroups();
-    cout << "bla " << endl;
     int count_hbonds_before = dssp.result.size();
     int count_atoms = S.countAtoms();
     int count_NH    = dssp.NH_Groups.size();

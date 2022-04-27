@@ -83,7 +83,7 @@ void DSSP::getGroups(){
 
             // push NH to Space
 
-            //space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
+            space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
 
         }
 
