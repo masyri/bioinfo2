@@ -19,8 +19,8 @@ void DSSP::removeHBonds() {
 
         // (i,j) = (NH-Groud.indicy = i , CO-Group.indicy = j)   <- Welche Gruppe ist i und welche j? ist das egal und es muss nur der Abstand stimmen?
 
-        int i = bond.NH->indices;
-        int j = bond.CO->indices;
+        int i = bond.NH->index;
+        int j = bond.CO->index;
         // würde diese Art von überprüfung nicht auch die Fälle (i,i+1)(i,i+2) akzeptieren?
         // zb. (1,3) -> abs(3-1)-3 = 2-3 = -1 < 3 --> wahr obwohl removed werden sollte
         
@@ -34,22 +34,22 @@ void DSSP::removeHBonds() {
         }
     position++;
 
-/*
-int position = 0;
-for(WSBB_Tuple bond : wsbb){
-   
-    int i = atoi(bond.i->getID().c_str());
-    int j = atoi(bond.j->getID().c_str());
+    /*
+    int position = 0;
+    for(WSBB_Tuple bond : wsbb){
+    
+        int i = atoi(bond.i->getID().c_str());
+        int j = atoi(bond.j->getID().c_str());
 
-    int abstand = abs(j - i);
-    cout << abstand << endl;
-    bool distance = abstand == 3 ||abstand == 4||abstand == 5;
-    if (!distance) { 
-        // delete this bond from wsbb if j not i + 3 , i + 4 , i + 5
-        wsbb.erase(wsbb.begin() + position);
-    }
-    position++;
-}*/
+        int abstand = abs(j - i);
+        cout << abstand << endl;
+        bool distance = abstand == 3 ||abstand == 4||abstand == 5;
+        if (!distance) { 
+            // delete this bond from wsbb if j not i + 3 , i + 4 , i + 5
+            wsbb.erase(wsbb.begin() + position);
+        }
+        position++;
+    }*/
 }
 
 
@@ -68,70 +68,70 @@ for(WSBB_Tuple bond : wsbb){
 */
 void DSSP::computeHelices(std::string file_out) {
 
-std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
-std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
+    std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
+    std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
 
 
-// Initialisieren der beiden Listen damit alle Indexe der Liste schonmal existieren und 
-// die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
-//
-//
-/*
-foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
+    // Initialisieren der beiden Listen damit alle Indexe der Liste schonmal existieren und 
+    // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
+    //
+    //
+    /*
+    foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
 
-    result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
+        result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
 
-    result_Type.push_back('-');
+        result_Type.push_back('-');
 
-}
-*/
-
-
-// Checks if the WSBB are 5,4,3 AS away from eachother 
-// and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
-// 3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
-// 4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
-// 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
-
-//iteration over bonds
-for(IJ_Tuple bond : result){
-
-    int i = bond.NH->indices;
-    int j = bond.CO->indices;
-    // check the indieces from the other bonds
-    for(IJ_Tuple bond2 : result){
-
-        int i2 = bond2.NH->indices;
-        int j2 = bond2.CO->indices;
-
-        // schauen ob die Amonisäuren nachbarn sind
-        if(i2-i == 1){
-        
-        // falls ja check ob die WSBB auch jeweils 5,4or3 auseinander liegen
-        // Helix check
-        if (j-i == 4 && j2-i2 == 4){
-            // füg H zu beiden Aminosäuren hinzu     
-            result_Type[i]  = 'H';
-            result_Type[i2]  = 'H';
-
-        } else if (j-i == 3 && j2-i2 == 3){
-            // füg H zu beiden Aminosäuren hinzu
-            result_Type[i]  = 'H';
-            result_Type[i2]  = 'H';
-
-        } else if (j-i == 2 && j2-i2 == 2){
-            // füg H zu beiden Aminosäuren hinzu 
-            result_Type[i]  = 'H';
-            result_Type[i2]  = 'H';
-
-        }
-        }
     }
-    
-}
+    */
 
-// Write results to file:
-createAS_File(result_AS,result_Type,file_out);
+
+    // Checks if the WSBB are 5,4,3 AS away from eachother 
+    // and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
+    // 3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
+    // 4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
+    // 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
+
+    //iteration over bonds
+    for(IJ_Tuple bond : result){
+
+        int i = bond.NH->index;
+        int j = bond.CO->index;
+        // check the indieces from the other bonds
+        for(IJ_Tuple bond2 : result){
+
+            int i2 = bond2.NH->index;
+            int j2 = bond2.CO->index;
+
+            // schauen ob die Amonisäuren nachbarn sind
+            if(i2-i == 1){
+            
+            // falls ja check ob die WSBB auch jeweils 5,4or3 auseinander liegen
+            // Helix check
+            if (j-i == 4 && j2-i2 == 4){
+                // füg H zu beiden Aminosäuren hinzu     
+                result_Type[i]  = 'H';
+                result_Type[i2]  = 'H';
+
+            } else if (j-i == 3 && j2-i2 == 3){
+                // füg H zu beiden Aminosäuren hinzu
+                result_Type[i]  = 'H';
+                result_Type[i2]  = 'H';
+
+            } else if (j-i == 2 && j2-i2 == 2){
+                // füg H zu beiden Aminosäuren hinzu 
+                result_Type[i]  = 'H';
+                result_Type[i2]  = 'H';
+
+            }
+            }
+        }
+        
+    }
+
+    // Write results to file:
+    createAS_File(result_AS,result_Type,file_out);
 
 }
 

@@ -34,6 +34,9 @@ void DSSP::getGroups(){
     BALL::ResidueIterator resit = S.beginResidue();
     for (; +resit ; ++resit)
     {
+
+        // Read index from this residue
+        int ID = atoi(resit.getID());
        
         AtomIterator a_it = resit->beginAtom();
 
@@ -71,12 +74,12 @@ void DSSP::getGroups(){
             // create NH Group
 
             NH_Group nh(atomH,atomN);
-            this->NH_Groups.push_back(nh);
+            this->NH_Groups.push_back(nh,ID);
 
             // create CO Group
 
             CO_Group co(atomC_O,atomO);
-            this->CO_Groups.push_back(co);
+            this->CO_Groups.push_back(co,ID);
 
             // push NH to Space
 
@@ -106,6 +109,9 @@ DSSP::DSSP(BALL::System S) {
         this->space =   Space( S , 8.0 );
 
     // iterate over all atoms to find NH- and CO-Groups
+
+/*
+
     for(auto iter=S.atoms().begin();iter!=S.atoms().end();iter++) // Hoffe der Iterator wird so initialisiert und funktioniert so
         {
         Atom A = iter.operator*();
@@ -136,7 +142,8 @@ DSSP::DSSP(BALL::System S) {
             CO_Group co(C,O);
             this->CO_Groups.push_back(co);
         }
-    }
+    }*/
+
 }
 
 

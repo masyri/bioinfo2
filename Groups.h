@@ -44,21 +44,21 @@ using namespace BALL;
 class NH_Group {
 public:
 
-    NH_Group(Atom *H, Atom *N) {
+    NH_Group(Atom *H, Atom *N,int ID) {
         this->H = H;
         this->N = N;
-        this->indices = 123456; // Wie bekommt man den Indices aus dem Atom bzw. Molekül heraus? Hä ?
+        this->index = ID;
 
     }
 
     Atom *H;
     Atom *N;
-    int indices = -1;
+    int index = -1;
 
     std::string Group2String() {
         std::stringstream s("");
 
-        s << "\n [NH-Group] " <<"indices = " << this->indices
+        s << "\n [NH-Group] " <<"index = " << this->index
               << "\n (N pos) : " << this->N->getPosition()
               << "\n (H pos) : " << this->H->getPosition();
 
@@ -88,10 +88,10 @@ public:
 
 
 
-    CO_Group(Atom *C, Atom *O) {
+    CO_Group(Atom *C, Atom *O,int ID) {
         this->O = O;
         this->C = C;
-        this->indices = 123456; // Wie bekommt man den Indices aus dem Atom bzw. Molekül heraus? Hä ?
+        this->index = ID; 
     }
 
 
@@ -177,11 +177,14 @@ public:
 
 
 
-
+    /*
+     * print for testing
+     
+     * */
     std::string Group2String() {
         std::stringstream s("");
 
-        s << "\n [CO-Group] " << "indices = " << this->indices
+        s << "\n [CO-Group] " << "index = " << this->index
           << "\n (C pos) : " << this->C->getPosition()
           << "\n (O pos) : " << this->O->getPosition();
 
@@ -190,7 +193,7 @@ public:
 
     Atom *O;
     Atom *C;
-    int indices = -1;
+    int index = -1;
 
 };
 
