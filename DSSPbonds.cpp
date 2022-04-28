@@ -2,6 +2,7 @@
 // Created by manjaro on 22.04.22.
 //
 
+#include <BALL/STRUCTURE/peptides.h>
 #include "DSSP.h"
 
 
@@ -59,6 +60,12 @@ void DSSP::removeHBonds() {
 /*
   Exercise c)
 
+    Checks if the WSBB are 5,4,3 AS away from each other
+    and checks if the NH and OH Groups from the H-bonds are 5,4,3 length away
+    3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
+    4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
+    5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
+
   compute Helices and send this to a file in Format:
 
   1   FAGIFKEIDHFLVAYILGPALIRHGTAITFIAEIFILASEACFIEADLF   <- result_AS;
@@ -68,30 +75,16 @@ void DSSP::removeHBonds() {
 */
 void DSSP::computeHelices(std::string file_out) {
 
-    std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
-    std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
+    std::vector<char> result_AS;
+    std::vector<char> result_Type;
 
-
-    // Initialisieren der beiden Listen damit alle Indexe der Liste schonmal existieren und 
-    // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
-    //
-    //
-    /*
-    foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
-
-        result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
-
-        result_Type.push_back('-');
-
+    // Create List of
+    BALL::ResidueIterator resit = S.beginResidue();
+    for (; +resit ; ++resit) {
+            result_AS.push_back(Peptides::OneLetterCode(resit->getName()));
+            result_Type.push_back('-');
     }
-    */
 
-
-    // Checks if the WSBB are 5,4,3 AS away from eachother 
-    // and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
-    // 3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
-    // 4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
-    // 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
 
     //iteration over bonds
     for(IJ_Tuple bond : result){
@@ -134,6 +127,11 @@ void DSSP::computeHelices(std::string file_out) {
     createAS_File(result_AS,result_Type,file_out);
 
 }
+
+
+
+
+
 
 
 

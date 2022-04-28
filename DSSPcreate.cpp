@@ -27,7 +27,7 @@ Vector3 DSSP::calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Ato
 
 void DSSP::getGroups(){
 
-    // Iteration over Resiudes
+    // Iteration over Residues
 
     BALL::ResidueIterator resit = S.beginResidue();
     for (; +resit ; ++resit)
@@ -63,7 +63,8 @@ void DSSP::getGroups(){
             Vector3 position_C_N = atomC_N->getPosition();
             Vector3 position_N   = atomN->getPosition();
             Vector3 position_C_O = atomC_O->getPosition();
-            Vector3 position_H   = calculate_H_position(position_C_N, position_N, position_C_O);
+
+            Vector3 position_H   = calculate_H_position(position_C_N, position_C_O, position_N);
 
 
             atomH->setPosition(position_H);
@@ -80,6 +81,8 @@ void DSSP::getGroups(){
 
             // push NH to Space
 
+            std::cout << "\n Position C1 " << position_C_N << " C2 "<< position_C_O << " N "<< position_N << " -> H " << position_H;
+
             space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
 
         }
@@ -95,51 +98,26 @@ DSSP::DSSP(BALL::System S) {
 
     this->S = S;
 
-    // open a fragment database
-        FragmentDB fragment_db("");
-
-    // add hydrogens
-        //S.apply(fragment_db.add_hydrogens);
-
     // Create Coordinate Space
       
         this->space =   Space3D( S , 8.0 );
 
-    // iterate over all atoms to find NH- and CO-Groups
+    // statistics for testing
 
-/*
+    std::stringstream s("");
+    int i = 0;
+    for (ProteinIterator p_iter = S.beginProtein(); +p_iter; ++p_iter) {
+        s << S.getProtein(0)->getID() << " / " << p_iter->getName();i++;
+        BALL::ResidueIterator resit = S.beginResidue();
+        for (; +resit ; ++resit) {
 
-    for(auto iter=S.atoms().begin();iter!=S.atoms().end();iter++) // Hoffe der Iterator wird so initialisiert und funktioniert so
-        {
-        Atom A = iter.operator*();
-
-        // Which element?
-        Element el = A.getElement();
-
-        // if N-Atom:
-        if (el.getSymbol() == Element::N) { // hoffe der Vergleich funktioniert
-            // Hier noch nicht fertig, es muss das H-Atom gefunden werden per Bond und dann
-            // In die Atom *H-Variable gesteckt werden (dabei checken ob das H überhaupt erzeugt wurde)
-            Atom *N = &A;
-            Atom *H;
-
-            // Add found Atoms to Group and add to List
-            NH_Group nh(H,N);
-            this->NH_Groups.push_back(nh);
+            //s << "cout << " (" << resit->getFullName()<< " , " << Peptides::OneLetterCode(resit->getName()) << " < " << resit->getID() << ") ";
         }
+    }
 
-        // if N-Atom:
-        if (el.getSymbol() == Element::O) { // hoffe der Vergleich funktioniert
-            // Hier noch nicht fertig, es muss das C-Atom gefunden werden per Bond und dann
-            // In die Atom *H-Variable gesteckt werden
-            Atom *O = &A;
-            Atom *C;
+    this->names = s.str();
 
-            // Add found Atoms to Group and add to List
-            CO_Group co(C,O);
-            this->CO_Groups.push_back(co);
-        }
-    }*/
+
 
 }
 
@@ -170,7 +148,7 @@ void DSSP::startAlgorithm() {
             if (CO.checkDistance(*NH,2.5)) {
 
                 // check for the other values:
-                bool energy = CO.checkEnergy(*NH,1.0);
+                bool energy = CO.checkEnergy(*NH,-0.5);
                 bool angle = CO.checkAngle(*NH,120.0);
                 if (energy && angle) { // if all values correct add this as a Hydrogen-Bond to results
                     IJ_Tuple ij(*NH,CO);

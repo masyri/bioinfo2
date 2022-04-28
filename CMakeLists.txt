@@ -50,13 +50,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 target_link_libraries( BALL)
 
-# Add new program example1
 # Here, you can also add new programs
-# add_executable(example1 example.C)
-# target_link_libraries(example1 Uebung01 BALL)
-
-# add_executable(getSequence getSequence.C)
-# target_link_libraries(getSequence Uebung01 BALL)
 
 add_executable(dssp 
 			Main.cpp 

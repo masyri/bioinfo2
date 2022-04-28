@@ -52,7 +52,7 @@ public:
 
     void getGroups();
 
-    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom );
+    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom);
 
     void startAlgorithm();
 
@@ -69,6 +69,7 @@ public:
     Space3D space = Space3D(100,100,100,100); // Coordinate-Space with all Groups
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
+    std::string names;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
 };
 

@@ -26,21 +26,22 @@ std::vector<NH_Group*> Space3D::search(double x, double y, double z) {
     std::set<int> neighbors_x = { abs(_x - 1) , _x , _x < Space[0][0].size() - 1 ? _x + 1 : _x};
     std::set<int> neighbors_y = { abs(_y - 1) , _y , _y < Space[0].size() - 1 ? _y + 1 : _y};
     std::set<int> neighbors_z = { abs(_z - 1) , _z , _z < Space.size() - 1 ? _z + 1 : _z};
-    std::cout << "\n search at " << x << " " << y << " " << z;
+    //std::cout << "\n search at " << x << " " << y << " " << z << " , found: ";
     std::vector<NH_Group*> res;
 
     for(int _x_ : neighbors_x) {
-        for(int _y_ : neighbors_x) {
-            for(int _z_ : neighbors_x) {
-                std::cout << "\n (x,y,z) " << _x_ << " " << _y_ << " " << _z_;
+        for(int _y_ : neighbors_y) {
+            for(int _z_ : neighbors_z) {
+                //std::cout << "\n (x,y,z) " << _x_ << " " << _y_ << " " << _z_;
+                //if (_x_ < 0 || _y_ < 0 || _z_ < 0 ){ std::cerr << "out of bounds in Space3D at search";}
 
-                for(NH_Group* NH : this->Space[_x][_y][_z].NH_Groups) {
+                for(NH_Group* NH : this->Space[_z_][_y_][_x_].NH_Groups) {
                     res.push_back(NH);                    
                 }
             }
         }
     }
-
+    //cout << res.size();
     return res;
 }
 
