@@ -77,7 +77,10 @@ int main(int argc, char* argv[])
     int count_NH    = dssp.NH_Groups.size();
     int count_CO    = dssp.NH_Groups.size();
     dssp.startAlgorithm();
+<<<<<<< HEAD
     int count_hbonds_before = dssp.result.size();
+=======
+>>>>>>> c1a5cb15efdc51b6ed6d605be47424c7a399af17
 
     // ## >> 1b) << delete all != ( i , i+3 4 5 ) from the list of H-Bonds
 
