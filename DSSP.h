@@ -27,9 +27,12 @@
 */
 class IJ_Tuple { // H-Bond in (i,j) - Format
 public:
-    IJ_Tuple(NH_Group NH,CO_Group CO) {this->NH = &NH;this->CO = &CO;}
+    IJ_Tuple(NH_Group NH,CO_Group CO, int i, int j) {this->NH = &NH;this->CO = &CO;
+        this->i = i; this-> j = j;}
     NH_Group *NH;
     CO_Group *CO;
+    int i = -1;
+    int j = -1;
     std::string toString() { 
         std::stringstream s("");
         s << "\n ( " << NH->index << " , " << CO->index << " )";
@@ -52,7 +55,7 @@ public:
 
     void getGroups();
 
-    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom );
+    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom);
 
     void startAlgorithm();
 
@@ -69,6 +72,7 @@ public:
     Space3D space = Space3D(100,100,100,100); // Coordinate-Space with all Groups
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
+    std::string names;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
 };
 

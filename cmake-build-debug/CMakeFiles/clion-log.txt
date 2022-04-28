@@ -1,4 +1,17 @@
-/snap/clion/164/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/masy00001/Documents/bioinfo2/Uebung01
+/snap/clion/164/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/masy00001/Documents/bioinfo2/Bioinfo_UB02
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0") found components: iostreams filesystem system program_options chrono serialization thread date_time regex 
 CMake Warning at /usr/src/googletest/googletest/CMakeLists.txt:54 (project):
   VERSION keyword not followed by a value or was followed by a value that
   expanded to nothing.
@@ -12,6 +25,8 @@ CMake Deprecation Warning at /usr/src/googletest/googletest/CMakeLists.txt:56 (c
   CMake that the project does not need compatibility with older versions.
 
 
+-- Found PythonInterp: /usr/bin/python (found version "3.8.10") 
+-- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug
+-- Build files have been written to: /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug

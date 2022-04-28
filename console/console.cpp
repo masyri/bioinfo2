@@ -49,12 +49,13 @@ void console::Help(std::string message) {
  *
  * statistics
  **/
-void console::ShowInputs(std::string file_in, std::string file_out, int atoms, int NH, int CO, int hbonds_all, int hbonds_after_removing) {
+void console::ShowInputs(std::string file_in, std::string file_out, int atoms, int NH, int CO, int hbonds_all, int hbonds_after_removing, std::string names, int count_prot, int res) {
 
     std::cout << C::BRED    <<    "\n  | PDB file in            ->  " << C::BCYAN  << file_in ;
     std::cout << C::BRED    <<    "\n  | created File helices   ->  " << C::BCYAN  << file_out ;
 
-    std::cout << C::BGREEN   << "\n\n   count all atoms   " << C::BWHITE << " :   " << C::GREEN    << atoms ;
+    std::cout << C::BGREEN   << "\n\n   count all atoms   " << C::BWHITE << " :   " << C::GREEN    << atoms << C::BRED << " | proteins: " << count_prot << " names: " << names << "";
+    std::cout << C::BGREEN   <<   "\n   count Residues    " << C::BWHITE << " :   " << C::YELLOW   << res ;
     std::cout << C::BYELLOW  <<   "\n   count NH-Groups   " << C::BWHITE << " :   " << C::YELLOW   << NH ;
     std::cout << C::BYELLOW  <<   "\n   count CO-Groups   " << C::BWHITE << " :   " << C::YELLOW   << CO ;
     std::cout << C::BBLUE    <<   "\n   count H-Bonds     " << C::BWHITE << " :   " << C::BLUE     << hbonds_all ;

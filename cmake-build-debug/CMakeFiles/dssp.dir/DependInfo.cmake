@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/masy00001/Documents/bioinfo2/Uebung01/DSSPbonds.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/DSSPbonds.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/DSSPcreate.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/DSSPcreate.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/Groups.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/Groups.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/Main.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/Main.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/Space3D.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/Space3D.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/console/Color.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/console/Color.cpp.o"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/console/console.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles/dssp.dir/console/console.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/DSSPbonds.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/DSSPbonds.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/DSSPcreate.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/DSSPcreate.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Groups.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/Groups.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Main.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/Main.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Space3D.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/Space3D.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/Color.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/console/Color.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/console.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles/dssp.dir/console/console.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

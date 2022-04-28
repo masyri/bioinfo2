@@ -117,7 +117,28 @@ public:
         return dist < max_distance;
     }
 
+    /*
+     * Returns if the distance between the O-Atom from this Group
+     * and the H-Atom from the chosen NH_Group 'NH' in the given max range
+     * (Example min_angle = 120 ( in degree :) ) for a valid "Wasserstoffbrückenbindung")
+     *
+     * */
+    double getAngle(NH_Group NH) {
 
+        // get position of 3 points
+        Vector3 position_H = NH.H->getPosition();
+        Vector3 position_N = NH.N->getPosition();
+        Vector3 position_O = O->getPosition();
+
+        // make 2 vectors which starts at the H-Atom in the direction to the N-Atom and the O-Atom
+        Vector3 vector_H_N = position_N - position_H;
+        Vector3 vector_H_O = position_O - position_H;
+
+        double angle = vector_H_N.getAngle(vector_H_O).toDegree();
+
+        return angle;
+
+    }
 
     /*
      * Returns if the distance between the O-Atom from this Group
@@ -134,9 +155,9 @@ public:
         
         // make 2 vectors which starts at the H-Atom in the direction to the N-Atom and the O-Atom
         Vector3 vector_H_N = position_N - position_H;
-        Vector3 vector_H_O = position_N - position_H; // Hab ich die beiden Vektoren jetzt richtig erstellt?
+        Vector3 vector_H_O = position_O - position_H; // Hab ich die beiden Vektoren jetzt richtig erstellt?
 
-        double angle = vector_H_N.getAngle(vector_H_O); // ist der Return dieser Methode in Grad oder im Whatever-Maß ? Ist wichtig wegen dem vergleichen mit dem min_angle von 120°
+        double angle = vector_H_O.getAngle(vector_H_N).toDegree(); // ist der Return dieser Methode in Grad oder im Whatever-Maß ? Ist wichtig wegen dem vergleichen mit dem min_angle von 120°
 
         return angle >= min_angle;
 

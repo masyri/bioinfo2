@@ -57,10 +57,10 @@ RM = /snap/clion/164/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/masy00001/Documents/bioinfo2/Uebung01
+CMAKE_SOURCE_DIR = /home/masy00001/Documents/bioinfo2/Bioinfo_UB02
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug
+CMAKE_BINARY_DIR = /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -97,14 +97,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests//CMakeFiles/progress.marks
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/CMakeFiles 0
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/tests//CMakeFiles/progress.marks
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -113,22 +113,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 tests/CMakeFiles/test_driver.dir/rule:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_driver.dir/rule
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_driver.dir/rule
 .PHONY : tests/CMakeFiles/test_driver.dir/rule
 
 # Convenience name for target.
@@ -137,12 +137,12 @@ test_driver: tests/CMakeFiles/test_driver.dir/rule
 
 # fast build rule for target.
 test_driver/fast:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/build
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/build
 .PHONY : test_driver/fast
 
 # Convenience name for target.
 tests/CMakeFiles/TestSuite1_tests.dir/rule:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/TestSuite1_tests.dir/rule
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/TestSuite1_tests.dir/rule
 .PHONY : tests/CMakeFiles/TestSuite1_tests.dir/rule
 
 # Convenience name for target.
@@ -151,12 +151,12 @@ TestSuite1_tests: tests/CMakeFiles/TestSuite1_tests.dir/rule
 
 # fast build rule for target.
 TestSuite1_tests/fast:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/build
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/build
 .PHONY : TestSuite1_tests/fast
 
 # Convenience name for target.
 tests/CMakeFiles/DSSP_Test.dir/rule:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/DSSP_Test.dir/rule
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/DSSP_Test.dir/rule
 .PHONY : tests/CMakeFiles/DSSP_Test.dir/rule
 
 # Convenience name for target.
@@ -165,7 +165,7 @@ DSSP_Test: tests/CMakeFiles/DSSP_Test.dir/rule
 
 # fast build rule for target.
 DSSP_Test/fast:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/build
 .PHONY : DSSP_Test/fast
 
 DSSP_Test.o: DSSP_Test.cpp.o
@@ -173,7 +173,7 @@ DSSP_Test.o: DSSP_Test.cpp.o
 
 # target to build an object file
 DSSP_Test.cpp.o:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.o
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.o
 .PHONY : DSSP_Test.cpp.o
 
 DSSP_Test.i: DSSP_Test.cpp.i
@@ -181,7 +181,7 @@ DSSP_Test.i: DSSP_Test.cpp.i
 
 # target to preprocess a source file
 DSSP_Test.cpp.i:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.i
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.i
 .PHONY : DSSP_Test.cpp.i
 
 DSSP_Test.s: DSSP_Test.cpp.s
@@ -189,7 +189,7 @@ DSSP_Test.s: DSSP_Test.cpp.s
 
 # target to generate assembly for a file
 DSSP_Test.cpp.s:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.s
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/DSSP_Test.dir/build.make tests/CMakeFiles/DSSP_Test.dir/DSSP_Test.cpp.s
 .PHONY : DSSP_Test.cpp.s
 
 TestSuite1_tests.o: TestSuite1_tests.cpp.o
@@ -197,7 +197,7 @@ TestSuite1_tests.o: TestSuite1_tests.cpp.o
 
 # target to build an object file
 TestSuite1_tests.cpp.o:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.o
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.o
 .PHONY : TestSuite1_tests.cpp.o
 
 TestSuite1_tests.i: TestSuite1_tests.cpp.i
@@ -205,7 +205,7 @@ TestSuite1_tests.i: TestSuite1_tests.cpp.i
 
 # target to preprocess a source file
 TestSuite1_tests.cpp.i:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.i
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.i
 .PHONY : TestSuite1_tests.cpp.i
 
 TestSuite1_tests.s: TestSuite1_tests.cpp.s
@@ -213,7 +213,7 @@ TestSuite1_tests.s: TestSuite1_tests.cpp.s
 
 # target to generate assembly for a file
 TestSuite1_tests.cpp.s:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.s
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/TestSuite1_tests.dir/build.make tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.s
 .PHONY : TestSuite1_tests.cpp.s
 
 main_test.o: main_test.cpp.o
@@ -221,7 +221,7 @@ main_test.o: main_test.cpp.o
 
 # target to build an object file
 main_test.cpp.o:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.o
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.o
 .PHONY : main_test.cpp.o
 
 main_test.i: main_test.cpp.i
@@ -229,7 +229,7 @@ main_test.i: main_test.cpp.i
 
 # target to preprocess a source file
 main_test.cpp.i:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.i
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.i
 .PHONY : main_test.cpp.i
 
 main_test.s: main_test.cpp.s
@@ -237,7 +237,7 @@ main_test.s: main_test.cpp.s
 
 # target to generate assembly for a file
 main_test.cpp.s:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.s
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_driver.dir/build.make tests/CMakeFiles/test_driver.dir/main_test.cpp.s
 .PHONY : main_test.cpp.s
 
 # Help Target
@@ -272,6 +272,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

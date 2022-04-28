@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/masy00001/Documents/bioinfo2/Uebung01/DSSP.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/DSSP.h
 BALL/KERNEL/system.h
 -
 BALL/KERNEL/molecule.h
@@ -26,17 +26,13 @@ BALL/KERNEL/residueIterator.h
 vector
 -
 Groups.h
-/home/masy00001/Documents/bioinfo2/Uebung01/Groups.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Groups.h
 Space3D.h
-/home/masy00001/Documents/bioinfo2/Uebung01/Space3D.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Space3D.h
 sstream
 -
 
-/home/masy00001/Documents/bioinfo2/Uebung01/DSSPcreate.cpp
-DSSP.h
-/home/masy00001/Documents/bioinfo2/Uebung01/DSSP.h
-
-/home/masy00001/Documents/bioinfo2/Uebung01/Groups.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Groups.h
 BALL/KERNEL/system.h
 -
 BALL/KERNEL/molecule.h
@@ -50,15 +46,51 @@ BALL/KERNEL/PTE.h
 BALL/FORMAT/PDBFile.h
 -
 
-/home/masy00001/Documents/bioinfo2/Uebung01/Space3D.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Main.cpp
+BALL/KERNEL/system.h
+-
+BALL/KERNEL/molecule.h
+-
+BALL/KERNEL/atom.h
+-
+BALL/KERNEL/bond.h
+-
+BALL/KERNEL/PTE.h
+-
+BALL/STRUCTURE/secondaryStructureProcessor.h
+-
+BALL/STRUCTURE/fragmentDB.h
+-
+BALL/STRUCTURE/peptides.h
+-
+BALL/FORMAT/PDBFile.h
+-
+Groups.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Groups.h
+console/console.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/console.h
+console/Color.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/Color.h
+DSSP.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/DSSP.h
+iostream
+-
+
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Space3D.h
 vector
 -
 iostream
 -
 console/Color.h
-/home/masy00001/Documents/bioinfo2/Uebung01/console/Color.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/Color.h
 Groups.h
-/home/masy00001/Documents/bioinfo2/Uebung01/Groups.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/Groups.h
 
-/home/masy00001/Documents/bioinfo2/Uebung01/console/Color.h
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/Color.h
+
+/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/console/console.h
+string
+-
+iostream
+-
 

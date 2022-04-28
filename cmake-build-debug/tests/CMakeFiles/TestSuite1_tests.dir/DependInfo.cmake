@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/masy00001/Documents/bioinfo2/Uebung01/tests/TestSuite1_tests.cpp" "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.o"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/tests/TestSuite1_tests.cpp" "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/tests/CMakeFiles/TestSuite1_tests.dir/TestSuite1_tests.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -48,9 +48,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
-  "/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug/tests/CMakeFiles/test_driver.dir/DependInfo.cmake"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/tests/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/tests/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug/tests/CMakeFiles/test_driver.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

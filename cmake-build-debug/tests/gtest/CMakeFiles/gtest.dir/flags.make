@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/eigen3 -I/home/masy00001/Documents/bioinfo2/Uebung01 -I/home/masy00001/Documents/bioinfo2/Uebung01/cmake-build-debug -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest
+CXX_INCLUDES = -I/usr/include/eigen3 -I/home/masy00001/Documents/bioinfo2/Bioinfo_UB02 -I/home/masy00001/Documents/bioinfo2/Bioinfo_UB02/cmake-build-debug -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest
 
 CXX_FLAGS = -g   -std=c++17 -pedantic -Wall -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
 

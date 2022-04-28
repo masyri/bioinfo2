@@ -2,6 +2,7 @@
 // Created by manjaro on 22.04.22.
 //
 
+#include <BALL/STRUCTURE/peptides.h>
 #include "DSSP.h"
 
 
@@ -12,44 +13,26 @@
 
 */
 void DSSP::removeHBonds() {
-    
-//  !!! noch nicht getestet ob es baut und funktioniert!!!
+
     int position = 0;
-    for(IJ_Tuple bond :result){ // iterate over the H-Bond-List 'result'
 
-        // (i,j) = (NH-Groud.indicy = i , CO-Group.indicy = j)   <- Welche Gruppe ist i und welche j? ist das egal und es muss nur der Abstand stimmen?
+    for(IJ_Tuple bond : result){ // iterate over the H-Bond-List 'result'
 
-        int i = bond.NH->index;
-        int j = bond.CO->index;
-        // würde diese Art von überprüfung nicht auch die Fälle (i,i+1)(i,i+2) akzeptieren?
-        // zb. (1,3) -> abs(3-1)-3 = 2-3 = -1 < 3 --> wahr obwohl removed werden sollte
-        
-        //bool distance = abs(j - i) - 3 < 3; 
-        
+        int i = bond.i;
+        int j = bond.j;
+
         int abstand = abs(j - i);
         bool distance = abstand == 3 ||abstand == 4||abstand == 5;
+
         if (!distance) { 
                 // delete this bond from result if j not i + 3 , i + 4 , i + 5
-                result.erase(result.begin() + position);}
-        }
-    position++;
+                result.erase(result.begin() + position);
+        } else
 
-    /*
-    int position = 0;
-    for(WSBB_Tuple bond : wsbb){
-    
-        int i = atoi(bond.i->getID().c_str());
-        int j = atoi(bond.j->getID().c_str());
+            { position++;}
 
-        int abstand = abs(j - i);
-        cout << abstand << endl;
-        bool distance = abstand == 3 ||abstand == 4||abstand == 5;
-        if (!distance) { 
-            // delete this bond from wsbb if j not i + 3 , i + 4 , i + 5
-            wsbb.erase(wsbb.begin() + position);
         }
-        position++;
-    }*/
+
 }
 
 
@@ -58,6 +41,12 @@ void DSSP::removeHBonds() {
 
 /*
   Exercise c)
+
+    Checks if the WSBB are 5,4,3 AS away from each other
+    and checks if the NH and OH Groups from the H-bonds are 5,4,3 length away
+    3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
+    4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
+    5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
 
   compute Helices and send this to a file in Format:
 
@@ -68,30 +57,16 @@ void DSSP::removeHBonds() {
 */
 void DSSP::computeHelices(std::string file_out) {
 
-    std::vector<char> result_AS    = {'B','I','O','I','N','F','O'};
-    std::vector<char> result_Type  = {'-','-','H','H','-','H','-'};
+    std::vector<char> result_AS;
+    std::vector<char> result_Type;
 
-
-    // Initialisieren der beiden Listen damit alle Indexe der Liste schonmal existieren und 
-    // die '-' nur noch durch 'H' ersetzt werden müssen, falls eine WSBB existiert 
-    //
-    //
-    /*
-    foreach(AminoAcid AS : where_ever_molecules) { // <- wie kommt man an die Liste der AS? Eventuell über Residien? Residue sind die Aminosäuren
-
-        result_AS.push_back(AS.toChar); // Hier ist eine Methode gesucht die die AS in einen Char umwandelt
-
-        result_Type.push_back('-');
-
+    // Create List of
+    BALL::ResidueIterator resit = S.beginResidue();
+    for (; +resit ; ++resit) {
+            result_AS.push_back(Peptides::OneLetterCode(resit->getName()));
+            result_Type.push_back('-');
     }
-    */
 
-
-    // Checks if the WSBB are 5,4,3 AS away from eachother 
-    // and checks if the NH and OH Groups from the H-bonds are 5,4,3 lenght away
-    // 3-Helix(i, i + 2) := HBond(i − 1, i + 2) ∧ HBond(i, i + 3)
-    // 4-Helix(i, i + 3) := HBond(i − 1, i + 3) ∧ HBond(i, i + 4)
-    // 5-Helix(i, i + 4) := HBond(i − 1, i + 4) ∧ HBond(i, i + 5)
 
     //iteration over bonds
     for(IJ_Tuple bond : result){
@@ -137,6 +112,11 @@ void DSSP::computeHelices(std::string file_out) {
 
 
 
+
+
+
+
+
 /*
   Exercise c)
 
@@ -147,8 +127,6 @@ void DSSP::computeHelices(std::string file_out) {
 
 */
 void DSSP::createAS_File(std::vector<char> AS, std::vector<char> TY,std::string file_out) {
-
-    // bereits Getestet , Dateiausgabe funktioniert im richtigen Format
 
      if (TY.size() < AS.size()) {std::cout << "\nError createAS_File : TY smaller AS\n";return;}
     int counter50 = 0;
