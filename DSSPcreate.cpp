@@ -57,8 +57,6 @@ void DSSP::getGroups(){
 
             // Get H Atom
             Atom* atomH;
-            //auto hyd = PTE[Element::H];
-            //atomH->setElement(hyd);
 
             Vector3 position_C_N = atomC_N->getPosition();
             Vector3 position_N   = atomN->getPosition();
@@ -80,8 +78,6 @@ void DSSP::getGroups(){
             this->CO_Groups.push_back(co);
 
             // push NH to Space
-
-            //std::cout << "\n Position C1 " << position_C_N << " C2 "<< position_C_O << " N "<< position_N << " -> H " << position_H;
 
             space.pushToSpace(position_H.x , position_H.y , position_H.z , nh);
 
@@ -108,11 +104,7 @@ DSSP::DSSP(BALL::System S) {
     int i = 0;
     for (ProteinIterator p_iter = S.beginProtein(); +p_iter; ++p_iter) {
         s << S.getProtein(0)->getID() << " / " << p_iter->getName();i++;
-        BALL::ResidueIterator resit = S.beginResidue();
-        for (; +resit ; ++resit) {
 
-            //s << "cout << " (" << resit->getFullName()<< " , " << Peptides::OneLetterCode(resit->getName()) << " < " << resit->getID() << ") ";
-        }
     }
 
     this->names = s.str();
@@ -134,20 +126,12 @@ void DSSP::startAlgorithm() {
 
         // look for the position of the O-Atom of this Group
         Vector3 pos = CO.O->getPosition();
-        double x = pos.x;
-        double y = pos.y;
-        double z = pos.z; 
-
-        // look for all near NH-Groups/H-Atoms
-        //std::vector<NH_Group*> near_NHgroups = space.search( x,  y,  z);
 
         // Iteriere über alle NH-Gruppen, die in den Koordinatenboxen liegen
-            //cout << " \n ";
-        for(NH_Group NH : NH_Groups) {
-            //cout << "\n " << pos << " -> " << NH->H->getPosition() << " = " << pos.getDistance(NH->H->getPosition() );
-            cout << " \n distance: " << pos.getDistance(NH.H->getPosition()) << " energy: " << CO.getEnergy(NH) << " angle: " << CO.getAngle(NH);
 
-            if (pos.getDistance(NH.H->getPosition()) < 3.5) {
+        for(NH_Group NH : NH_Groups) {
+
+            if (pos.getDistance(NH.H->getPosition()) < 8.5) {
 
                 // check for the other values:
                 bool energy = CO.checkEnergy(NH,-0.5);

@@ -4,10 +4,10 @@ project(Uebung01 VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
-    -std=c++17            
-    -pedantic                
-    -Wall                    
-)
+		-std=c++17
+		-pedantic
+		-Wall
+		)
 
 # Set CIP Pool specific include paths
 set(BALL_DIR "/opt/BALL/install/lib/cmake/BALL/")
@@ -22,9 +22,9 @@ find_package(Qt5Xml REQUIRED)
 find_package(Qt5Network REQUIRED)
 
 include_directories(
-	${BALL_INCLUDE_DIRS}
-	"${CMAKE_SOURCE_DIR}"
-	"${CMAKE_BINARY_DIR}"
+		${BALL_INCLUDE_DIRS}
+		"${CMAKE_SOURCE_DIR}"
+		"${CMAKE_BINARY_DIR}"
 )
 add_definitions(${CXX_FLAGS} ${BALL_ADDCXX_FLAGS})
 
@@ -52,21 +52,19 @@ target_link_libraries( BALL)
 
 # Here, you can also add new programs
 
-add_executable(dssp 
-			Main.cpp 
-			DSSPbonds.cpp 
-			DSSPcreate.cpp 
-			DSSP.h 
-			console/console.h 
-			console/console.cpp 
-			console/Color.h 
-			console/Color.cpp
-			Groups.cpp
-			Groups.h
-			Space3D.cpp
-			Space3D.h)
+add_executable(dssp
+		Main.cpp
+		DSSPbonds.cpp
+		DSSPcreate.cpp
+		DSSP.h
+		console/console.h
+		console/console.cpp
+		console/Color.h
+		console/Color.cpp
+		Groups.cpp
+		Groups.h
+		Space3D.cpp
+		Space3D.h)
 target_link_libraries(dssp BALL)
 
 add_subdirectory(tests)
-
-
