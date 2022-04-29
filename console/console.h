@@ -10,9 +10,10 @@
 class console {
 public:
 
- static void ShowHeader();
- static void Help(std::string message);
- static void ShowInputs(std::string file_in, std::string file_out, int atoms, int NH, int CO, int hbonds_all, int hbonds_after_removing, std::string names, int count_prot, int res);
+ static void ShowHeader(std::string name);
+ static void Help(std::string name,std::string message);
+ static void ShowInputs(std::string file);
+
 
 };
 

@@ -7,7 +7,7 @@
 /*
 * sends a big-font Ascii-Art-Header to std::cout
 * */
-void console::ShowHeader() {
+void console::ShowHeader(std::string name) {
     std::cout << "\n";
     std::string r  = C::RED;
     std::string R  = C::BRED;
@@ -30,16 +30,16 @@ void console::ShowHeader() {
 
 /*
  *
- * send the help-message to std::cout
+ * send the help-message to std::cout -createH2O-
  **/
-void console::Help(std::string message) {
-    console::ShowHeader();
+void console::Help(std::string name,std::string message) {
+    console::ShowHeader(name);
     std::cout << C::BRED  << message <<  "\n\n" ;
     std::cout << C::BWHITE  <<  "";
-    std::cout << C::BWHITE  <<  "  Help:    " << C::BYELLOW << " $ ./dssp [input]  \n" ;
-    std::cout << C::BWHITE  <<  "  Example: " << C::BGREEN  << " $ ./dssp ../file.pdb \n" ;
+    std::cout << C::BWHITE  <<  "  Help:    " << C::BYELLOW << " $ ./deepBlackCoffee [PDB-File] \n" ;
+    std::cout << C::BWHITE  <<  "  Example: " << C::BGREEN  << " $ ./deepBlackCoffee ../your_amazing_molecule.pdb \n" ;
     std::cout << C::BWHITE  <<  "\n" ;
-    std::cout << C::BGREEN  <<  " [FILE]   input   " << C::BWHITE << "| " << C::BYELLOW << " File with your molecule\n" ;
+    std::cout << C::BGREEN  <<  " [FILE]   PDB-File   " << C::BWHITE << "| " << C::BYELLOW << " File with your molecule\n" ;
     std::cout << C::BWHITE  <<  "\n" ;
 }
 
@@ -47,20 +47,15 @@ void console::Help(std::string message) {
 
 /*
  *
- * statistics
+ * send inputs and outputs to std::cout
  **/
-void console::ShowInputs(std::string file_in, std::string file_out, int atoms, int NH, int CO, int hbonds_all, int hbonds_after_removing, std::string names, int count_prot, int res) {
+void console::ShowInputs(std::string file) {
 
-    std::cout << C::BRED    <<    "\n  | PDB file in            ->  " << C::BCYAN  << file_in ;
-    std::cout << C::BRED    <<    "\n  | created File helices   ->  " << C::BCYAN  << file_out ;
-
-    std::cout << C::BGREEN   << "\n\n   count all atoms   " << C::BWHITE << " :   " << C::GREEN    << atoms << C::BRED << " | proteins: " << count_prot << " names: " << names << "";
-    std::cout << C::BGREEN   <<   "\n   count Residues    " << C::BWHITE << " :   " << C::YELLOW   << res ;
-    std::cout << C::BYELLOW  <<   "\n   count NH-Groups   " << C::BWHITE << " :   " << C::YELLOW   << NH ;
-    std::cout << C::BYELLOW  <<   "\n   count CO-Groups   " << C::BWHITE << " :   " << C::YELLOW   << CO ;
-    std::cout << C::BBLUE    <<   "\n   count H-Bonds     " << C::BWHITE << " :   " << C::BLUE     << hbonds_all ;
-    std::cout << C::BMAGENTA <<   "\n   -> after deleting " << C::BWHITE << " :   " << C::BMAGENTA << hbonds_after_removing ;
-    std::cout << C::RESET    << "\n\n";
+    std::cout << C::BWHITE  <<    "";
+    std::cout << C::BWHITE  <<            "\n  | file:    "<< C::BCYAN  << file ;
+    std::cout << C::BWHITE  <<            "\n  | ????:    "<< C::BCYAN  << 0 ;
+    std::cout << C::BWHITE  <<    "\n\n";
 
 }
+
 
