@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "getSequence.C": "cpp",
-        "createH2O.C": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
-}
