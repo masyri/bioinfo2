@@ -1,6 +1,9 @@
 # 
+# This script creates a Ramachandran-Plot from a given CSV-File and save this
+# Plot in a PNG-File
 #
-# Command line:
+#
+# -- Command line --
 #
 # $ Rscript script.R [plot_name] [inputfile]
 #
