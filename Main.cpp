@@ -26,9 +26,9 @@ int main(int argc, char* argv[])
 
     // ## Program variables
     console::ShowHeader();
-    string filename     = "-";
+    string filename     = "---";
     bool file           = false;
-    string proteinname  = "-";
+    string proteinname  = "---";
     string output       = "../plotList.csv";
 
 
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
                     continue;} else {
                     cout << C::BRED << "\n > invalid filename ’" << filename << "’ \n" << C::RESET;}
             }
-            file = true;
+            if (!file) {proteinname  = "---";filename     = "---";continue;}
                         
             PDBFile f(filename, ios::in);
             System S;
@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
             auto angles = R.getTorsionAngels();
             Ramachandran::anglesToFile(output,angles);
             cout << C::BBLUE   << " > File created '" << output << "'\n";
-            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "You can create a Plot with the R-File 'script.R'";
+            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << " ---> You can create a Plot with the R-File 'script.R'";
             cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "please call:";
             cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "$ Rscript test.R [plot_name] [inputfile]";
             cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "example: $ Rscript script.R xyZ72 plotList.csv\n\n" << C::RESET;
@@ -129,6 +129,7 @@ int main(int argc, char* argv[])
             continue;
             }
 
+        // break the loop and close the program
         if (chosen == '\033') {break;}
 
 }
