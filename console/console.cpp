@@ -72,7 +72,7 @@ void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
 
 char console::ShowChoices(std::string filename,std::string proteinname) {
 
-    std::cout << C::BWHITE  <<    "\n" << " | Choose an option and press Enter: " << C::BGREEN << "| loaded Protein: " << proteinname << " / " << filename;
+    std::cout << C::BWHITE  <<    "\n" << " | Choose an option and press Enter: " << C::BGREEN << "| Protein: " << proteinname << C::YELLOW << " file: " << filename;
     std::cout << C::BWHITE  <<    "\n" << " | ";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::BYELLOW << "1"   << "   Open PDB File";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "2"   << "   Print Sequence with secondary structure";
