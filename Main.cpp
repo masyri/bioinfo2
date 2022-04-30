@@ -23,16 +23,19 @@ using namespace BALL;
 
 int main(int argc, char* argv[])
 {
-cout << "\n R A M A C H A N D R A N \n" ;
+    
+    // ## correct arg-count?
+
+    if (argc < 2) { console::Help("","   not enough arguments!");return 0; }
+    if (argc > 2) { console::Help("","   too many arguments!");return 0; }
 
     // ## get arguments
-    if (argc < 2) {cerr << "Not enough arguments" << endl; return 1; }
-
+    
+    string file   = argv[1];
+    string output = "../plotList.csv";
 
     // ## load file
-    
-    string file   = "../PDB/1A0B.pdb";
-    string output = "../plotList.csv";
+
     PDBFile f(file, ios::in);
     System S;
     f >> S;
@@ -41,14 +44,16 @@ cout << "\n R A M A C H A N D R A N \n" ;
 
     Ramachandran R(S);
 
-    
-    
+    console::ShowHeader(file,R.protein_name);
+
+    cout << "\n" << R << "\n";
     
     // ## calculate angles and print out to console and file
 
     auto angles = R.getTorsionAngels();
 
     console::ShowAngles(output,angles);
+    
     Ramachandran::anglesToFile(output,angles);
 
 
