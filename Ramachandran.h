@@ -27,7 +27,10 @@ using namespace std;
 
 
 
-
+/**
+ *  A tuple of Phi and Psi angles
+ *
+ * */
 class AnglePair {
 public:
     AnglePair(double phi,double psi) {this->phi = phi;this->psi = psi;}
@@ -59,7 +62,10 @@ public:
 
 
 
-
+/**
+ *  Main Class of Ramachandran for print statistics and create CSV-Files
+ *
+ * */
 class Ramachandran {
 
 public:
@@ -72,7 +78,9 @@ public:
     
     static void anglesToFile(string filename, std::vector<AnglePair> AP);
 
-    friend ostream& operator<<(ostream& os, const Ramachandran& SC);
+    void printStats() const;
+
+    void printSequences() const;
 
     string protein_name;
 
