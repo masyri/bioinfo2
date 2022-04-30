@@ -2,9 +2,9 @@
 #
 # Command line:
 #
-# $ Rscript test.R [plot_name] [inputfile]
+# $ Rscript script.R [plot_name] [inputfile]
 #
-# $ Rscript test.R coffee plotList.csv
+# $ Rscript script.R coffee plotList.csv
 #
 #
 
