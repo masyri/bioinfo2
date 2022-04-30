@@ -38,12 +38,15 @@ cout << "\n R A M A C H A N D R A N \n" ;
 
     Ramachandran R(S);
 
-    cout << "\n" << R << "\n";
+    
+    
+    
+    // ## calculate angles and print out to console and file
 
-    for(AnglePair AP : R.getTorsionAngels()) {
-        cout << "\n" << AP;
+    auto angles = R.getTorsionAngels();
 
-    }
-    cout << "\n";
+    console::ShowAngles(output,angles);
+    Ramachandran::anglesToFile(output,angles);
+
 
 }
