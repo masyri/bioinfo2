@@ -62,7 +62,7 @@ void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
     std::cout << C::BWHITE  <<    "\n" << " | ";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "You can create a Plot with the R-File 'script.R'";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "please call:";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "$ Rscript test.R [plot_name] [inputfile]";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "$ Rscript script.R [plot_name] [inputfile]";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "example: $ Rscript test.R xyZ72 plotList.csv\n\n" << C::RESET;
 
 }
