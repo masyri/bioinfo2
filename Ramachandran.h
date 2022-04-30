@@ -69,6 +69,8 @@ public:
     vector<AnglePair> getTorsionAngels();
 
     Peptides::OneLetterAASequence getCodeAA(SecondaryStructureIterator &begin);
+    
+    static void anglesToFile(string filename, std::vector<AnglePair> AP);
 
     friend ostream& operator<<(ostream& os, const Ramachandran& SC);
 
