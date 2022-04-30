@@ -89,34 +89,48 @@ vector <AnglePair> Ramachandran::getTorsionAngels() {
 
 
 /**
- *  R A M A C H A N D R A N - O U T P U T
+ *  R A M A C H A N D R A N - S E Q U E N C E S
  *
  *  Create a double-lined string of AminoAcid-Name and their secondary structure and statistics
  *
  *  @return formatted string
  *
  * */
-ostream &operator<<(ostream &os, const Ramachandran &SC) {
+void Ramachandran::printSequences() const {
 
-    os << C::BWHITE;
-    for (auto &aa : SC.structures) {
-      os << aa.name;
+    std::cout << C::BWHITE;
+    for (auto &aa : structures) {
+        std::cout << aa.name;
     }
 
-    os << C::RESET << "\n";
-    for (auto &ty : SC.structures) {
-        if (ty.type == 'H') {os << C::BBLUE;} else if (ty.type == 'S') {os << C::BGREEN;} else if (ty.type == 'L') {os << C::BYELLOW;} else {os << C::BRED;}
-        os << ty.type;
+    std::cout << C::RESET << "\n";
+    for (auto &ty : structures) {
+        if (ty.type == 'H') {std::cout << C::BBLUE;} else if (ty.type == 'S') {std::cout << C::BGREEN;} else if (ty.type == 'L') {std::cout << C::BYELLOW;} else {std::cout << C::BRED;}
+        std::cout << ty.type;
     }
+}
 
-    os << C::RESET    << "\n";
-    os << C::BGREEN   << "\n   Sequence length " << C::BWHITE << " :   " << C::GREEN    << SC.aminoacids ;
-    os << C::BYELLOW  << "\n   Loops           " << C::BWHITE << " :   " << C::YELLOW   << 100.0 * (double)SC.loops   / (double)SC.aminoacids << " %";
-    os << C::BBLUE    << "\n   Helices         " << C::BWHITE << " :   " << C::BLUE     << 100.0 * (double)SC.helices / (double)SC.aminoacids << " %";
-    os << C::BMAGENTA << "\n   Loops           " << C::BWHITE << " :   " << C::BMAGENTA << 100.0 * (double)SC.loops   / (double)SC.aminoacids << " %";
-    os << C::RESET    << "\n";
 
-    return os;
+
+
+
+/**
+ *  R A M A C H A N D R A N - S T A T I S T I C S
+ *
+ *  Print statistics in percent about their secondary structure
+ *
+ *  @return formatted string
+ *
+ * */
+void Ramachandran::printStats() const {
+
+    std::cout << C::RESET    << "\n";
+    std::cout << C::BGREEN   << "\n   Sequence length " << C::BWHITE << " :   " << C::GREEN    << aminoacids ;
+    std::cout << C::BYELLOW  << "\n   Loops           " << C::BWHITE << " :   " << C::YELLOW   << 100.0 * (double)loops   / (double)aminoacids << " %";
+    std::cout << C::BBLUE    << "\n   Helices         " << C::BWHITE << " :   " << C::BLUE     << 100.0 * (double)helices / (double)aminoacids << " %";
+    std::cout << C::BMAGENTA << "\n   Loops           " << C::BWHITE << " :   " << C::BMAGENTA << 100.0 * (double)loops   / (double)aminoacids << " %";
+    std::cout << C::RESET    << "\n";
+
 }
 
 
