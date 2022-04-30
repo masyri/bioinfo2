@@ -23,38 +23,117 @@ using namespace BALL;
 
 int main(int argc, char* argv[])
 {
-    
-    // ## correct arg-count?
 
-    if (argc < 2) { console::Help("","   not enough arguments!");return 0; }
-    if (argc > 2) { console::Help("","   too many arguments!");return 0; }
-
-    // ## get arguments
-    
-    string file   = argv[1];
-    string output = "../plotList.csv";
-
-    // ## load file
-
-    PDBFile f(file, ios::in);
-    System S;
-    f >> S;
-
-    // ## create Ramachandran
-
-    Ramachandran R(S);
-
-    console::ShowHeader(file,R.protein_name);
-
-    cout << "\n" << R << "\n";
-    
-    // ## calculate angles and print out to console and file
-
-    auto angles = R.getTorsionAngels();
-
-    console::ShowAngles(output,angles);
-    
-    Ramachandran::anglesToFile(output,angles);
+    // ## Program variables
+    console::ShowHeader();
+    string filename     = "-";
+    bool file           = false;
+    string proteinname  = "-";
+    string output       = "../plotList.csv";
 
 
+    // ## The 'endless' loop
+    while (true) {
+
+        char chosen = console::ShowChoices(filename,proteinname);
+
+        // Load File
+        if (chosen == '1') {
+            file = false;
+            while (!file) {
+                cout << C::BWHITE << "Type PDB-File in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
+                cin >> filename;
+                if (filename.begin().operator*() == '\033') {file = false;break;}
+                std::ifstream infile(filename);
+                if (infile) {
+                    file = true;
+                    continue;} else {
+                    cout << C::BRED << "\n > invalid filename ’" << filename << "’ \n" << C::RESET;}
+            }
+            file = true;
+                        
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+            proteinname = R.protein_name;
+            
+            continue;
+            }
+
+        // Print sequences
+        if (chosen == '2') {
+                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n > press Enter to continue ...";getchar();continue;}
+                cout << C::BBLUE   << " > Print sequences ...\n\n";
+            
+                PDBFile f(filename, ios::in);
+                System S;
+                f >> S;
+                Ramachandran R(S);
+            
+                R.printSequences();
+                std::cout << C::BLUE   <<    "\n\n" << " > press [ENTER] to continue ... \n";
+                getchar();
+                continue;
+            }
+
+        // Print stats in percent
+        if (chosen == '3') {
+            if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n > press Enter to continue ...";getchar();continue;}
+            cout << C::BBLUE   << " > Print stats ...\n";
+            
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+            
+            R.printStats();
+            std::cout << C::BLUE   <<    "\n" << " > press [ENTER] to continue ... \n";
+            getchar();
+            continue;
+            }
+
+        // Print Angles
+        if (chosen == '4') {
+            if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n > press Enter to continue ...";getchar();continue;}
+            cout << C::BBLUE   << " > Print all Psi/Phi angles ...\n";
+            
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+            
+            auto angles = R.getTorsionAngels();
+            console::ShowAngles(output,angles);
+            continue;}
+
+        // Create CSV File
+        if (chosen == '5') {
+            if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n > press Enter to continue ...";getchar();continue;}
+            cout << C::BBLUE << " > Create CSV file ...\n";
+            
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+            
+            auto angles = R.getTorsionAngels();
+            Ramachandran::anglesToFile(output,angles);
+            cout << C::BBLUE   << " > File created '" << output << "'\n";
+            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "You can create a Plot with the R-File 'script.R'";
+            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "please call:";
+            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "$ Rscript test.R [plot_name] [inputfile]";
+            cout << C::BWHITE  <<   "\n" << " > " << C::BMAGENTA  << "example: $ Rscript script.R xyZ72 plotList.csv\n\n" << C::RESET;
+            cout << C::BLUE   <<    "\n" << " > press [ENTER] to continue ... \n";
+            getchar();
+            continue;
+            }
+
+        if (chosen == '\033') {break;}
+
+}
+
+    std::cout << C::BRED   <<    "\n" << " > Program aborted.\n";
+
+return 1;
 }
