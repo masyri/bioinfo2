@@ -12,7 +12,7 @@ public:
 
  static void ShowHeader(std::string name);
  static void Help(std::string name,std::string message);
- static void ShowInputs(std::string file);
+ static void ShowAngles(std::string outputfile, std::vector<AnglePair> AP);
 
 
 };
