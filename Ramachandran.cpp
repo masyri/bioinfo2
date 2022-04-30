@@ -152,3 +152,27 @@ Peptides::OneLetterAASequence Ramachandran::getCodeAA(SecondaryStructureIterator
 
 
 
+/**
+ *  R A M A C H A N D R A N - F I L E
+ *
+ *  Create a CSV FIle with the phi and psi angles
+ *
+ *  @filename filename for output
+ *  @AP       vector of angles
+ *  @return   a file in *.csv - format
+ *
+ * */
+void Ramachandran::anglesToFile(string filename, std::vector<AnglePair> AP) {
+
+    ofstream file;
+    file.open (filename);
+    file << "\"phi\";\"psi\"";
+
+    for(auto ap : AP) {
+        file << "\n" << ap.phi << ";" << ap.psi;
+    }
+
+    file.close();
+}
+
+
