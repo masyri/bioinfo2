@@ -6,7 +6,7 @@
 /*
 * sends a big-font Ascii-Art-Header to std::cout
 * */
-void console::ShowHeader(std::string filename, std::string protein) {
+void console::ShowHeader() {
     std::cout << "\n";
     std::string r  = C::RED;
     std::string R  = C::BRED;
@@ -32,28 +32,22 @@ void console::ShowHeader(std::string filename, std::string protein) {
     std::cout << b << "\n     \\/            \\/     \\/"  << B <<  "                 \\/       \\/         ";
 
     std::cout << B << "\n\n";
-    std::cout << C::BWHITE  <<    "\n | " << G << "Filename  :  " << g << filename;
-    std::cout << C::BWHITE  <<    "\n | " << Y << "Protein   :  " << y << protein;
-    std::cout << C::BWHITE  <<    "\n | ";
-    std::cout << C::BWHITE  <<    "\n | " << "press [ENTER] to print out sequence stats ... ";
-    getchar();
-
 
 }
 
 
 /*
  *
- * send the help-message to std::cout -createH2O-
+ * send the help-message to std::cout
  **/
 void console::Help(std::string name,std::string message) {
 
     std::cout << C::BRED  << message <<  "\n\n" ;
     std::cout << C::BWHITE  <<  "";
-    std::cout << C::BWHITE  <<  "  Help:    " << C::BYELLOW << " $ ./deepBlackCoffee [PDB-File] \n" ;
-    std::cout << C::BWHITE  <<  "  Example: " << C::BGREEN  << " $ ./deepBlackCoffee ../your_amazing_molecule.pdb \n" ;
+    std::cout << C::BWHITE  <<  "  Help:    " << C::BYELLOW << " $ ./deepBlackCoffee \n" ;
+    std::cout << C::BWHITE  <<  "  Example: " << C::BGREEN  << " $ ./deepBlackCoffee \n" ;
     std::cout << C::BWHITE  <<  "\n" ;
-    std::cout << C::BGREEN  <<  " [FILE]   PDB-File   " << C::BWHITE << "| " << C::BYELLOW << " File with your molecule\n" ;
+    std::cout << C::BGREEN  <<  " " << C::BWHITE << "| " << C::BYELLOW << " \n" ;
     std::cout << C::BWHITE  <<  "\n" ;
 }
 
@@ -64,23 +58,34 @@ void console::Help(std::string name,std::string message) {
  * send inputs and outputs to std::cout
  **/
 void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
-
-    std::cout << C::BWHITE  <<    "\n" << " | press [ENTER] to print out all angles ... ";
-    getchar();
     std::cout << C::BWHITE  <<    "\n";
     for(auto ap : AP) {
         cout << ap << endl;
     }
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BLUE   << AP.size() << " tuples printed ... ";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BBLUE  << "output-file :        " << outputfile;
-    std::cout << C::BWHITE  <<    "\n" << " | ";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "You can create a Plot with the R-File 'script.R'";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "please call:";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "$ Rscript script.R [plot_name] [inputfile]";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "example: $ Rscript script.R xyZ72 plotList.csv\n\n" << C::RESET;
-
+    std::cout << C::BBLUE <<    "\n" << " > " << C::BBLUE << AP.size() << " tuples printed. ";
+    std::cout << C::BLUE   <<    "\n" << " > press [ENTER] to continue ... \n";
+    getchar();
 }
 
 
 
+
+char console::ShowChoices(std::string filename,std::string proteinname) {
+
+    std::cout << C::BWHITE  <<    "\n" << " | Choose an option and press Enter: " << C::BGREEN << "| loaded Protein: " << proteinname << " / " << filename;
+    std::cout << C::BWHITE  <<    "\n" << " | ";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BYELLOW << "1"   << "   Open PDB File";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "2"   << "   Print Sequence with secondary structure";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "3"   << "   Print structure assignments in percent";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "4"   << "   Print phi/psi angles";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "5"   << "   Create CSV File for Plot";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "ESC" << " quit program";
+    std::cout << C::RESET  <<     "\n\n > ";
+    char c;
+    while (cin.get(c)) {
+        if (c)
+        return c;
+    }
+
+}
 
