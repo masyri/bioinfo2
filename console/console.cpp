@@ -49,13 +49,21 @@ void console::Help(std::string name,std::string message) {
  *
  * send inputs and outputs to std::cout
  **/
-void console::ShowInputs(std::string file) {
+void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
 
-    std::cout << C::BWHITE  <<    "";
-    std::cout << C::BWHITE  <<            "\n  | file:    "<< C::BCYAN  << file ;
-    std::cout << C::BWHITE  <<            "\n  | ????:    "<< C::BCYAN  << 0 ;
-    std::cout << C::BWHITE  <<    "\n\n";
+    std::cout << C::BWHITE  <<    "\n" << " | press [ENTER] to print out all angles ... ";
+    getchar();
+    std::cout << C::BWHITE  <<    "\n";
+    for(auto ap : AP) {
+        cout << ap << endl;
+    }
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BLUE   << AP.size() << " tuples printed ... ";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BBLUE  << "output-file : " << outputfile;
+    std::cout << C::BWHITE  <<    "\n" << " | ";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "You can create a Plot with the R-File 'script.R'";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "please call:";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "$ Rscript test.R [plot_name] [inputfile]";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "example: $ Rscript test.R xyZ72 plotList.csv\n\n" << C::RESET;
 
 }
-
 
