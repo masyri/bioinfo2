@@ -28,8 +28,11 @@ cout << "\n R A M A C H A N D R A N \n" ;
     // ## get arguments
     if (argc < 2) {cerr << "Not enough arguments" << endl; return 1; }
 
+
     // ## load file
-    string file = "../PDB/1A0B.pdb";
+    
+    string file   = "../PDB/1A0B.pdb";
+    string output = "../plotList.csv";
     PDBFile f(file, ios::in);
     System S;
     f >> S;
