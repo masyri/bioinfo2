@@ -10,7 +10,7 @@
 class console {
 public:
 
- static void ShowHeader(std::string name);
+ static void ShowHeader(std::string filename, std::string protein);
  static void Help(std::string name,std::string message);
  static void ShowAngles(std::string outputfile, std::vector<AnglePair> AP);
 
