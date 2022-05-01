@@ -3,6 +3,11 @@
 //
 
 #include "Ramachandran.h"
+#include <BALL/KERNEL/system.h>
+#include <BALL/FORMAT/PDBFile.h>
+#include <BALL/STRUCTURE/secondaryStructureProcessor.h>
+#include <BALL/STRUCTURE/fragmentDB.h>
+#include <BALL/KERNEL/residueIterator.h>
 #include <BALL/STRUCTURE/peptides.h>
 
 
@@ -14,13 +19,15 @@
  * */
 Ramachandran::Ramachandran(System Sys) {
 
-    this->S = S;
+    this->S = Sys;
 
     // iterate over proteins
 
     for (ProteinIterator Piter = S.beginProtein(); +Piter; ++Piter) {
 
-        protein_name = Piter->getID(); // store the name of this protein
+        std::stringstream s("");
+        s << "SADF"; // S.getProtein(0)->getName();  ////////////// <- nur provisorisch ...
+        this->protein_name = s.str();
 
         // iterate over secondary structures
 
@@ -32,8 +39,11 @@ Ramachandran::Ramachandran(System Sys) {
 
             string code = oneLetter.c_str();
 
+
             // if the founded AS == ? -> continue
             if (code.empty()) { continue; }
+
+            code = code.begin().operator*(); ////////////// <- nur provisorisch ...
 
             // ## search for AminoAcid-Structure
 
@@ -46,7 +56,7 @@ Ramachandran::Ramachandran(System Sys) {
                 default:
                     break;
             }
-            ++aminoacids;
+            aminoacids++;
         }
     }
 }
@@ -67,22 +77,14 @@ vector <AnglePair> Ramachandran::getTorsionAngels() {
 
     vector<AnglePair> collection = {};
 
-    collection.push_back(AnglePair(0.23,1));
-    collection.push_back(AnglePair(3.23,2));
-    collection.push_back(AnglePair(10.23,3));
-/*
-    for (ResidueIterator iter = S.beginResidue() ; +res ; ++res) {
-        if(res->getTorsionPhi() != 0 && res->getTorsionPsi() != 0) {
+    for (ResidueIterator iter = S.beginResidue() ; +iter ; ++iter) {
+        if(iter->getTorsionPhi() != 0 && iter->getTorsionPsi() != 0) {
             double psi = iter->getTorsionPsi().toDegree();
             double phi = iter->getTorsionPhi().toDegree();
             collection.emplace_back(phi,psi);
         }
 
     }
-
-*/
-
-
     return collection;
 }
 
@@ -146,22 +148,20 @@ void Ramachandran::printStats() const {
  *  @return one letter code
  *
  * */
-Peptides::OneLetterAASequence Ramachandran::getCodeAA(SecondaryStructureIterator &begin) {
-
-    Residue *f(begin->getResidue(0));
-    Peptides::OneLetterAASequence aa_seq;
-    /*
+Peptides::OneLetterAASequence Ramachandran::getCodeAA(SecondaryStructureIterator &cursor) {
+    //
     int c = 1;
-    while (fst_res != nullptr) {
-        if(Peptides::OneLetterCode(f->getName())!='?') {
-            aa_seq += Peptides::OneLetterCode(f->getName());
-
+    Peptides::OneLetterAASequence AA;
+    Residue *resi(cursor->getResidue(0));
+    //
+    while (resi != nullptr) {
+        if(Peptides::OneLetterCode(resi->getName()) != '?' ) {
+            AA += Peptides::OneLetterCode(resi->getName());
         }
-        fst_res = (begin->getResidue(c)); ++c;
-    }*/
-    return aa_seq;
-
- }
+        resi = (cursor->getResidue(c)); ++c;
+    }
+    return AA;
+}
 
 
 
