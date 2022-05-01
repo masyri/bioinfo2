@@ -4,7 +4,8 @@
 #include "Color.h"
 
 /*
-* sends a big-font Ascii-Art-Header to std::cout
+ * sends a big-font Ascii-Art-Header to std::cout
+ *
 * */
 void console::ShowHeader() {
     std::cout << "\n";
@@ -37,8 +38,8 @@ void console::ShowHeader() {
 
 
 /*
+ * Send the help-message to std::cout
  *
- * send the help-message to std::cout
  **/
 void console::Help(std::string name,std::string message) {
 
@@ -54,38 +55,59 @@ void console::Help(std::string name,std::string message) {
 
 
 /*
- *
- * send inputs and outputs to std::cout
+ * Show list of angles from the protein
+ * and send to std::cout
  **/
 void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
     std::cout << C::BWHITE  <<    "\n";
     for(auto ap : AP) {
-        cout << ap << endl;
+        std::cout << ap << "\n";
     }
     std::cout << C::BBLUE <<    "\n" << " > " << C::BBLUE << AP.size() << " tuples printed. ";
-    std::cout << C::BLUE   <<    "\n" << " > press [ENTER] to continue ... \n";
-    getchar();
+
 }
 
 
 
-
+/*
+ * Show "Menu-Items"
+ * and wait for User input (Keypress [choice-chars] + [Enter] )
+ *
+ **/
 char console::ShowChoices(std::string filename,std::string proteinname) {
 
     std::cout << C::BWHITE  <<    "\n" << " | Choose an option and press Enter: " << C::BGREEN << "| Protein: " << proteinname << C::YELLOW << " file: " << filename;
     std::cout << C::BWHITE  <<    "\n" << " | ";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::BYELLOW << "1"   << "   Open PDB File";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "2"   << "   Print Sequence with secondary structure";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "2"   << "   Print Sequence with secondary structure assignment";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "3"   << "   Print structure assignments in percent";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "4"   << "   Print phi/psi angles";
     std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "5"   << "   Create CSV File for Plot";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "ESC" << " quit program";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "ESC" << " Quit program";
     std::cout << C::RESET  <<     "\n\n > ";
-    char c;
-    while (cin.get(c)) {
-        if (c)
-        return c;
+
+    while (true) {
+        std::string inp;
+        std::cin >> inp;
+        char i = inp.begin().operator*();
+        if ( i == '1' || i == '2' || i == '3' || i == '4' || i == '5' || i == '\033' ) {return i;break;}
     }
 
 }
 
+
+
+/*
+ *
+ * Wait for User input (Keypress [y] + [Enter] )
+ *
+ **/
+void console::pressY2continue() {
+    std::cout << C::BBLUE   << "\n > press [y] + [ENTER] to continue ... ";
+    while (true) {
+        std::string inp;
+        std::cin >> inp;
+        if (inp.begin().operator*() == 'y' || inp.begin().operator*() == 'Y') {break;}
+    }
+
+}
