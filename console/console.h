@@ -2,7 +2,9 @@
 #define BIOINFO2_CONSOLE_H
 
 #include <string>
+#include <vector>
 #include <iostream>
+#include "../Ramachandran.h"
 
 /**
  * Contains output strings for console
