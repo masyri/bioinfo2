@@ -1,3 +1,17 @@
+//
+// Created by manjaro on 29.04.22.
+//
+
+/**
+ *
+ *  ##   R A M A C H A N D R A N - P L O T   ##
+ *
+ *  Start this program with ./ramachandran without arguments
+ *  all data (File ...) statistics and file outputs can you
+ *  control with the main menues
+ *
+ */
+
 #include <BALL/KERNEL/system.h>
 #include <BALL/KERNEL/molecule.h>
 #include <BALL/KERNEL/atom.h>
@@ -7,95 +21,143 @@
 #include <BALL/STRUCTURE/fragmentDB.h>
 #include <BALL/STRUCTURE/peptides.h>
 #include <BALL/FORMAT/PDBFile.h>
-#include "Groups.h"
 #include "console/console.h"
 #include "console/Color.h"
-#include "DSSP.h"
+
 #include <iostream>
 
+#include "Ramachandran.h"
 
 using namespace std;
 using namespace BALL;
 
-
-
 int main(int argc, char* argv[])
 {
 
-
-
-
-    // ## correct arg-count?
-    
-    //if (argc < 3) { console::Help("   not enough arguments!");return 0; }
-    //if (argc > 2) { console::Help("   too many arguments!");return 0; }
+    // ## Program variables
     console::ShowHeader();
-
-    // ## import file
-
-    std::string arg_In    = "../2x7h.pdb";
-    std::string file_out  = "../AminoSecondary.txt";
-    PDBFile f(arg_In);
-    System S;
-    f >> S;
-
-    // ## add hydrogens
-
-    //FragmentDB fragdb("");
-    //FragmentDB fragdb("../Fragments.db");
-    //set(BALL_DIR "/opt/BALL/install/lib/cmake/BALL/")
-    //FragmentDB fragdb("/opt/BALL/install/share/BALL/data/fragments/Fragments.db");
-    //S.apply(fragdb.normalize_names);
-    //S.apply(fragdb.add_hydrogens);
-    //S.apply(fragdb.build_bonds);
-
-    // ## >> 1a) << create DSSP and create a list of H-Bonds
-
-    DSSP dssp(S);
-    dssp.getGroups();
-
-    int count_atoms = S.countAtoms();
-    int count_prot  = S.countProteins();
-    int res         = S.countResidues();
-    std::string name = dssp.names;
-    int count_NH    = dssp.NH_Groups.size();
-    int count_CO    = dssp.NH_Groups.size();
-    dssp.startAlgorithm();
-
-    int count_hbonds_before = dssp.result.size();
+    string filename     = "---";
+    bool file           = false;
+    string proteinname  = "---";
+    string output       = "../plotList.csv";
 
 
-    // ## >> 1b) << delete all != ( i , i+3 4 5 ) from the list of H-Bonds
+    // ## The 'endless' loop
+    while (true) {
 
-    dssp.removeHBonds();
-    int count_hbonds_after = dssp.result.size();
+        char chosen = console::ShowChoices(filename,proteinname);
 
-    // ## >> 1c) << compute helices and create file
+        // Load File
+        if (chosen == '1') {
+            file = false;
+            while (!file) {
+                // wait for filename typing in ...
+                cout << C::BWHITE << "Type PDB-File in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
+                cin >> filename;
+                // check first char ESC ... -> ABORT
+                if (filename.begin().operator*() == '\033') {file = false;break;}
+                std::ifstream infile(filename);
+                // check file is valid ...
+                if (infile) {
+                    // file .pdb ?
+                    if (filename.find(".pdb") == string::npos) {
+                        cout << C::BRED << "\n > your file is not a  *.pdb - File  ’" << filename << "’ \n" << C::RESET;
+                        continue;}
+                    // file okay -> set file true and continue to program
+                    file = true;
+                    continue;
+                    // file not exist -> return to loop
+                    } else {
+                    cout << C::BRED << "\n > invalid filename ’" << filename << "’ \n" << C::RESET;}
+            }
+            // if Abort, set file false
+            if (!file) {proteinname  = "---";filename     = "---";continue;}
 
-    dssp.computeHelices(file_out);
+            // open file ...
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+            proteinname = R.protein_name;
+            
+            continue;
+            }
 
-    // ## show statistics
+        // Print sequences
+        if (chosen == '2') {
+                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
+                cout << C::BBLUE   << " > Print sequences ...\n\n";
+            
+                PDBFile f(filename, ios::in);
+                System S;
+                f >> S;
+                Ramachandran R(S);
+            
+                R.printSequences();
+                cout << "\n";
+                console::pressY2continue();
+                continue;
+            }
 
-    console::ShowInputs(arg_In,file_out,count_atoms,count_NH,count_CO,count_hbonds_before,count_hbonds_after,name,count_prot,res);
+        // Print stats in percent
+        if (chosen == '3') {
+                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
+                cout << C::BBLUE   << " > Print stats ...";
 
-    // ## print all bonds to console 'result from exercise b)'
+                PDBFile f(filename, ios::in);
+                System S;
+                f >> S;
+                Ramachandran R(S);
 
-    cout << C::BWHITE << "press any key to print all h-bonds in format (i,j) ..." << endl;
-    getchar();
-    int bond_count = dssp.printResults();
-    cout << C::BWHITE << "\n => " << bond_count << " bonds printed." << endl;
+                R.printStats();
+                console::pressY2continue();
+                continue;
+            }
 
+        // Print Angles
+        if (chosen == '4') {
+                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
+                cout << C::BBLUE   << " > Print all Psi/Phi angles ...\n";
 
-/*
-                 (meow!)
-         /\_/\   )/
-   ((   (=^.^=)
-   ))    )   (
-    (( /      \    ' '
-     (   ) || ||     ' '
-     '----''-''-'  >+++°>
+                PDBFile f(filename, ios::in);
+                System S;
+                f >> S;
+                Ramachandran R(S);
 
-*/
+                auto angles = R.getTorsionAngels();
+                console::ShowAngles(output,angles);
+                console::pressY2continue();
+                continue;
+            }
 
-    return 0;
+        // Create CSV File
+        if (chosen == '5') {
+                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
+                cout << C::BBLUE << "\n > Create CSV file ...\n";
+
+                PDBFile f(filename, ios::in);
+                System S;
+                f >> S;
+                Ramachandran R(S);
+
+                auto angles = R.getTorsionAngels();
+                Ramachandran::anglesToFile(output,angles);
+                cout << C::BBLUE   << " > File created '" << C::BWHITE << output << "'\n" << C::RESET;
+                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "You can create a Plot with the R-File 'script.R'";
+                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "please call:\n";
+                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "$ Rscript script.R [plot_name] [inputfile]\n";
+                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "example: $ Rscript script.R xyZ72 plotList.csv\n\n" << C::RESET;
+
+                console::pressY2continue();
+                continue;
+            }
+
+        // break the loop and close the program
+        if (chosen == '\033') {break;}
+
+}
+
+    std::cout << C::BRED   <<    "\n" << " > Program aborted.\n";
+
+return 1;
 }
