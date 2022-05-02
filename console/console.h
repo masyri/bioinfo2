@@ -14,7 +14,7 @@ class console {
 public:
 
  static void ShowHeader();
- static char ShowChoices(std::string filename,std::string proteinname);
+ static char ShowChoices(std::string filename,std::string proteinname,std::string rpath );
  static void Help(std::string name,std::string message);
  static void ShowAngles(std::string outputfile, std::vector<AnglePair> AP);
  static void pressY2continue();

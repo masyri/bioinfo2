@@ -7,8 +7,19 @@
  *  ##   R A M A C H A N D R A N - P L O T   ##
  *
  *  Start this program with ./ramachandran without arguments
- *  all data (File ...) statistics and file outputs can you
- *  control with the main menues
+ *
+ *  - To use the program, load a PDB-file via the menu. 
+ *
+ *  - You can start the R-Script with this program.
+ *
+ *  - You can change the path of the R-Script (for path fix)
+ *
+ *  - You can manually create the csv-files for the R-Script
+ *    and run the R-Script separately
+ *
+ *  - You can print out all assignment statistics
+ *
+ *
  *
  */
 
@@ -27,6 +38,7 @@
 #include <iostream>
 
 #include "Ramachandran.h"
+#include "Rscript.h"
 
 using namespace std;
 using namespace BALL;
@@ -38,14 +50,15 @@ int main(int argc, char* argv[])
     console::ShowHeader();
     string filename     = "---";
     bool file           = false;
-    string proteinname  = "---";
+    string proteinname  = "no_name";
+    string R_path       = "../script.R";
     string output       = "../plotList.csv";
 
 
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(filename,proteinname);
+        char chosen = console::ShowChoices(filename,proteinname,R_path);
 
         // Load File
         if (chosen == '1') {
@@ -151,6 +164,73 @@ int main(int argc, char* argv[])
                 console::pressY2continue();
                 continue;
             }
+
+        // Set R-Script-Path
+        if (chosen == '6') {
+            while (true) {
+                // wait for filename typing in ...
+                cout << C::BWHITE << "Type R-Script Path in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
+                cin >> R_path;
+                // check first char ESC ... -> ABORT
+                if (R_path.begin().operator*() == '\033') {string R_path = "../script.R";break;}
+
+                if (Rscript::Exists(R_path))
+                {
+                    break;
+                }
+                else
+                {
+                    cout << C::BRED << "\n > invalid filepath ’" << R_path << "’ \n" << C::RESET;
+                }
+            }
+            //
+            cout << C::BBLUE   << " > You have a new R-Script path: " << R_path << "\n";
+            console::pressY2continue();
+            continue;
+        }
+
+
+        // Run R-Script
+        if (chosen == '7') {
+            // file validation check
+            if (!file) {
+                cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;
+            }
+            if (!Rscript::Exists(R_path)){
+                cout << C::BRED << "\n > R-Script not found: ’" << filename << "’ \n  if path not working start the R-Script manually." << C::RESET;
+                console::pressY2continue();continue;
+            }
+
+            // create System
+            PDBFile f(filename, ios::in);
+            System S;
+            f >> S;
+            Ramachandran R(S);
+
+            // create CSV-File
+            auto angles = R.getTorsionAngels();
+            Ramachandran::anglesToFile(output,angles);
+            cout << C::BBLUE   << " > CSV-File created '" << C::BWHITE << output << "'\n" << C::RESET;
+
+            // build arguments for R-Script
+            vector<string> _args = { proteinname , output };
+
+            // load R-Script
+            std::cout << C::BBLUE    <<   "\n" << " > Run R-Script:\n";
+            std::cout << C::BWHITE   <<   "\n" << " > Run Command: " << C::BGREEN << "$ " << Rscript::getCommandString(R_path,_args);
+            std::cout << C::BWHITE   <<   "\n" << " > Continue?    \n" << C::BBLUE;
+            console::pressY2continue();
+
+            // start R-Script
+            Rscript::Run(R_path,_args);
+
+            // finish
+            std::cout << C::BWHITE   <<    "\n" << " > R-Script finished.\n" << C::BBLUE;
+
+            console::pressY2continue();
+            continue;
+        }
+
 
         // break the loop and close the program
         if (chosen == '\033') {break;}

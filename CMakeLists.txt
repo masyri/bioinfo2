@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Uebung01 VERSION 1.0.0)
+project(Ramachandran VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
@@ -46,18 +46,9 @@ SET(Boost_LIBRARIES
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-
-
 target_link_libraries( BALL)
 
-
-
-
-
-
-
-
-add_executable(deepBlackCoffee Main.cpp
+add_executable(ramachandran Main.cpp
         console/console.cpp
         console/console.h
         console/Color.cpp
@@ -65,7 +56,8 @@ add_executable(deepBlackCoffee Main.cpp
 
         Ramachandran.h
         Ramachandran.cpp
+        Rscript.h
 )
 
-target_link_libraries(deepBlackCoffee BALL)
+target_link_libraries(ramachandran BALL)
 

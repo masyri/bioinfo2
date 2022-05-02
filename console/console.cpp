@@ -74,23 +74,26 @@ void console::ShowAngles(std::string outputfile, std::vector<AnglePair> AP) {
  * and wait for User input (Keypress [choice-chars] + [Enter] )
  *
  **/
-char console::ShowChoices(std::string filename,std::string proteinname) {
+char console::ShowChoices(std::string filename,std::string proteinname,std::string rpath) {
 
     std::cout << C::BWHITE  <<    "\n" << " | Choose an option and press Enter: " << C::BGREEN << "| Protein: " << proteinname << C::YELLOW << " file: " << filename;
+    std::cout << C::BWHITE  <<    "\n" << " |                                   " << C::GREEN << "| R-Script-Path: " << C::YELLOW << rpath;
     std::cout << C::BWHITE  <<    "\n" << " | ";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BYELLOW << "1"   << "   Open PDB File";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN  << "2"   << "   Print Sequence with secondary structure assignment";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN   << "3"   << "   Print structure assignments in percent";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "4"   << "   Print phi/psi angles";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "5"   << "   Create CSV File for Plot";
-    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED     << "ESC" << " Quit program";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BYELLOW       << "1"   << "   Open PDB File";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BGREEN        << "2"   << "   Print Sequence with secondary structure assignment";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::GREEN         << "3"   << "   Print structure assignments in percent";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BMAGENTA       << "4"   << "   Print phi/psi angles";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::YELLOW        << "5"   << "   Create CSV File for Plot";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BLUE          << "6"   << "   Set R-Script Path";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::BBLUE         << "7"   << "   ! Run R-Script !";
+    std::cout << C::BWHITE  <<    "\n" << " | " << C::RED           << "ESC" << " Quit program";
     std::cout << C::RESET  <<     "\n\n > ";
 
     while (true) {
         std::string inp;
         std::cin >> inp;
         char i = inp.begin().operator*();
-        if ( i == '1' || i == '2' || i == '3' || i == '4' || i == '5' || i == '\033' ) {return i;break;}
+        if ( i == '1' || i == '2' || i == '3' || i == '4' || i == '5' || i == '6' || i == '7' ||  i == '\033' ) {return i;break;}
     }
 
 }
