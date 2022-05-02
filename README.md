@@ -8,12 +8,12 @@
  
    - You can change the path of the R-Script (for path fix)
  
-   - You can manually create the csv-files for the R-Script
+   - You can manually create the CSV-files for the R-Script
      and run the R-Script separately
  
    - You can print out all assignment statistics
 
-For seperately start the R-Script:
+For start the R-Script seperately:
 
 Type in (all files in same folder):
 
