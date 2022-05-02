@@ -8,6 +8,8 @@
  *
  *  Start this program with ./ramachandran without arguments
  *
+ *  - To use the program, load a PDB-file via the menu. 
+ *
  *  - You can start the R-Script with this program.
  *
  *  - You can change the path of the R-Script (for path fix)
