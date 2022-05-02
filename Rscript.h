@@ -26,11 +26,11 @@ public:
      * Checks if the given [R-Script] or any other
      * file exists under this path.
      *
-     * Example Rscript::Exist("../Rfiles/script.R")
+     * Example Rscript::Exists("../Rfiles/script.R")
      *
      * @filepath path of the [R-Script]
      * */
-    static bool Exist(const string& filepath) {
+    static bool Exists(const string& filepath) {
         ifstream infile(filepath);
         if (infile) { return true; }
         return false;
@@ -48,7 +48,7 @@ public:
      *
      * */
     static void Run(const string& filepath,const vector<string>& args) {
-        if (!Exist(filepath)) { return; }
+        if (!Exists(filepath)) { return; }
 
         string command_string = getCommandString(filepath,args);
 

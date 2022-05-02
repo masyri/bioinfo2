@@ -36,7 +36,7 @@
 #include <iostream>
 
 #include "Ramachandran.h"
-#include "Rscropt.h"
+#include "Rscript.h"
 
 using namespace std;
 using namespace BALL;
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
                 cout << C::BWHITE << "Type R-Script Path in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
                 cin >> R_path;
                 // check first char ESC ... -> ABORT
-                if (filename.begin().operator*() == '\033') {file = false;break;}
+                if (R_path.begin().operator*() == '\033') {string R_path = "../script.R";break;}
 
                 if (Rscript::Exists(R_path))
                 {
@@ -178,7 +178,7 @@ int main(int argc, char* argv[])
                 }
                 else
                 {
-                    cout << C::BRED << "\n > invalid filename ’" << filename << "’ \n" << C::RESET;
+                    cout << C::BRED << "\n > invalid filepath ’" << R_path << "’ \n" << C::RESET;
                 }
             }
             //
@@ -220,7 +220,7 @@ int main(int argc, char* argv[])
             console::pressY2continue();
 
             // start R-Script
-            Rscript::Run(R_path,args);
+            Rscript::Run(R_path,_args);
 
             // finish
             std::cout << C::BWHITE   <<    "\n" << " > R-Script finished.\n" << C::BBLUE;
