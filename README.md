@@ -1,7 +1,5 @@
 # bioinfo2
 
-Ramachandran Übung 3
-
  ##   R A M A C H A N D R A N - P L O T   ##
  
  Start this program with ./ramachandran (without arguments)
