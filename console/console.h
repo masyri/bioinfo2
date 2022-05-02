@@ -2,7 +2,9 @@
 #define BIOINFO2_CONSOLE_H
 
 #include <string>
+#include <vector>
 #include <iostream>
+#include "../Ramachandran.h"
 
 
 /**
@@ -10,17 +12,15 @@
  * */
 class console {
 public:
- enum cdir { Up, Down, Left, Right };
 
  static void ShowHeader();
- static int ShowChoices(std::string folder, int count,std::string script ) ;
+ static char ShowChoices(std::string filename,std::string proteinname,std::string rpath );
  static void Help(std::string name,std::string message);
-
- static void move(cdir direction, int s);
-
- static void linesClear(int i);
-
+ static void ShowAngles(std::string outputfile, std::vector<AnglePair> AP);
  static void pressY2continue();
+
+
 };
 
 #endif //BIOINFO2_CONSOLE_H
+
