@@ -76,7 +76,7 @@ public:
 
     Peptides::OneLetterAASequence getCodeAA(SecondaryStructureIterator &begin);
     
-    static void anglesToFile(string filename, std::vector<AnglePair> AP);
+    static void anglesToFile(const string& filename, std::vector<AnglePair> AP);
 
     void printStats() const;
 
