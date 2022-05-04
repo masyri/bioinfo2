@@ -52,10 +52,31 @@ TEST(Ramachandran, Initiation) {
     EXPECT_EQ(refloops, R.getLoops());
 }
 
-TEST(CAT,MEOW) {
+TEST(Ramachandran, getTorsionAngels) {
+    //get ramachandran
+    PDBFile f("../PDB/1QJP.pdb", ios::in);
+    System S;
+    f >> S;
+    Ramachandran R(S);
+    vector<AnglePair> angles = R.getTorsionAngels();
 
+    //get reference values
+    vector<AnglePair> ref = {};
+    for (ResidueIterator iter = S.beginResidue() ; +iter ; ++iter) {
+        if(iter->getTorsionPhi() != 0 && iter->getTorsionPsi() != 0) {
+            double refpsi = iter->getTorsionPsi().toDegree();
+            double refphi = iter->getTorsionPhi().toDegree();
+            ref.emplace_back(refphi,refpsi);
+        }
 
-    ASSERT_EQ("meow","wouf");
+    }
+    auto refi = ref.begin();
+    for(auto tuple : angles) {
+        EXPECT_EQ(refi->phi, tuple.phi);
+        EXPECT_EQ(refi->psi, tuple.psi);
+        refi++;
+    }
+
 }
 
 TEST(DOG,WOUF) {
