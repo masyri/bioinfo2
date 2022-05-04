@@ -186,3 +186,9 @@ void Ramachandran::anglesToFile(const string& filename, std::vector<AnglePair> A
 }
 
 
+// getter for testing
+    vector<StructPair> Ramachandran::getStructures(){return structures;}
+    int Ramachandran::getHelices(){return helices;}
+    int Ramachandran::getLoops(){return loops;}
+    int Ramachandran::getSheets(){return sheets;}
+    int Ramachandran::getAminoacids(){return aminoacids;}

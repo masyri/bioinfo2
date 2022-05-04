@@ -84,6 +84,13 @@ public:
 
     string protein_name;
 
+    // getter for testing
+    vector<StructPair> getStructures();
+    int getHelices();
+    int getLoops();
+    int getSheets();
+    int getAminoacids();
+
 private:
     System S;
 
