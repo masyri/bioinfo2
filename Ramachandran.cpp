@@ -21,44 +21,37 @@ Ramachandran::Ramachandran(System Sys) {
 
     this->S = Sys;
 
-    // iterate over proteins
+    // iterate over proteins (getName)
 
     for (ProteinIterator Piter = S.beginProtein(); +Piter; ++Piter) {
-
         std::stringstream s("");
-        s << "SADF"; // S.getProtein(0)->getName();  ////////////// <- nur provisorisch ...
+        s << S.getProtein(0)->getName();
         this->protein_name = s.str();
+    }
 
-        // iterate over secondary structures
+    // iterate over residues for assigned secondary structures
 
-        for (SecondaryStructureIterator SSiter = Piter->beginSecondaryStructure(); +SSiter; ++SSiter) {
-
-            // ## search for AminoAcid-Letter
-
-            Peptides::OneLetterAASequence oneLetter = getCodeAA(SSiter);
-
-            string code = oneLetter.c_str();
-
-
-            // if the founded AS == ? -> continue
-            if (code.empty()) { continue; }
-
-            code = code.begin().operator*(); ////////////// <- nur provisorisch ...
-
-            // ## search for AminoAcid-Structure
-
-            switch (SSiter->getType()) {
-                case SecondaryStructure::HELIX:   structures.push_back(StructPair(code,'H')); helices++;  break;
-                case SecondaryStructure::COIL:
-                case SecondaryStructure::TURN:    structures.push_back(StructPair(code,'L')); loops++;    break;
-                case SecondaryStructure::STRAND:  structures.push_back(StructPair(code,'S')); sheets++;   break;
-                case SecondaryStructure::UNKNOWN: structures.push_back(StructPair(code,'U'));             break;
-                default:
-                    break;
-            }
-            aminoacids++;
+    for (auto &iter: S.residues()){
+        if (iter.isAminoAcid()){
+            // Get Aminoacid Char
+             auto code = Peptides::OneLetterCode(iter.getName());
+            // Get assigned structure
+             auto SecStruct = iter.getSecondaryStructure()->getType();
+            // Decision SS Type
+             switch (SecStruct) {
+               case SecondaryStructure::HELIX:             structures.push_back(StructPair(&code,'H')); helices++;  break;
+               case SecondaryStructure::COIL:              structures.push_back(StructPair(&code,'-'));             break;
+               case SecondaryStructure::TURN:              structures.push_back(StructPair(&code,'L')); loops++;    break;
+               case SecondaryStructure::STRAND:            structures.push_back(StructPair(&code,'S')); sheets++;   break;
+               case SecondaryStructure::UNKNOWN:           structures.push_back(StructPair(&code,'U'));             break;
+               default:                                    structures.push_back(StructPair(&code,'-'));             break;
+             }
+             // count of all residues
+             aminoacids++;
         }
     }
+    // end
+
 }
 
 
@@ -90,6 +83,7 @@ vector <AnglePair> Ramachandran::getTorsionAngels() {
 
 
 
+
 /**
  *  R A M A C H A N D R A N - S E Q U E N C E S
  *
@@ -100,16 +94,45 @@ vector <AnglePair> Ramachandran::getTorsionAngels() {
  * */
 void Ramachandran::printSequences() const {
 
-    std::cout << C::BWHITE;
-    for (auto &aa : structures) {
-        std::cout << aa.name;
+    int counter50 = 0;
+    int idx = 0;
+    int step = 0;
+    std::stringstream line1("");
+    std::stringstream line2("");
+
+    line1 << C::BBLUE << " " << "   1" << "| "<< C::RESET;
+    line2 << C::BBLUE << " " << "    " << "| "<< C::RESET;
+
+    for(const auto& tuple : structures) {
+        // Line Break:
+        if (counter50 > 48) {
+            std::cout  << line1.str() << "\n";
+            std::cout  << line2.str() << "\n\n";
+            std::stringstream number("");
+            step += 50;
+            number << std::setfill(' ') << std::setw(4) << step;
+            line1.str("");
+            line2.str("");
+            line1 << C::BBLUE << " " << number.str()  << "| "<< C::RESET;
+            line2 << C::BBLUE << " " << "    " << "| "<< C::RESET;
+
+            counter50 = 0;
+
+        }
+
+        line1 << C::BWHITE << tuple.name << C::RESET;
+
+        if (tuple.type == 'H') {line2 << C::BBLUE;} else if (tuple.type == 'S') {line2 << C::BGREEN;} else if (tuple.type == 'L') {line2 << C::BYELLOW;} else {line2 << C::BRED;}
+        line2 << tuple.type << C::RESET;
+        counter50++;
+        idx++;
     }
 
-    std::cout << C::RESET << "\n";
-    for (auto &ty : structures) {
-        if (ty.type == 'H') {std::cout << C::BBLUE;} else if (ty.type == 'S') {std::cout << C::BGREEN;} else if (ty.type == 'L') {std::cout << C::BYELLOW;} else {std::cout << C::BRED;}
-        std::cout << ty.type;
-    }
+    if (counter50 < 51) {
+        std::cout  << line1.str() << "\n";
+        std::cout  << line2.str() << "\n\n";}
+
+
 }
 
 
@@ -130,38 +153,11 @@ void Ramachandran::printStats() const {
     std::cout << C::BGREEN   << "\n   Sequence length " << C::BWHITE << " :   " << C::GREEN    << aminoacids ;
     std::cout << C::BYELLOW  << "\n   Loops           " << C::BWHITE << " :   " << C::YELLOW   << 100.0 * (double)loops   / (double)aminoacids << " %";
     std::cout << C::BBLUE    << "\n   Helices         " << C::BWHITE << " :   " << C::BLUE     << 100.0 * (double)helices / (double)aminoacids << " %";
-    std::cout << C::BMAGENTA << "\n   Loops           " << C::BWHITE << " :   " << C::BMAGENTA << 100.0 * (double)loops   / (double)aminoacids << " %";
+    std::cout << C::BMAGENTA << "\n   Sheets          " << C::BWHITE << " :   " << C::BMAGENTA << 100.0 * (double)sheets  / (double)aminoacids << " %";
     std::cout << C::RESET    << "\n";
 
 }
 
-
-
-
-
-
-/**
- *  R A M A C H A N D R A N - C O D E
- *
- *  Create a string of one-letter-codes
- *
- *  @return one letter code
- *
- * */
-Peptides::OneLetterAASequence Ramachandran::getCodeAA(SecondaryStructureIterator &cursor) {
-    //
-    int c = 1;
-    Peptides::OneLetterAASequence AA;
-    Residue *resi(cursor->getResidue(0));
-    //
-    while (resi != nullptr) {
-        if(Peptides::OneLetterCode(resi->getName()) != '?' ) {
-            AA += Peptides::OneLetterCode(resi->getName());
-        }
-        resi = (cursor->getResidue(c)); ++c;
-    }
-    return AA;
-}
 
 
 
@@ -176,7 +172,7 @@ Peptides::OneLetterAASequence Ramachandran::getCodeAA(SecondaryStructureIterator
  *  @return   a file in *.csv - format
  *
  * */
-void Ramachandran::anglesToFile(string filename, std::vector<AnglePair> AP) {
+void Ramachandran::anglesToFile(const string& filename, std::vector<AnglePair> AP) {
 
     ofstream file;
     file.open (filename);

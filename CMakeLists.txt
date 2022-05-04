@@ -46,18 +46,27 @@ SET(Boost_LIBRARIES
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-target_link_libraries( BALL)
+add_library(ramabib SHARED Main.cpp
+        console/console.cpp
+        console/console.h
+        console/Color.cpp
+        console/Color.h
+        Ramachandran.h
+        Ramachandran.cpp
+        Rscript.h
+        )
+
+target_link_libraries(ramabib BALL)
 
 add_executable(ramachandran Main.cpp
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-
         Ramachandran.h
         Ramachandran.cpp
-        Rscript.h
-)
+        Rscript.h)
 
 target_link_libraries(ramachandran BALL)
 
+add_subdirectory(tests)
