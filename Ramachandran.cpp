@@ -25,7 +25,7 @@ Ramachandran::Ramachandran(System Sys) {
 
     for (ProteinIterator Piter = S.beginProtein(); +Piter; ++Piter) {
         std::stringstream s("");
-        s << S.getProtein(0)->getName();
+        s << S.getProtein(0)->getID();
         this->protein_name = s.str();
     }
 
