@@ -1,27 +1,26 @@
-# 
-# This script creates a Ramachandran-Plot from a given CSV-File and save this
-# Plot in a PNG-File
-#
-#
-# -- Command line --
-#
-# $ Rscript script.R [plot_name] [inputfile]
-#
-# $ Rscript script.R coffee plotList.csv
-#
-#
+### CIP Pool ###
 
-# -- read arguments --
+Sys.setenv(TENSORFLOW_PYTHON="/opt/miniconda3/envs/tf2/bin/python")
 
-# include in R
-#setwd(dirname(getwd()))
-#source("extend.R")
+### Parameter ###
 
-# Line read
-cat("a string please: ");
-a <- readLines("stdin",n=1);
-cat("You entered")
-str(a);
-cat( "\n" )
+library(nnet)
+
+filepath <- "X:/Bioinfo_2/BI_Programmierung/04_Prediction/Tables/table.csv"
+
+hidden <- 2
+
+### Open Table ... ###
+
+table_raw <- read.table(filepath, header = TRUE, sep= "\t")
+
+count_rows <- nrow(table_raw)
+
+### Delete duplicate ... ###
+
+table <- table_raw[!duplicated(table_raw, MARGIN = 1),]
+
+count_rows_after <- nrow(table)
+
 
 
