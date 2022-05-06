@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Ramachandran VERSION 1.0.0)
+project(Predictor VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
@@ -46,27 +46,31 @@ SET(Boost_LIBRARIES
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_library(ramabib SHARED Main.cpp
+# Libraries:
+add_library(predbib SHARED Main.cpp
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        Ramachandran.h
-        Ramachandran.cpp
+        Data.h
+        Predictor.cpp
+        Predictor.h
         Rscript.h
         )
 
-target_link_libraries(ramabib BALL)
+target_link_libraries(predbib BALL)
 
-add_executable(ramachandran Main.cpp
+add_executable(predictor Main.cpp
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        Ramachandran.h
-        Ramachandran.cpp
-        Rscript.h)
+        Data.h
+        Predictor.cpp
+        Predictor.h
+        Rscript.h
+)
 
-target_link_libraries(ramachandran BALL)
+target_link_libraries(predictor BALL stdc++fs)
 
 add_subdirectory(tests)

@@ -2,26 +2,12 @@
 // Created by manjaro on 29.04.22.
 //
 
-/**
- *
- *  ##   R A M A C H A N D R A N - P L O T   ##
- *
- *  Start this program with ./ramachandran without arguments
- *
- *  - To use the program, load a PDB-file via the menu. 
- *
- *  - You can start the R-Script with this program.
- *
- *  - You can change the path of the R-Script (for path fix)
- *
- *  - You can manually create the csv-files for the R-Script
- *    and run the R-Script separately
- *
- *  - You can print out all assignment statistics
- *
- *
- *
- */
+
+#include "console/console.h"
+#include "console/Color.h"
+#include "Data.h"
+#include "Predictor.h"
+#include "Rscript.h"
 
 #include <BALL/KERNEL/system.h>
 #include <BALL/KERNEL/molecule.h>
@@ -32,212 +18,183 @@
 #include <BALL/STRUCTURE/fragmentDB.h>
 #include <BALL/STRUCTURE/peptides.h>
 #include <BALL/FORMAT/PDBFile.h>
-#include "console/console.h"
-#include "console/Color.h"
 
 #include <iostream>
-
-#include "Ramachandran.h"
-#include "Rscript.h"
+#include <fstream>
+#include <experimental/filesystem>
+#include <sstream>
 
 using namespace std;
 using namespace BALL;
+
 
 int main(int argc, char* argv[])
 {
 
     // ## Program variables
-    console::ShowHeader();
-    string filename     = "---";
-    bool file           = false;
-    string proteinname  = "no_name";
-    string R_path       = "../script.R";
-    string output       = "../plotList.csv";
+
+    string pathPDB       = "---";
+    bool file            = false;
+    int filecount        = 0;
+    int proteincount     = 0;
+    vector<string> files = {};
+    string R_Path        = "../R/script.R";
+    string R_args        = " 10 10 20";
+    string output        = "../Table/";
 
 
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(filename,proteinname,R_path);
+        char chosen = console::ShowChoices(pathPDB,R_Path,filecount,proteincount);
 
-        // Load File
-        if (chosen == '1') {
+
+        // ### Open Folder ###
+        if (chosen == 0) {
+            std::cout << C::BBLUE   <<    "\n" << " > Open folder ...\n";
+
             file = false;
             while (!file) {
+                // counter reset
+                filecount = 0;
+                proteincount  = 0;
+                files = {};
+
                 // wait for filename typing in ...
-                cout << C::BWHITE << "Type PDB-File in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
-                cin >> filename;
+                cout << C::BWHITE << "Type a folder-path with PDB-Files in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
+                cin >> pathPDB;
+
                 // check first char ESC ... -> ABORT
-                if (filename.begin().operator*() == '\033') {file = false;break;}
-                std::ifstream infile(filename);
-                // check file is valid ...
-                if (infile) {
-                    // file .pdb ?
-                    if (filename.find(".pdb") == string::npos) {
-                        cout << C::BRED << "\n > your file is not a  *.pdb - File  ’" << filename << "’ \n" << C::RESET;
-                        continue;}
-                    // file okay -> set file true and continue to program
-                    file = true;
+                if (pathPDB.begin().operator*() == '\033') {file = false;break;}
+                std::ifstream infile(pathPDB);
+
+                // check folder exists
+                if (!std::experimental::filesystem::is_directory(pathPDB)) {
+                    cout << C::BRED << "\n > Path is invalid or not exist ’" << pathPDB << "’ \n" << C::RESET;
                     continue;
-                    // file not exist -> return to loop
-                    } else {
-                    cout << C::BRED << "\n > invalid filename ’" << filename << "’ \n" << C::RESET;}
+                }
+
+                // check folder is valid + count correct files ...
+
+                for (const auto & entry : std::experimental::filesystem::directory_iterator(pathPDB))
+                {
+                    std::stringstream fp("");
+                    std::cout << " - ";
+                    fp << entry.path();
+                    bool isPDB = fp.str().find(".pdb") != string::npos;
+                    if (isPDB) {std::cout << C::BGREEN;filecount++;files.push_back(entry.path().string());} else {std::cout << C::BRED;}
+                    std::cout << entry.path() << std::endl << C::RESET;
+
+
+                }
+
+                // files found ? -> if enough break this loop
+                if (filecount < 1) {
+                    cout << C::BRED << "\n > No PDB-Files found in this folder: ’" << pathPDB << "’ \n" << C::RESET;
+                    filecount = 0;
+                    continue;
+                } else {
+                    cout << C::BGREEN << "\n\n > " << filecount <<" PDB-Files found in this folder: ’" << pathPDB << "’ \n" << C::RESET;
+                    file = true;
+                    break;
+
+                }
             }
+
             // if Abort, set file false
-            if (!file) {proteinname  = "---";filename     = "---";continue;}
+            if (!file) {pathPDB     = "---";continue;}
 
-            // open file ...
-            PDBFile f(filename, ios::in);
-            System S;
-            f >> S;
-            Ramachandran R(S);
-            proteinname = R.protein_name;
-            
+            // count proteins
+            for (auto file : files) {
+                PDBFile f(file, ios::in);
+                System S;
+                f >> S;
+                proteincount += S.countProteins();
+            }
+
+            console::pressY2continue();
             continue;
-            }
+        }
 
-        // Print sequences
-        if (chosen == '2') {
-                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
-                cout << C::BBLUE   << " > Print sequences ...\n\n";
-            
-                PDBFile f(filename, ios::in);
-                System S;
-                f >> S;
-                Ramachandran R(S);
-            
-                R.printSequences();
-                cout << "\n";
-                console::pressY2continue();
-                continue;
-            }
 
-        // Print stats in percent
-        if (chosen == '3') {
-                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
-                cout << C::BBLUE   << " > Print stats ...";
+        // ### Create Table ###
+        if (chosen == 1) {
+            std::cout << C::BBLUE   <<    "\n" << " > Create CSV-Table.\n\n";
 
-                PDBFile f(filename, ios::in);
-                System S;
-                f >> S;
-                Ramachandran R(S);
+            // build filename
+            std::stringstream s("");
+            s << output << "table.csv";
 
-                R.printStats();
-                console::pressY2continue();
-                continue;
-            }
+            // table
+            std::cout << C::BLUE  << " PDB-Files : " << files.size() << "\n";
+            Predictor pred(files);
+            std::cout << C::BLUE  << " Proteins  : " << pred.data_point_arrays.size() << "\n";
+            std::cout << C::BLUE  << " DataSets  : " << pred.countdatasets() << "\n";
+            pred.createTableFile(s.str());
 
-        // Print Angles
-        if (chosen == '4') {
-                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
-                cout << C::BBLUE   << " > Print all Psi/Phi angles ...\n";
+            // end
+            std::cout << C::BBLUE   <<    "\n" << " > File created: ' " << s.str() <<" '\n";
+            console::pressY2continue();
+            continue;
+        }
 
-                PDBFile f(filename, ios::in);
-                System S;
-                f >> S;
-                Ramachandran R(S);
 
-                auto angles = R.getTorsionAngels();
-                console::ShowAngles(output,angles);
-                console::pressY2continue();
-                continue;
-            }
-
-        // Create CSV File
-        if (chosen == '5') {
-                if (!file) {cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;}
-                cout << C::BBLUE << "\n > Create CSV file ...\n";
-
-                PDBFile f(filename, ios::in);
-                System S;
-                f >> S;
-                Ramachandran R(S);
-
-                auto angles = R.getTorsionAngels();
-                Ramachandran::anglesToFile(output,angles);
-                cout << C::BBLUE   << " > File created '" << C::BWHITE << output << "'\n" << C::RESET;
-                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "You can create a Plot with the R-File 'script.R'";
-                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "please call:\n";
-                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "$ Rscript script.R [plot_name] [inputfile]\n";
-                cout << C::BWHITE  <<   "\n" << "   " << C::BMAGENTA  << "example: $ Rscript script.R xyZ72 plotList.csv\n\n" << C::RESET;
-
-                console::pressY2continue();
-                continue;
-            }
-
-        // Set R-Script-Path
-        if (chosen == '6') {
+        // ### Change R-Script location ###
+        if (chosen == 2) {
+            std::cout << C::BBLUE   <<    "\n" << " > Set R-Script Path\n";
             while (true) {
                 // wait for filename typing in ...
                 cout << C::BWHITE << "Type R-Script Path in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
-                cin >> R_path;
+                cin >> R_Path;
                 // check first char ESC ... -> ABORT
-                if (R_path.begin().operator*() == '\033') {string R_path = "../script.R";break;}
+                if (R_Path.begin().operator*() == '\033') {string R_path = "../R/script.R";break;}
 
-                if (Rscript::Exists(R_path))
+                if (Rscript::Exists(R_Path))
                 {
                     break;
                 }
                 else
                 {
-                    cout << C::BRED << "\n > invalid filepath ’" << R_path << "’ \n" << C::RESET;
+                    cout << C::BRED << "\n > invalid filepath ’" << R_Path << "’ \n" << C::RESET;
                 }
             }
             //
-            cout << C::BBLUE   << " > You have a new R-Script path: " << R_path << "\n";
+            cout << C::BBLUE   << " > You have a new R-Script path: " << R_Path << "\n";
+
+
             console::pressY2continue();
             continue;
         }
 
 
-        // Run R-Script
-        if (chosen == '7') {
-            // file validation check
-            if (!file) {
-                cout << C::BRED << " > No valid PDB File loaded.\n";console::pressY2continue();continue;
-            }
-            if (!Rscript::Exists(R_path)){
-                cout << C::BRED << "\n > R-Script not found: ’" << filename << "’ \n  if path not working start the R-Script manually." << C::RESET;
-                console::pressY2continue();continue;
-            }
 
-            // create System
-            PDBFile f(filename, ios::in);
-            System S;
-            f >> S;
-            Ramachandran R(S);
-
-            // create CSV-File
-            auto angles = R.getTorsionAngels();
-            Ramachandran::anglesToFile(output,angles);
-            cout << C::BBLUE   << " > CSV-File created '" << C::BWHITE << output << "'\n" << C::RESET;
-
-            // build arguments for R-Script
-            vector<string> _args = { proteinname , output };
-
-            // load R-Script
-            std::cout << C::BBLUE    <<   "\n" << " > Run R-Script:\n";
-            std::cout << C::BWHITE   <<   "\n" << " > Run Command: " << C::BGREEN << "$ " << Rscript::getCommandString(R_path,_args);
-            std::cout << C::BWHITE   <<   "\n" << " > Continue?    \n" << C::BBLUE;
+        // ### Run R-Script ###
+        if (chosen == 3) {
+            std::cout << C::BBLUE   <<    "\n" << " > Run R-Script :\n";
+            // create commandline:
+            std::stringstream call("");
+            call << "Rscript " << R_Path << R_args;
+            // show infos:
+            std::cout << C::BWHITE   <<    "\n" << " > Script File: " << C::BGREEN << "$ " << call.str();
+            std::cout << C::BWHITE   <<    "\n" << " > Continue?    \n" << C::BBLUE;
             console::pressY2continue();
-
-            // start R-Script
-            Rscript::Run(R_path,_args);
-
+            // call commandline
+            std::cout << C::RESET;
+            system(call.str().c_str());
             // finish
             std::cout << C::BWHITE   <<    "\n" << " > R-Script finished.\n" << C::BBLUE;
-
             console::pressY2continue();
             continue;
         }
 
 
-        // break the loop and close the program
+        // ### break the loop and close the program ###
         if (chosen == '\033') {break;}
 
+    }
+
+    std::cout << C::BRED   <<    "\n" << " > Program aborted.\n" << C::RESET;
+
+    return 1;
 }
 
-    std::cout << C::BRED   <<    "\n" << " > Program aborted.\n";
-
-return 1;
-}
