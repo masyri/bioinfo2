@@ -11,6 +11,7 @@
 #include <BALL/STRUCTURE/peptides.h>
 #include <BALL/FORMAT/PDBFile.h>
 #include <string>
+#include <experimental/filesystem>
 
 #include "../Data.h"
 #include "../Predictor.h"
@@ -64,10 +65,46 @@ TEST(PredictorTEST, getAminosFromMultipleProteins) {
 
     vector<string> filelist;
     Predictor p(filelist);
-    p.*/
+    auto vec = p.getAminoFromMultipleProteins(S);*/
 }
 TEST(PredictorTEST, createDatasetArrayFromProtein) {
-    // get reference value
+    /*
+    Amino a1(1,'H','R',"test");
+    Amino a2(2,'H','R',"test");
+    Amino a3(3,'H','R',"test");
+    Amino a4(4,'H','R',"test");
+    Amino a5(5,'H','R',"test");
+    Amino a6(6,'H','R',"test");
+    Amino a7(7,'H','R',"test");
+    Amino a8(8,'H','R',"test");
+    Amino a9(9,'H','R',"test");
+    Amino a10(10,'H','R',"test");
+    Amino a11(11,'H','R',"test");
+    Amino a12(12,'H','R',"test");
+    Amino a13(13,'H','R',"test");
+
+    vector<Amino> aminos;
+
+    aminos.push_back(a1);
+    aminos.push_back(a2);
+    aminos.push_back(a3);
+    aminos.push_back(a4);
+    aminos.push_back(a5);
+    aminos.push_back(a6);
+    aminos.push_back(a7);
+    aminos.push_back(a8);
+    aminos.push_back(a9);
+    aminos.push_back(a10);
+    aminos.push_back(a11);
+    aminos.push_back(a12);
+    aminos.push_back(a13);
+
+    vector<string> filelist = {"1A0B.pdb"};
+    Predictor pred(filelist);
+
+    DataPointArray array = pred.createDatasetArrayFromProtein(aminos);
+
+    EXPECT_EQ(1, array.getCountAllAmino());*/
 }
 TEST(PredictorTEST, createTableFile) {
     // get reference value
