@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     int proteincount     = 0;
     vector<string> files = {};
     string R_Path        = "../R/script.R";
-    string R_args        = " 10 10 20";
+    string R_args        = " ../Tables/table.csv";
     string output        = "../Table/";
 
 

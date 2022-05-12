@@ -52,12 +52,12 @@ TEST(Data, DataPointArray) {
 
 TEST(PredictorTEST, Constructor) {
    vector<string> filelist = {"1A0B.pdb"};
-    //Predictor pred(filelist);
+    Predictor pred(filelist);
 }
 
 TEST(PredictorTEST, getAminosFromMultipleProteins) {
     // get reference value
-/*
+
     // get system
     PDBFile f("../PDB/1QJP.pdb", ios::in);
     System S;
@@ -65,10 +65,10 @@ TEST(PredictorTEST, getAminosFromMultipleProteins) {
 
     vector<string> filelist;
     Predictor p(filelist);
-    auto vec = p.getAminoFromMultipleProteins(S);*/
+    auto vec = p.getAminosFromMultipleProteins(S);
 }
 TEST(PredictorTEST, createDatasetArrayFromProtein) {
-    /*
+
     Amino a1(1,'H','R',"test");
     Amino a2(2,'H','R',"test");
     Amino a3(3,'H','R',"test");
@@ -104,8 +104,9 @@ TEST(PredictorTEST, createDatasetArrayFromProtein) {
 
     DataPointArray array = pred.createDatasetArrayFromProtein(aminos);
 
-    EXPECT_EQ(1, array.getCountAllAmino());*/
+    EXPECT_EQ(1, array.getCountAllAmino());
 }
+
 TEST(PredictorTEST, createTableFile) {
     // get reference value
 }
