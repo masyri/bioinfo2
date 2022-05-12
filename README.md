@@ -1,18 +1,13 @@
-##   PROTEINSTRUCTURE PREDICTION   ##
+##   Contact Capacity Potential (CCP)  ##
 
-Start this program with ./predictor (without arguments)
+Start this program with ./ccp (without arguments)
 
-- You can start the R-Script with this C++ program.
+- Load a folder with PDB-Files
 
-- To use the C++-program, load a PDB-file via the menu.
+- print a occurrence-matrix of all contacts between amino acids
 
-- You can change the path of the R-Script (for path fix)
+- print a probability-matrix for all occurrences
 
-- You can manually create the CSV-files for the R-Script
-  and run the R-Script separately
+- print a score-matrix for all probabilities
 
-For start the R-Script seperately:
 
-Type in (all files in same folder):
-
-```$ Rscript R/script.R Tables/table.csv```
