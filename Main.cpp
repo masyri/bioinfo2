@@ -5,27 +5,17 @@
 
 #include "console/console.h"
 #include "console/Color.h"
-#include "Data.h"
-#include "Predictor.h"
-#include "Rscript.h"
-
-#include <BALL/KERNEL/system.h>
-#include <BALL/KERNEL/molecule.h>
-#include <BALL/KERNEL/atom.h>
-#include <BALL/KERNEL/bond.h>
-#include <BALL/KERNEL/PTE.h>
-#include <BALL/STRUCTURE/secondaryStructureProcessor.h>
-#include <BALL/STRUCTURE/fragmentDB.h>
-#include <BALL/STRUCTURE/peptides.h>
-#include <BALL/FORMAT/PDBFile.h>
+#include "ccp/CCP.h"
+#include "ccp/Probability.h"
+#include "ccp/Scoring.h"
 
 #include <iostream>
 #include <fstream>
-#include <experimental/filesystem>
+
 #include <sstream>
 
 using namespace std;
-using namespace BALL;
+
 
 
 int main(int argc, char* argv[])
@@ -38,15 +28,13 @@ int main(int argc, char* argv[])
     int filecount        = 0;
     int proteincount     = 0;
     vector<string> files = {};
-    string R_Path        = "../R/script.R";
-    string R_args        = " ../Tables/table.csv";
-    string output        = "../Table/";
+
 
 
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(pathPDB,R_Path,filecount,proteincount);
+        char chosen = console::ShowChoices(pathPDB,"",filecount,proteincount);
 
 
         // ### Open Folder ###
@@ -54,7 +42,7 @@ int main(int argc, char* argv[])
             std::cout << C::BBLUE   <<    "\n" << " > Open folder ...\n";
 
             file = false;
-            while (!file) {
+            while (!file) {break;/*
                 // counter reset
                 filecount = 0;
                 proteincount  = 0;
@@ -98,7 +86,7 @@ int main(int argc, char* argv[])
                     file = true;
                     break;
 
-                }
+                }*/
             }
 
             // if Abort, set file false
@@ -106,10 +94,10 @@ int main(int argc, char* argv[])
 
             // count proteins
             for (auto file : files) {
-                PDBFile f(file, ios::in);
-                System S;
-                f >> S;
-                proteincount += S.countProteins();
+              //  PDBFile f(file, ios::in);
+               // System S;
+              //  f >> S;
+             //   proteincount += S.countProteins();
             }
 
             console::pressY2continue();
@@ -117,72 +105,43 @@ int main(int argc, char* argv[])
         }
 
 
-        // ### Create Table ###
+        // ### Occurrence Matrix ###
         if (chosen == 1) {
-            std::cout << C::BBLUE   <<    "\n" << " > Create CSV-Table.\n\n";
+            std::cout << C::BBLUE   <<    "\n" << " > Show Occurrence Matrix.\n\n";
 
-            // build filename
-            std::stringstream s("");
-            s << output << "table.csv";
+            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
+            O.print_styled();
 
-            // table
-            std::cout << C::BLUE  << " PDB-Files : " << files.size() << "\n";
-            Predictor pred(files);
-            std::cout << C::BLUE  << " Proteins  : " << pred.data_point_arrays.size() << "\n";
-            std::cout << C::BLUE  << " DataSets  : " << pred.countdatasets() << "\n";
-            pred.createTableFile(s.str());
-
-            // end
-            std::cout << C::BBLUE   <<    "\n" << " > File created: ' " << s.str() <<" '\n";
+            std::cout << C::BBLUE   <<    "\n" << " >\n";
             console::pressY2continue();
             continue;
         }
 
 
-        // ### Change R-Script location ###
+        // ### Probability Matrix ###
         if (chosen == 2) {
-            std::cout << C::BBLUE   <<    "\n" << " > Set R-Script Path\n";
-            while (true) {
-                // wait for filename typing in ...
-                cout << C::BWHITE << "Type R-Script Path in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
-                cin >> R_Path;
-                // check first char ESC ... -> ABORT
-                if (R_Path.begin().operator*() == '\033') {string R_path = "../R/script.R";break;}
+            std::cout << C::BBLUE   <<    "\n" << " > Show Probability Matrix.\n\n";
 
-                if (Rscript::Exists(R_Path))
-                {
-                    break;
-                }
-                else
-                {
-                    cout << C::BRED << "\n > invalid filepath ’" << R_Path << "’ \n" << C::RESET;
-                }
-            }
-            //
-            cout << C::BBLUE   << " > You have a new R-Script path: " << R_Path << "\n";
+            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
+            Probability p(O);
+            p.print_styled();
 
-
+            std::cout << C::BBLUE   <<    "\n" << " >\n";
             console::pressY2continue();
             continue;
         }
 
 
-
-        // ### Run R-Script ###
+        // ### Scoring Matrix ###
         if (chosen == 3) {
-            std::cout << C::BBLUE   <<    "\n" << " > Run R-Script :\n";
-            // create commandline:
-            std::stringstream call("");
-            call << "Rscript " << R_Path << R_args;
-            // show infos:
-            std::cout << C::BWHITE   <<    "\n" << " > Script File: " << C::BGREEN << "$ " << call.str();
-            std::cout << C::BWHITE   <<    "\n" << " > Continue?    \n" << C::BBLUE;
-            console::pressY2continue();
-            // call commandline
-            std::cout << C::RESET;
-            system(call.str().c_str());
-            // finish
-            std::cout << C::BWHITE   <<    "\n" << " > R-Script finished.\n" << C::BBLUE;
+            std::cout << C::BBLUE   <<    "\n" << " > Show Scoring Matrix.\n\n";
+
+            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
+            Probability p(O);
+            Scoring s(O,p);
+            s.print_styled();
+
+            std::cout << C::BBLUE   <<    "\n" << " >\n";
             console::pressY2continue();
             continue;
         }

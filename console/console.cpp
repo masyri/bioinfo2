@@ -71,29 +71,29 @@ std::vector<std::string> console::helpText(int index) {
     switch (index) {
         case 0 : lines.push_back("\033[1;32m - Read Files from Folder -      ");
                  lines.push_back("                                           ");
-                 lines.push_back("choose a folder with valid PDB-            ");
-                 lines.push_back("Files to create a table with               ");
-                 lines.push_back("Secondary-Structure assignments.           ");
+                 lines.push_back("choose a folder with valid PDB-Files       ");
+                 lines.push_back("for create occurrence-, probability- or    ");
+                 lines.push_back("Score matrices for aminoacid-contacts      ");
             break;
 
-        case 1 : lines.push_back("\033[1;32m - Create a CSV-Table -          ");
+        case 1 : lines.push_back("\033[1;32m - Occurrence Matrix -           ");
                  lines.push_back("                                           ");
-                 lines.push_back("Save table in file for use with            ");
-                 lines.push_back("a R-Script.                                ");
+                 lines.push_back("Shows how often an amino acid has          ");
+                 lines.push_back("the same number of contacts                ");
+                 lines.push_back("with an another amino acid.                ");
+            break;
+
+        case 2 : lines.push_back("\033[1;32m - Probability Matrix -          ");
+                 lines.push_back("                                           ");
+                 lines.push_back("Shows the probability matrix for           ");
+                 lines.push_back("all occurrences                            ");
                  lines.push_back("                                           ");
             break;
 
-        case 2 : lines.push_back("\033[1;32m - Change R-Script Path -        ");
+        case 3 : lines.push_back("\033[1;32m - Score Matrix -                ");
                  lines.push_back("                                           ");
-                 lines.push_back("Change default R-Script Location           ");
-                 lines.push_back("                                           ");
-                 lines.push_back("                                           ");
-            break;
-
-        case 3 : lines.push_back("\033[1;32m - Run R-Script -                ");
-                 lines.push_back("                                           ");
-                 lines.push_back("Run R-Script from default-Path             ");
-                 lines.push_back("                                           ");
+                 lines.push_back("compute the scores for all                 ");
+                 lines.push_back("probabilities                              ");
                  lines.push_back("                                           ");
             break;
 
@@ -135,14 +135,14 @@ int console::ShowChoices(std::string folder, std::string script,int file_count, 
 
     std::vector<std::string> choice_text = {
             " Read PDB-Files from Folder   ",
-            " Create Table.csv             ",
-            " Change R-Script Location     ",
-            " Run R-Script                 ",
+            " Show Occurrence Matrix       ",
+            " Show Probability Matrix      ",
+            " Show Score Matrix            ",
             " Exit Program                 "};
 
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " PDB-Folder          : " << C::YELLOW << folder << "\n";
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Files/Protein count : " << C::YELLOW << file_count << " -> " << prot_count << "\n";
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << " R-Script Location   : " << C::YELLOW << script << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << "   " << C::YELLOW << script << "\n";
 
     while (true) {
 
