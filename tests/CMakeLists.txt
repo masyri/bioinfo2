@@ -24,4 +24,4 @@ add_library(test_driver main_test.cpp)
 # Füge einen Test hinzu. Sie können die folgende
 # Zeile für neue Tests einfach kopieren und anpassen.
 
-add_gtest(Predictor_Test LIBRARIES predbib BALL stdc++fs)
+add_gtest(CCP_Test LIBRARIES predbib BALL stdc++fs)

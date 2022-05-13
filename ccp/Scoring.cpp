@@ -11,10 +11,11 @@ double Scoring::Sak(double Wak, double Nak) {
 
     double val = Wak;
 
-    Nak == 0 ? val = -500 : val;
-    Wak != 0 ? val = -log(Wak) : val = 500;
+    if (Nak == 0) {val = -500; this->valn500++; return val;}
+    if (Wak != 0) {val = -log(Wak);  this->vallog++;return val;}
+    this->val500++;
+    return 500;
 
-    return val;
 }
 
 Scoring::Scoring(Occurrence occur, Probability prob) {

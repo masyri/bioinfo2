@@ -161,8 +161,10 @@ public:
         if (knum > num) {num = knum;}
 
         // print title line
+        int cut = 0;
         std::cout << "\n" <<  C::BWHITE << "                | ";
         for (int k = 0; k < matrix.countColumns(); k++) {
+            if (cut > 25) {break;}cut++;
             std::cout << setw(num) << k << " ";
         }
 
@@ -170,8 +172,10 @@ public:
         for (int i = 0; i < 20; i++) {
             // show name
             std::cout << "\n" << C::BWHITE << lines(i);
+            cut = 0;
             // print columns
             for (int k = 0; k < matrix.countColumns(); k++) {
+                if (cut > 25) {break;}cut++;
                 int value = matrix.getValue(i,k);
                 if (value < 1) {std::cout << C::BRED;} else {std::cout << C::BYELLOW;}
                 std::cout << setw(num) << value << " " << C::RESET;
@@ -180,8 +184,11 @@ public:
         std::cout << "\n";
     }
 
-
-
+int all_residues  = 0;
+int near_residues = 0;
+int zerocontact_residues = 0;
+int contact_unknowns      = 0;
+int amino_unknown = 0;
 
 private:
 

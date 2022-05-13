@@ -43,9 +43,11 @@ public:
         if (knum > num) {num = knum;}
 
         // print title line
+        int cut = 0;
         std::cout << "\n" <<  C::BWHITE << "                | ";
         for (int k = 0; k < matrix.countColumns(); k++) {
-            std::cout << setw(num) << k << " ";
+            if (cut > 20) {break;}cut++;
+            std::cout << setw(5) << k << " ";
         }
 
         // print matrix
@@ -53,10 +55,13 @@ public:
             // show name
             std::cout << "\n" << C::BWHITE << lines(i) ;
             // print columns
-            for (int k = 0; k < matrix.countColumns(); k++) {
+            cut = 0;
+            for (int k = 0; k < matrix.countColumns(); k++ ) {
+                if (cut > 20) {break;}cut++;
                 double value = matrix.getValue(i,k);
+                 string v = to_string(value).substr( 0,5 );
                 if (value > 0)  {std::cout << C::BYELLOW;} else {std::cout << C::BRED;}
-                std::cout << setw(num) << value << " " << C::RESET;
+                std::cout << setw(5) << v << " " << C::RESET;
             }
         }
         std::cout << "\n";

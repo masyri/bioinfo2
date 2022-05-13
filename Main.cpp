@@ -127,8 +127,13 @@ int main(int argc, char* argv[])
 
             Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
             O.print_styled();
+            string B = C::BGREEN;
+            string b = C::YELLOW;
 
-            std::cout << C::BBLUE   <<    "\n" << " >\n";
+            std::cout << B << "\n" << " > Cutted after 25 columns.";
+            std::cout << B << "\n" << " > [Residue count:] "      << b << O.all_residues  << B << " [ > 0 contacts:] " << b << O.near_residues << B << " [ 0 contacts:] " << b << O.zerocontact_residues;
+            std::cout << B << "\n" << " > [Unknown AminoAcids:] " << b << O.amino_unknown << B << " [residues with contacts to 'Unknown':] " << b << O.contact_unknowns << B;
+            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
             console::pressY2continue();
             continue;
         }
@@ -141,8 +146,11 @@ int main(int argc, char* argv[])
             Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
             Probability p(O);
             p.print_styled();
+            string B = C::BGREEN;
+            string b = C::YELLOW;
 
-            std::cout << C::BBLUE   <<    "\n" << " >\n";
+            std::cout << B  <<    "\n" << " > Cutted after 20 columns.";
+            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
             console::pressY2continue();
             continue;
         }
@@ -156,8 +164,13 @@ int main(int argc, char* argv[])
             Probability p(O);
             Scoring s(O,p);
             s.print_styled();
+            string B = C::BGREEN;
+            string b = C::YELLOW;
 
-            std::cout << C::BBLUE   <<    "\n" << " >\n";
+            std::cout << B   <<    "\n" << " > Cutted after 20 columns.";
+            std::cout << B << "\n" << " > Score: [500:] "      << b << s.val500  << B << " [ -500:] " << b << s.valn500 << B << " [ log(Wak):] " << b << s.vallog;
+
+            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
             console::pressY2continue();
             continue;
         }

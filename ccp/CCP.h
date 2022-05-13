@@ -17,11 +17,25 @@
 #include <BALL/STRUCTURE/peptides.h>
 #include <BALL/FORMAT/PDBFile.h>
 
+
 #include <vector>
 #include <string>
 
 using namespace std;
 using namespace BALL;
+
+class AminoTuple {
+public:
+AminoTuple(int id , AA amino , Vector3 position ) {
+    this->id = id;
+    this->amino = amino;
+    this->position = position;
+}
+int id;
+AA amino;
+Vector3 position;
+};
+
 
 class CCP {
 public:
@@ -31,6 +45,7 @@ public:
     static bool distance(Atom A, Atom B, double max);
 
 };
+
 
 
 #endif //CCP_CCP_H

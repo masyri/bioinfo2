@@ -137,7 +137,8 @@ public:
         cout << BBLUE << "\n[MATRIX] rows: " << BLUE << countRows() << BBLUE << " cols: " << BLUE << countColumns();
         int row = 0;int col = 0;
         cout << BWHITE << "\n" << "   " << "   ";
-        for (auto c : _rows[0]) { cout << BWHITE << setw(column_text_width) << col << " " << GREEN;col++; }
+        for ( auto c : _rows[0]) { cout << BWHITE << setw(column_text_width) << col << " " << GREEN;col++;(void)c; }
+
         for (auto r : _rows) {
             cout << "\n" << BWHITE << setw(3) << row << " | " << GREEN;row++;
             for (auto c_val : r) { cout << setw(column_text_width) << c_val << " "; }

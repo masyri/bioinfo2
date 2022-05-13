@@ -20,10 +20,35 @@
 */
 
 
+
+
+// Es werden zu hohe k-Werte erzeugt. Soll das so sein ?
+//
+//
+//
+// Bei PDB-Ordner über 40 
+// Bei preprocessed über 500
+//
+//
+// 40, und vorallem 500 Kontakte für ein Molekül ist schon ein bisschen zu viel
+//
+
+
+
 Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
+
     Occurrence O;
 
-        for (string file : files) {
+    int id = 0;
+    int unknowns = 0;
+
+    vector<AminoTuple> aminos;
+
+    vector<AminoTuple> compare;
+
+    // Store all Amino from all files
+
+    for (string file : files) {
 
         // == open file
 
@@ -33,7 +58,7 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
         int index = 0;
 
         // == iterate over all proteins of the system
-        for(ProteinIterator iter = S.beginProtein(); +iter; ++iter) {
+        for(ProteinIterator p_iter = S.beginProtein(); +p_iter; ++p_iter) {
 
             // ## get protein
             Protein *protein = (S.getProtein(index));
@@ -41,50 +66,93 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
 
             // ## iterate over proteins
 
-            for (ResidueIterator res_iter_A = protein->beginResidue(); +res_iter_A; ++res_iter_A) {
+            for (ResidueIterator iter = protein->beginResidue(); +iter; ++iter) {
 
-                if(res_iter_A->isAminoAcid()){
+                if(iter->isAminoAcid()){ 
 
-                    // -- get Name
-                    auto code = 'A'; //Peptides::OneLetterCode(res_iter_A.getName());
-                    AA amino = Valin; // static_cast<AA>(code);
+                    // get AminoAcid Type
 
-                    // -- counter for contacts
-                    int contacts = 0;
+                    auto code = Peptides::OneLetterCode(iter->getName());
+                    AA amino = char2Amino(code);
+                    if (amino == Unknown) {unknowns++;}
 
-                    // -- get reference Atom
-                    Atom * A = res_iter_A->getAtom("CA");
+                    // get position
 
-                    // -- look for neighbors 
-                    for (ResidueIterator res_iter_B = protein->beginResidue(); +res_iter_B; ++res_iter_B){
+                    Atom  *  CA       = iter->getAtom("CA");
+                    if (CA == nullptr) {cout << "null";id++;continue;}
+                    Vector3 position  = CA->getPosition();
 
-                        if(res_iter_B->isAminoAcid()){
 
-                            Atom * B = res_iter_B->getAtom("CA");
+                    // insert in List (int id , AA amino , Vector3 position )
+                    AminoTuple a(id,amino,position);
+                    AminoTuple b(id,amino,position);
+                    aminos.push_back(a);
+                    compare.push_back(b);
+                    id++;
 
-                            bool not_same = res_iter_B != res_iter_A;
 
-                            bool in_distance = true; 
-                            cout << " \n : " << A->getDistance(*B) < 7; 
-
-                            if (not_same && in_distance) {contacts++;}
-
-                        }
-                    }
-
-                    // -- insert occurrence
-                    O.insert(amino,contacts);
 
                 }
+
             }
         }
     }
 
+    // Check all stored aminos
 
+    for (AminoTuple as : aminos) {
 
+        // -- counter for contacts
+        int contacts = 0;
+
+        // compare with all atoms
+        for (AminoTuple comp : compare) {
+            // get distance
+            double dist = abs(as.position.getDistance(comp.position));
+            // if not same atom
+            if (as.id != comp.id && dist <= 7 ) {
+                contacts++;
+                if (comp.amino == Unknown) {O.contact_unknowns++;}
+
+            } 
+
+        }
+
+        // statistics
+
+        if (contacts == 0) {O.zerocontact_residues++;} else {O.near_residues++;}
+
+        // insert occurrence
+
+        O.insert(as.amino,contacts);
+
+    } 
+
+    // Store Statistics
+
+    O.all_residues = id;
+    O.amino_unknown = unknowns;
+
+    // Return
 
     return O;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
