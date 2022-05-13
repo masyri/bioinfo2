@@ -13,6 +13,21 @@
 #include <fstream>
 
 #include <sstream>
+#include <BALL/KERNEL/system.h>
+#include <BALL/KERNEL/molecule.h>
+#include <BALL/KERNEL/atom.h>
+#include <BALL/KERNEL/bond.h>
+#include <BALL/KERNEL/PTE.h>
+#include <BALL/STRUCTURE/secondaryStructureProcessor.h>
+#include <BALL/STRUCTURE/fragmentDB.h>
+#include <BALL/STRUCTURE/peptides.h>
+#include <BALL/FORMAT/PDBFile.h>
+#include <vector>
+#include <string>
+#include <experimental/filesystem>
+
+using namespace std;
+using namespace BALL;
 
 using namespace std;
 
@@ -42,7 +57,7 @@ int main(int argc, char* argv[])
             std::cout << C::BBLUE   <<    "\n" << " > Open folder ...\n";
 
             file = false;
-            while (!file) {break;/*
+            while (!file) {
                 // counter reset
                 filecount = 0;
                 proteincount  = 0;
@@ -86,7 +101,7 @@ int main(int argc, char* argv[])
                     file = true;
                     break;
 
-                }*/
+                }
             }
 
             // if Abort, set file false
@@ -94,10 +109,10 @@ int main(int argc, char* argv[])
 
             // count proteins
             for (auto file : files) {
-              //  PDBFile f(file, ios::in);
-               // System S;
-              //  f >> S;
-             //   proteincount += S.countProteins();
+               PDBFile f(file, ios::in);
+               System S;
+               f >> S;
+               proteincount += S.countProteins();
             }
 
             console::pressY2continue();
