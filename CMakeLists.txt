@@ -55,16 +55,16 @@ add_library(predbib SHARED Main.cpp
         console/Color.h
         matrix/Matrix.h
 
-        cpp/Amino.cpp
-        cpp/Amino.h
-        cpp/CCP.cpp
-        cpp/CCP.h
-        cpp/Occurrence.cpp
-        cpp/Occurrence.h
-        cpp/Probability.cpp
-        cpp/Probability.h
-        cpp/Scoring.cpp
-        cpp/Scoring.h
+        ccp/Amino.cpp
+        ccp/Amino.h
+        ccp/CCP.cpp
+        ccp/CCP.h
+        ccp/Occurrence.cpp
+        ccpp/Occurrence.h
+        ccp/Probability.cpp
+        ccp/Probability.h
+        ccp/Scoring.cpp
+        ccp/Scoring.h
 
         )
 
@@ -76,18 +76,18 @@ add_executable(ccp Main.cpp
         console/Color.cpp
         console/Color.h
         
-        cpp/Amino.cpp
-        cpp/Amino.h
-        cpp/CCP.cpp
-        cpp/CCP.h
-        cpp/Occurrence.cpp
-        cpp/Occurrence.h
-        cpp/Probability.cpp
-        cpp/Probability.h
-        cpp/Scoring.cpp
-        cpp/Scoring.h
+        ccp/Amino.cpp
+        ccp/Amino.h
+        ccp/CCP.cpp
+        ccp/CCP.h
+        ccp/Occurrence.cpp
+        ccp/Occurrence.h
+        ccp/Probability.cpp
+        ccpp/Probability.h
+        ccp/Scoring.cpp
+        ccp/Scoring.h
 )
 
-target_link_libraries(predictor BALL stdc++fs)
+target_link_libraries(ccp BALL stdc++fs)
 
 add_subdirectory(tests)
