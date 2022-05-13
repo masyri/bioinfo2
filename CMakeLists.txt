@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Predictor VERSION 1.0.0)
+project(CCP VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
@@ -48,27 +48,44 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 # Libraries:
 add_library(predbib SHARED Main.cpp
+
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        Data.h
-        Predictor.cpp
-        Predictor.h
-        Rscript.h
+        matrix/Matrix.h
+
+        cpp/Amino.cpp
+        cpp/Amino.h
+        cpp/CCP.cpp
+        cpp/CCP.h
+        cpp/Occurrence.cpp
+        cpp/Occurrence.h
+        cpp/Probability.cpp
+        cpp/Probability.h
+        cpp/Scoring.cpp
+        cpp/Scoring.h
+
         )
 
 target_link_libraries(predbib BALL)
 
-add_executable(predictor Main.cpp
+add_executable(ccp Main.cpp
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        Data.h
-        Predictor.cpp
-        Predictor.h
-        Rscript.h
+        
+        cpp/Amino.cpp
+        cpp/Amino.h
+        cpp/CCP.cpp
+        cpp/CCP.h
+        cpp/Occurrence.cpp
+        cpp/Occurrence.h
+        cpp/Probability.cpp
+        cpp/Probability.h
+        cpp/Scoring.cpp
+        cpp/Scoring.h
 )
 
 target_link_libraries(predictor BALL stdc++fs)
