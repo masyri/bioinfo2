@@ -60,7 +60,7 @@ add_library(predbib SHARED Main.cpp
         ccp/CCP.cpp
         ccp/CCP.h
         ccp/Occurrence.cpp
-        ccpp/Occurrence.h
+        ccp/Occurrence.h
         ccp/Probability.cpp
         ccp/Probability.h
         ccp/Scoring.cpp
@@ -83,7 +83,7 @@ add_executable(ccp Main.cpp
         ccp/Occurrence.cpp
         ccp/Occurrence.h
         ccp/Probability.cpp
-        ccpp/Probability.h
+        ccp/Probability.h
         ccp/Scoring.cpp
         ccp/Scoring.h
 )

@@ -13,37 +13,10 @@
 #include <string>
 #include <experimental/filesystem>
 
-#include "../Data.h"
-#include "../Predictor.h"
-// DATA TESTS
+//
 
 TEST(Data, Amino) {
-    Amino a(1,'H','R',"test");
 
-    EXPECT_EQ(1, a.getID());
-    EXPECT_EQ('H', a.getStructure());
-    EXPECT_EQ('R', a.getName());
-    EXPECT_EQ("test", a.getProteinName());
-}
-
-TEST(Data, DataPoint) {
-    Amino a(1,'H','R',"test");
-    DataPoint point(a);
-
-    EXPECT_EQ(a.getID(), point.Ref.getID());
-    EXPECT_EQ(a.getName(), point.Ref.getName());
-    EXPECT_EQ(a.getProteinName(), point.Ref.getProteinName());
-    EXPECT_EQ(a.getStructure(), point.Ref.getStructure());
-}
-
-TEST(Data, DataPointArray) {
-    Amino a(1,'H','R',"test");
-    DataPoint point(a);
-    DataPointArray ar(1);
-    ar.array.push_back(point);
-    
-    EXPECT_EQ("test", ar.getProteinName());
-    EXPECT_EQ(1, ar.getCountAllAmino());
-    EXPECT_EQ(1, ar.getCountInDataSetAmino());
+    EXPECT_EQ("","");
 }
 

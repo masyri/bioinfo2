@@ -13,7 +13,7 @@ public:
  enum cdir { Up, Down, Left, Right };
 
  static void ShowHeader();
- static int ShowChoices(std::string folder, std::string script,int file_count, int prot_count) ;
+ static int ShowChoices(std::string folder, std::string script,int file_count, int prot_count, int as_count) ;
  static void Help(std::string name,std::string message);
 
  static void move(cdir direction, int s);

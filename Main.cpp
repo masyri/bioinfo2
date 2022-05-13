@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
     string pathPDB       = "---";
     bool file            = false;
     int filecount        = 0;
+    int as_count        = 0;
     int proteincount     = 0;
     vector<string> files = {};
 
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(pathPDB,"",filecount,proteincount);
+        char chosen = console::ShowChoices(pathPDB,"",filecount,proteincount,as_count);
 
 
         // ### Open Folder ###
@@ -58,6 +59,7 @@ int main(int argc, char* argv[])
             while (!file) {
                 // counter reset
                 filecount = 0;
+                as_count = 0;
                 proteincount  = 0;
                 files = {};
 
@@ -111,6 +113,7 @@ int main(int argc, char* argv[])
                System S;
                f >> S;
                proteincount += S.countProteins();
+               as_count += S.countResidues();
             }
 
             console::pressY2continue();

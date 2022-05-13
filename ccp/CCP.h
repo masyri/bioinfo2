@@ -16,6 +16,7 @@
 #include <BALL/STRUCTURE/fragmentDB.h>
 #include <BALL/STRUCTURE/peptides.h>
 #include <BALL/FORMAT/PDBFile.h>
+
 #include <vector>
 #include <string>
 

@@ -4,6 +4,22 @@
 
 #include "CCP.h"
 
+
+/*
+   
+   There are no bugs, only features ;-)
+   Otherwise, these are digital life forms with family and children, 
+   who also have a right to live their beautiful life in this beautiful code. ;-) 
+                     
+     \ o/\o /
+   --- |  | ---         
+       /\/\                
+      /    \
+
+
+*/
+
+
 Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
     Occurrence O;
 
@@ -14,6 +30,7 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
         PDBFile meop(file, ios::in);
         System S;
         meop >> S;
+        int index = 0;
 
         // == iterate over all proteins of the system
         for(ProteinIterator iter = S.beginProtein(); +iter; ++iter) {
@@ -26,41 +43,41 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
 
             for (ResidueIterator res_iter_A = protein->beginResidue(); +res_iter_A; ++res_iter_A) {
 
-                if(res_iter->isAminoAcid()){
+                if(res_iter_A->isAminoAcid()){
 
                     // -- get Name
-                    char code = 'Kaffee';
+                    auto code = 'A'; //Peptides::OneLetterCode(res_iter_A.getName());
+                    AA amino = Valin; // static_cast<AA>(code);
 
                     // -- counter for contacts
                     int contacts = 0;
 
                     // -- get reference Atom
-                    Atom A = res_iter_A->getAtom("CA");
+                    Atom * A = res_iter_A->getAtom("CA");
 
                     // -- look for neighbors 
                     for (ResidueIterator res_iter_B = protein->beginResidue(); +res_iter_B; ++res_iter_B){
 
                         if(res_iter_B->isAminoAcid()){
 
-                            Atom B = res_iter_B->getAtom("CA");
+                            Atom * B = res_iter_B->getAtom("CA");
 
-                            bool not_same = res_iter_B != res_iter;
+                            bool not_same = res_iter_B != res_iter_A;
 
-                            bool in_distance = distance( A , B , 7 ); 
+                            bool in_distance = true; 
+                            cout << " \n : " << A->getDistance(*B) < 7; 
 
-                            if (not_same && in_distance) {contact++;}
+                            if (not_same && in_distance) {contacts++;}
 
                         }
                     }
 
                     // -- insert occurrence
-                    O.insert(code,contacts);
+                    O.insert(amino,contacts);
 
                 }
-
             }
         }
-
     }
 
 
@@ -73,7 +90,7 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
 
 
 
-bool distance(Atom A, Atom B, double max) {
+bool CCP::distance(Atom A, Atom B, double max) {
 
 double dist = A.getDistance(B);
 if (dist <= max) return true;

@@ -123,7 +123,7 @@ std::vector<std::string> console::helpText(int index) {
 
 
 
-int console::ShowChoices(std::string folder, std::string script,int file_count, int prot_count) {
+int console::ShowChoices(std::string folder, std::string script,int file_count, int prot_count, int as_count) {
 
     int cursor = 0;
 
@@ -142,7 +142,7 @@ int console::ShowChoices(std::string folder, std::string script,int file_count, 
 
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " PDB-Folder          : " << C::YELLOW << folder << "\n";
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Files/Protein count : " << C::YELLOW << file_count << " -> " << prot_count << "\n";
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << "   " << C::YELLOW << script << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << " Residue count       : " << C::YELLOW << as_count << "\n";
 
     while (true) {
 
