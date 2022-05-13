@@ -23,7 +23,7 @@
   "S" | ...
   ... | ...
 
- Example: AminoAcid 'N' occurs 4 times with
+ Example: AminoAcid 'I' occurs 4 times with
  2 contacts to another amino-acid and 2 times with 1 contact to
  another amino acid
 
