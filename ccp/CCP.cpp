@@ -20,35 +20,23 @@
 */
 
 
-
-
-// Es werden zu hohe k-Werte erzeugt. Soll das so sein ?
-//
-//
-//
-// Bei PDB-Ordner über 40 
-// Bei preprocessed über 500
-//
-//
-// 40, und vorallem 500 Kontakte für ein Molekül ist schon ein bisschen zu viel
-//
-
-
-
 Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
 
     Occurrence O;
 
-    int id = 0;
+    int all_amino_count = 0;
     int unknowns = 0;
-
-    vector<AminoTuple> aminos;
-
-    vector<AminoTuple> compare;
 
     // Store all Amino from all files
 
     for (string file : files) {
+
+        int id = 0;
+        
+
+        vector<AminoTuple> aminos;
+
+        vector<AminoTuple> compare;
 
         // == open file
 
@@ -88,15 +76,14 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
                     AminoTuple b(id,amino,position);
                     aminos.push_back(a);
                     compare.push_back(b);
-                    id++;
+                    id++;all_amino_count++;
 
 
 
                 }
-
             }
         }
-    }
+    
 
     // Check all stored aminos
 
@@ -128,9 +115,13 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
 
     } 
 
+    // end file loop
+
+    }
+
     // Store Statistics
 
-    O.all_residues = id;
+    O.all_residues = all_amino_count;
     O.amino_unknown = unknowns;
 
     // Return
