@@ -201,6 +201,26 @@ EXPECT_EQ(0,6);
 
 
 
+//
+// Test correctness of count method
+//
+TEST(Occurence,CountResiduesTest) { // 
+
+Occurrence O;
+
+  //  int countResidues() 
+
+  //  int countResidues(AA amino) 
+  
+  //  int countResidues(int k) 
+
+
+     
+EXPECT_EQ(0,6);
+}
+
+
+
 
 
 
