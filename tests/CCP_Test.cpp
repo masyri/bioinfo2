@@ -16,7 +16,8 @@
 #include "../matrix/Matrix.h"
 #include "../ccp/Amino.h"
 #include "../ccp/Occurrence.h"
-
+#include "../ccp/Probability.h"
+#include "../ccp/Scoring.h"
 /*
 
      Alanin          //	Ala	A  0
@@ -182,68 +183,231 @@ EXPECT_EQ( 11 , O.getColumnCount());
 
 }
 
+TEST(Occurence, getOccurrences) { 
+
+  Occurrence O;
+
+  /*
+                0 | 1 | 2
+      Tyrosin | 1 | 0 | 0 
+      Alanin  | 0 | 2 | 0
+      Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
 
 
+  EXPECT_EQ(1, O.getOccurrences(Tyrosin, 0));
+  EXPECT_EQ(0, O.getOccurrences(Tyrosin, 1));
+  EXPECT_EQ(0, O.getOccurrences(Tyrosin, 2));
 
+  EXPECT_EQ(0, O.getOccurrences(Alanin, 0));
+  EXPECT_EQ(2, O.getOccurrences(Alanin, 1));
+  EXPECT_EQ(0, O.getOccurrences(Alanin, 2));
 
+  EXPECT_EQ(0, O.getOccurrences(Valin, 0));
+  EXPECT_EQ(1, O.getOccurrences(Valin, 1));
+  EXPECT_EQ(1, O.getOccurrences(Valin, 2));
 
-
-
-//
-// Test for correct values with insert
-//
-TEST(Occurence,Test) { // 
-
-Occurrence O;
-
-EXPECT_EQ(0,6);
 }
 
+TEST(Occurence, getValue) { 
+
+  Occurrence O;
+
+  /*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
 
 
-//
-// Test correctness of count method
-//
-TEST(Occurence,CountResiduesTest) { // 
+  EXPECT_EQ(1, O.getValue(18, 0));
+  EXPECT_EQ(0, O.getValue(18, 1));
+  EXPECT_EQ(0, O.getValue(18, 2));
+
+  EXPECT_EQ(0, O.getValue(1, 0));
+  EXPECT_EQ(2, O.getValue(1, 1));
+  EXPECT_EQ(0, O.getValue(1, 2));
+
+  EXPECT_EQ(0, O.getValue(19, 0));
+  EXPECT_EQ(1, O.getValue(19, 1));
+  EXPECT_EQ(1, O.getValue(19, 2));
+
+}
+
+TEST(Occurence, getColumnCount) { 
+
+  Occurrence O;
+
+  /*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
+
+
+  EXPECT_EQ(3, O.getColumnCount());
+
+}
+
+TEST(Occurence, countResidue) { 
+
+  Occurrence O;
+
+  /*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
+
+
+  EXPECT_EQ(3, O.countResidues());
+
+  EXPECT_EQ(1, O.countResidues(Tyrosin));
+  EXPECT_EQ(2, O.countResidues(Alanin));
+  EXPECT_EQ(2, O.countResidues(Valin));
+  EXPECT_EQ(0, O.countResidues(Leucin));
+
+  EXPECT_EQ(1, O.countResidues(0));
+  EXPECT_EQ(3, O.countResidues(1));
+  EXPECT_EQ(1, O.countResidues(2));
+  EXPECT_EQ(0, O.countResidues(3));
+
+}
+
+TEST(Probability,Test) { 
 
 Occurrence O;
 
-  //  int countResidues() 
+ /*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
 
-  //  int countResidues(AA amino) 
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
   
-  //  int countResidues(int k) 
+  Probability p(O);
 
+  EXPECT_EQ(1, p.getValue(1,0));
+  EXPECT_EQ(3, p.getValue(1,1));
+  EXPECT_EQ(1, p.getValue(1,2));
 
-     
-EXPECT_EQ(0,6);
+  EXPECT_EQ(0, p.getValue(18,0));
+  EXPECT_EQ(1, p.getValue(18,1));
+  EXPECT_EQ(0, p.getValue(18,2));
+  
+  EXPECT_EQ(1, p.getValue(19,0));
+  EXPECT_EQ(3, p.getValue(19,1));
+  EXPECT_EQ(1, p.getValue(19,2));
 }
 
-
-
-
-
-
-//
-// Test Probability Matrix
-//
-TEST(Probability,Values_Test) { // 
+TEST(Scoring,scoring) {
 
 Occurrence O;
 
-EXPECT_EQ(0,9);
+/*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
+  
+  Probability p(O);
+
+  Scoring s(O,p);
+
+  EXPECT_EQ(1, s.getValue(1,0));
+  EXPECT_EQ(3, s.getValue(1,1));
+  EXPECT_EQ(1, s.getValue(1,2));
+
+  EXPECT_EQ(0, s.getValue(18,0));
+  EXPECT_EQ(1, s.getValue(18,1));
+  EXPECT_EQ(0, s.getValue(18,2));
+  
+  EXPECT_EQ(1, s.getValue(19,0));
+  EXPECT_EQ(3, s.getValue(19,1));
+  EXPECT_EQ(1, s.getValue(19,2));
+
 }
 
-
-
-
-
-//
-// Test Scoring Matrix
-//
-TEST(Scoring,Values_Test) { // 
+TEST(Scoring,sak) {
 
 Occurrence O;
 
-EXPECT_EQ(0,9);
+/*
+                0 | 1 | 2
+   18 Tyrosin | 1 | 0 | 0 
+    1 Alanin  | 0 | 2 | 0
+   19 Valin   | 0 | 1 | 1
+
+  */
+
+  O.insert(Tyrosin, 0);
+  O.insert(Alanin, 1);
+  O.insert(Alanin, 1);
+  O.insert(Valin, 2);
+  O.insert(Valin, 1);
+  
+  Probability p(O);
+
+  Scoring s(O,p);
+
+  EXPECT_EQ(0, s.Sak(0.0, 0.0));
+
+}
+
+TEST(CCP,createOccurrenceMatrixFromFiles) {
+
+
+
+}
+
+TEST(CCP,distance) {
+
+
+
 }
