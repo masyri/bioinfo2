@@ -1,6 +1,8 @@
 ##   Contact Capacity Potential (CCP)  ##
 
-Start this program with ./ccp (without arguments)
+Start this program with:
+
+``` $ ./ccp``` (without arguments)
 
 - Load a folder with PDB-Files with this program
 
