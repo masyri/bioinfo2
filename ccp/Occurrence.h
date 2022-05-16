@@ -30,16 +30,6 @@
  **/
 
 
-
-
-
-// Soll das Auftreten 'Kontakte k = 0' auch gezählt werden? macht doch eigentlich keinen Sinn ???
-
-// Was ist mit den 'Unknown' Aminosäuren ? ignorieren ?
-
-
-
-
 class Occurrence {
 
 public:
