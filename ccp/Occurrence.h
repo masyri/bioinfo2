@@ -126,6 +126,8 @@ public:
     }
 
 
+
+
     /**
      * count all Residues with k contacts in this matrix
      *
@@ -142,16 +144,16 @@ public:
 
 
 
-    /** Print matrix to console without amino-acid names
-     *
+    /** 
+     * Print matrix to console without amino-acid names
      **/
     void print() { matrix.print(3); }
 
 
 
 
-    /** Print matrix to console with amino-acid names
-     *
+    /** 
+     * Print matrix to console with amino-acid names
      **/
     void print_styled() {
 
@@ -184,11 +186,14 @@ public:
         std::cout << "\n";
     }
 
-int all_residues  = 0;
-int near_residues = 0;
-int zerocontact_residues = 0;
-int contact_unknowns      = 0;
-int amino_unknown = 0;
+
+
+    // Statistics
+    int all_residues  = 0;
+    int near_residues = 0;
+    int zerocontact_residues = 0;
+    int contact_unknowns      = 0;
+    int amino_unknown = 0;
 
 private:
 

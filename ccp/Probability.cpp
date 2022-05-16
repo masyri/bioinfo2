@@ -5,6 +5,8 @@
 #include "Probability.h"
 
 
+
+
 Probability::Probability(Occurrence occur) {
 
     this->matrix = Matrix<double>(21,occur.getColumnCount(),0);
@@ -21,10 +23,10 @@ Probability::Probability(Occurrence occur) {
             double N_a = occur.countResidues(AminoAcid);
             double N_k = occur.countResidues(k);
 
-            // div
+            // calc N_ak
             double N_ak = (N_a * N_k) / N ;
 
-            // div
+            // calc W_ak
             double W_ak = occurrences / N_ak;
 
             // set probability

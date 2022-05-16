@@ -24,6 +24,11 @@
 using namespace std;
 using namespace BALL;
 
+
+/**
+ * @brief Set of Amino-Acid and Position 
+ * 
+ */
 class AminoTuple {
 public:
 AminoTuple(int id , AA amino , Vector3 position ) {
@@ -37,12 +42,23 @@ Vector3 position;
 };
 
 
+
+/**
+ * @brief Build an Occurence-Matrix from files
+ * 
+ */
 class CCP {
 public:
 
-    static Occurrence createOccurrenceMatrixFromFiles(vector<string> files);
 
-    static bool distance(Atom A, Atom B, double max);
+/**
+ * @brief Reads all proteins from all given PDB-files to build an occurence matrix
+ * 
+ * 
+ * @param files 
+ * @return Occurrence-Matrix
+ */
+    static Occurrence createOccurrenceMatrixFromFiles(vector<string> files);
 
 };
 

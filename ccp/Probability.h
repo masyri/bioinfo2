@@ -13,27 +13,39 @@ class Probability {
 
 public:
 
-    /** Create a probability matrix from a occurrence-matrix
+
+    /** 
+     * Create a probability matrix from a occurrence-matrix
      *
-     * @param occur :
-     **/
+     * @param occur  an occurence-matrix
+     */
     explicit Probability(Occurrence occur);
 
 
+
+
+    /**
+     * returns value from matrix
+     *
+     * @param row,column  position
+     */
     double getValue(int row, int column) {
         return this->matrix.getValue(row,column);
     }
 
 
-    /** Print matrix to console without amino-acid names
-     *
+
+
+    /** 
+     * Print matrix to console without amino-acid names
      **/
     void print() { matrix.print(3); }
 
 
 
-    /** Print matrix to console with amino-acid names
-     *
+
+    /** 
+     * Print matrix to console with amino-acid names
      **/
     void print_styled() {
 
@@ -66,6 +78,9 @@ public:
         }
         std::cout << "\n";
     }
+
+
+
 
 private:
 

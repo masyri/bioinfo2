@@ -129,30 +129,3 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
     return O;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bool CCP::distance(Atom A, Atom B, double max) {
-
-double dist = A.getDistance(B);
-if (dist <= max) return true;
-return false;
-
-}

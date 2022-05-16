@@ -8,6 +8,8 @@
 
 using namespace std;
 
+
+
 /**
  * Type-templated and resizable Matrix.
  * Min size is: 1 row + 1 column.
@@ -24,9 +26,9 @@ public:
      * Create a Matrix.
      * Example 'Matrix<int> values(4,5,-1);'
      *
-     * @rows          : count of rows. Min >=1
-     * @columns       : count of columns. Min >=1
-     * @initial_value : start values in the fields after creating
+     * @param rows          : count of rows. Min >=1
+     * @param columns       : count of columns. Min >=1
+     * @param initial_value : start values in the fields after creating
      * */
     Matrix(int rows, int columns, MatType initial_value) {
         //std::cout << "\n Matrix created: r: " << rows << " c: " << columns << " init: " << initial_value;
@@ -44,14 +46,13 @@ public:
 
 
 
-
     /**
      * Change the Size of this  Matrix.
      * All old values (which inbound for the new matrix-size) will copy
      *
-     * @rows          : count of rows. Min >=1
-     * @columns       : count of columns. Min >=1
-     * @initial_value : start values in the fields after creating
+     * @param rows          : count of rows. Min >=1
+     * @param columns       : count of columns. Min >=1
+     * @param initial_value : start values in the fields after creating
     * */
     void reSize(int rows, int columns, MatType initial_value) {
 
@@ -73,10 +74,10 @@ public:
             }
             _new_rows.template emplace_back(col);
         }
-
         this->_rows = _new_rows;
-
     }
+
+
 
 
 
@@ -88,6 +89,8 @@ public:
 
 
 
+
+
     /**
      * Get column size from this matrix
      *
@@ -96,11 +99,17 @@ public:
 
 
 
+
+
     /**
      * Get a value from this matrix
+     * 
+     * @param row,column position
      *
      * */
     MatType getValue(int row, int column)             { return this->_rows[row][column]; }
+
+
 
 
 
@@ -121,17 +130,24 @@ public:
     }
 
 
+
+
     /**
      * Set a value in this matrix
+     * 
+     * @param rot,column position
+     * @param value new value
      *
      * */
     void setValue(int row, int column, MatType value) { this->_rows[row][column] = value;}
 
 
+
+
     /**
      * Print the matrix to console (for testing)
      *
-     * @column_text_width : Console print-width for every column (fix different value-text-length for better readability)
+     * @param column_text_width : Console print-width for every column (fix different value-text-length for better readability)
      * */
     void print(int column_text_width) {
         cout << BBLUE << "\n[MATRIX] rows: " << BLUE << countRows() << BBLUE << " cols: " << BLUE << countColumns();
@@ -146,8 +162,15 @@ public:
         cout << RESET << "\n";
     }
 
+
+
+
 private:
+
+    // value-stack
     vector<vector<MatType>> _rows;
+
+    // for console print
     const char* RESET   = "\033[0m";
     const char* BLUE    = "\033[0;34m";
     const char* BBLUE   = "\033[1;34m";

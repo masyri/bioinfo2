@@ -18,6 +18,9 @@ double Scoring::Sak(double Wak, double Nak) {
 
 }
 
+
+
+
 Scoring::Scoring(Occurrence occur, Probability prob) {
 
     this->matrix = Matrix<double>(21,occur.getColumnCount(),0);

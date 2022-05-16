@@ -14,30 +14,52 @@ class Scoring {
 
     public:
 
+
+    /**
+     * create a Scoring matrix from probability and occurence-matrix
+     *
+     * @param occur  an occurence-matrix
+     * @param prob   a probability matrix 
+     */
     explicit Scoring(Occurrence occur, Probability prob);
 
+
+
+
+    /**
+     * returns value from matrix
+     *
+     * @param row,column  position
+     */
     double getValue(int row, int column) {
         return this->matrix.getValue(row,column);
     }
+
+
+
 
     /**
      * returns a Scoring value
      *
      * @param Wak     : if Wak !=  then returns -ln(Wak)
      * @param Nak     : if Nak = 0 then returns -500
-     * @return double :
+     * @return double : calculated Score
      */
     double Sak(double Wak, double Nak);
 
-    /** Print matrix to console without amino-acid names
-     *
+
+
+
+    /** 
+     * Print matrix to console without amino-acid names
      **/
     void print() { matrix.print(3); }
 
 
 
-    /** Print matrix to console with amino-acid names
-     *
+
+    /** 
+     * Print matrix to console with amino-acid names
      **/
     void print_styled() {
 
@@ -72,6 +94,8 @@ class Scoring {
     }
 
 
+
+    // statistics
     int val500 = 0;
     int valn500 = 0;
     int vallog = 0;
@@ -80,8 +104,6 @@ class Scoring {
 private:
 
     Matrix<double> matrix = Matrix<double>(21,1,0);
-
-
 
 };
 

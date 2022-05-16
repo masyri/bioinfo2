@@ -2,9 +2,9 @@
 
 Start this program with ./ccp (without arguments)
 
-- Load a folder with PDB-Files
+- Load a folder with PDB-Files with this program
 
-- print a occurrence-matrix of all contacts between amino acids
+- print an occurrence-matrix of all contacts between amino acids
 
 - print a probability-matrix for all occurrences
 
