@@ -33,6 +33,8 @@ using namespace BALL;
 
 int main(int argc, char* argv[])
 {
+    
+    console::ShowHeader();
 
     // ## Program variables
 
