@@ -65,8 +65,8 @@ public:
                 MatType val = initial_value;
 
                 // copy old values
-                bool inbound_row = r < _rows.size();
-                bool inbound_col = c < _rows[0].size();
+                bool inbound_row = r < (int) _rows.size();
+                bool inbound_col = c < (int) _rows[0].size();
                 if (inbound_row && inbound_col) { val = this->getValue(r,c); }
 
                 col.template emplace_back(val);
