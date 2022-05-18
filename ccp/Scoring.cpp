@@ -11,8 +11,8 @@ double Scoring::Sak(double Wak, double Nak) {
 
     double val = Wak;
 
-    if (Nak == 0) {val = -500; this->valn500++; return val;}
     if (Wak != 0) {val = -log(Wak);  this->vallog++;return val;}
+    if (Nak == 0) {val = -500; this->valn500++; return val;}
     this->val500++;
     return 500;
 

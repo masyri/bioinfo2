@@ -228,7 +228,7 @@ TEST(Occurence, getValue) {
   /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -244,9 +244,9 @@ TEST(Occurence, getValue) {
   EXPECT_EQ(0, O.getValue(18, 1));
   EXPECT_EQ(0, O.getValue(18, 2));
 
-  EXPECT_EQ(0, O.getValue(1, 0));
-  EXPECT_EQ(2, O.getValue(1, 1));
-  EXPECT_EQ(0, O.getValue(1, 2));
+  EXPECT_EQ(0, O.getValue(0, 0));
+  EXPECT_EQ(2, O.getValue(0, 1));
+  EXPECT_EQ(0, O.getValue(0, 2));
 
   EXPECT_EQ(0, O.getValue(19, 0));
   EXPECT_EQ(1, O.getValue(19, 1));
@@ -261,7 +261,7 @@ TEST(Occurence, getColumnCount) {
   /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -284,7 +284,7 @@ TEST(Occurence, countResidue) {
   /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -296,7 +296,7 @@ TEST(Occurence, countResidue) {
   O.insert(Valin, 1);
 
 
-  EXPECT_EQ(3, O.countResidues());
+  EXPECT_EQ(5, O.countResidues());
 
   EXPECT_EQ(1, O.countResidues(Tyrosin));
   EXPECT_EQ(2, O.countResidues(Alanin));
@@ -317,7 +317,7 @@ Occurrence O;
  /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -330,17 +330,20 @@ Occurrence O;
   
   Probability p(O);
 
-  EXPECT_EQ(1, p.getValue(1,0));
-  EXPECT_EQ(3, p.getValue(1,1));
-  EXPECT_EQ(1, p.getValue(1,2));
+  double a1 = (2/1.2);
+  double v1 = (1/1.2);
 
-  EXPECT_EQ(0, p.getValue(18,0));
-  EXPECT_EQ(1, p.getValue(18,1));
+  EXPECT_EQ(0, p.getValue(0,0));
+  EXPECT_EQ(a1, p.getValue(0,1));
+  EXPECT_EQ(0, p.getValue(0,2));
+
+  EXPECT_EQ(5, p.getValue(18,0));
+  EXPECT_EQ(0, p.getValue(18,1));
   EXPECT_EQ(0, p.getValue(18,2));
   
-  EXPECT_EQ(1, p.getValue(19,0));
-  EXPECT_EQ(3, p.getValue(19,1));
-  EXPECT_EQ(1, p.getValue(19,2));
+  EXPECT_EQ(0, p.getValue(19,0));
+  EXPECT_EQ(v1, p.getValue(19,1));
+  EXPECT_EQ(2.5, p.getValue(19,2));
 }
 
 TEST(Scoring,scoring) {
@@ -350,7 +353,7 @@ Occurrence O;
 /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -365,17 +368,20 @@ Occurrence O;
 
   Scoring s(O,p);
 
-  EXPECT_EQ(1, s.getValue(1,0));
-  EXPECT_EQ(3, s.getValue(1,1));
-  EXPECT_EQ(1, s.getValue(1,2));
+  double a1 = (2/1.2);
+  double v1 = (1/1.2);
 
-  EXPECT_EQ(0, s.getValue(18,0));
-  EXPECT_EQ(1, s.getValue(18,1));
-  EXPECT_EQ(0, s.getValue(18,2));
+  EXPECT_EQ(500, s.getValue(0,0));
+  EXPECT_EQ(-log(a1), s.getValue(0,1));
+  EXPECT_EQ(500, s.getValue(0,2));
+
+  EXPECT_EQ(-log(5), s.getValue(18,0));
+  EXPECT_EQ(500, s.getValue(18,1));
+  EXPECT_EQ(500, s.getValue(18,2));
   
-  EXPECT_EQ(1, s.getValue(19,0));
-  EXPECT_EQ(3, s.getValue(19,1));
-  EXPECT_EQ(1, s.getValue(19,2));
+  EXPECT_EQ(500, s.getValue(19,0));
+  EXPECT_EQ(-log(v1), s.getValue(19,1));
+  EXPECT_EQ(-log(2.5), s.getValue(19,2));
 
 }
 
@@ -386,7 +392,7 @@ Occurrence O;
 /*
                 0 | 1 | 2
    18 Tyrosin | 1 | 0 | 0 
-    1 Alanin  | 0 | 2 | 0
+    0 Alanin  | 0 | 2 | 0
    19 Valin   | 0 | 1 | 1
 
   */
@@ -401,8 +407,9 @@ Occurrence O;
 
   Scoring s(O,p);
 
-  EXPECT_EQ(0, s.Sak(0.0, 0.0));
-
+  EXPECT_EQ(-log(1.0), s.Sak(1.0, 0.0));
+  EXPECT_EQ(500, s.Sak(0.0, 1.0));
+  EXPECT_EQ(-500, s.Sak(0.0, 0.0));
 }
 
 TEST(CCP,createOccurrenceMatrixFromFiles) {
