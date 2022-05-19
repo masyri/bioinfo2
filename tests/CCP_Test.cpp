@@ -412,14 +412,3 @@ Occurrence O;
   EXPECT_EQ(-500, s.Sak(0.0, 0.0));
 }
 
-TEST(CCP,createOccurrenceMatrixFromFiles) {
-
-
-
-}
-
-TEST(CCP,distance) {
-
-
-
-}
