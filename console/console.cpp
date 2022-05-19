@@ -43,24 +43,18 @@ void console::ShowHeader() {
     std::string C = C::YELLOW;
     std::string W = C::BWHITE;
     std::cout << "\n";
-    std::cout << "\n" << H << " _________  "<< C <<"                 __                    __    ";
-    std::cout << "\n" << H << " \\_   ___ \\ "<< C <<"  ____    ____ _/  |_ _____     ____ _/  |_  ";
-    std::cout << "\n" << H << " /    \\  \\/ "<< C <<" /  _ \\  /    \\   __\\__  \\  _/ ___\\   __\\ ";
-    std::cout << "\n" << H << " \\     \\____"<< C <<"(  <_> )|   |  \\|  |   / __ \\_\\  \\___ |  |   ";
-    std::cout << "\n" << H << "  \\______  /"<< C <<" \\____/ |___|  /|__|  (____  / \\___  >|__|   ";
-    std::cout << "\n" << H << "         \\/ "<< C <<"             \\/            \\/      \\/        ";
-    std::cout << "\n" << H << " _________  "<< C <<"                               .__   __      ";
-    std::cout << "\n" << H << " \\_   ___ \\ "<< C <<"_____   ______ _____     ____  |__|_/  |_  ___.__.   ";
-    std::cout << "\n" << H << " /    \\  \\/ "<< C <<"\\__  \\  \\____ \\__  \\  _/ ___\\ |  |\\   __\\<   |  |   ";
-    std::cout << "\n" << H << " \\     \\____"<< C <<" / __ \\_|  |_> >/ __ \\_\\  \\___ |  | |  |   \\___  |   ";
-    std::cout << "\n" << H << "  \\______  /"<< C <<"(____  /|   __/(____  / \\___  >|__| |__|   / ____|   ";
-    std::cout << "\n" << H << "         \\/ "<< C <<"     \\/ |__|        \\/      \\/             \\/        ";
-    std::cout << "\n" << H << "  __________"<< C <<"         __                    __   .__         .__  ";
-    std::cout << "\n" << H << " \\______   \\"<< C <<" ____ _/  |_   ____    ____ _/  |_ |__|_____   |  |  ";
-    std::cout << "\n" << H << "  |     ___/"<< C <<"/  _ \\   __\\_/ __ \\  /    \\   __\\|  |\\__  \\  |  |  ";
-    std::cout << "\n" << H << "  |    |   "<< C <<"(  <_> )|  |  \\  ___/ |   |  \\|  |  |  | / __ \\_|  |__";
-    std::cout << "\n" << H << "  |____|   "<< C <<" \\____/ |__|   \\___  >|___|  /|__|  |__|(____  /|____/";
-    std::cout << "\n" << H << "           "<< C <<"                  \\/      \\/                \\/        ";
+    std::cout << "\n" << H << "  _________.__              .__          __             .___  ";
+    std::cout << "\n" << H << " /   _____/|__| _____  __ __|  | _____ _/  |_  ____   __| _/  ";
+    std::cout << "\n" << H << " \\_____  \\ |  |/     \\|  |  \\  | \\__  \\   __\\/ __ \\ / __ |   ";
+    std::cout << "\n" << H << " /        \\|  |  Y Y  \\  |  /  |__/ __ \\|  | \\  ___// /_/ |   ";
+    std::cout << "\n" << H << "/_______  /|__|__|_|  /____/|____(____  /__|  \\___  >____ |   ";
+    std::cout << "\n" << H << "        \\/          \\/                \\/          \\/     \\/   ";
+    std::cout << "\n" << H << "   _____                              .__  .__                ";
+    std::cout << "\n" << H << "  /  _  \\   ____   ____   ____ _____  |  | |__| ____    ____  ";
+    std::cout << "\n" << H << " /  /_\\  \\ /    \\ /    \\_/ __ \\__  \\ |  | |  |/    \\  / ___\\ ";
+    std::cout << "\n" << H << "/    |    \\   |  \\   |  \\  ___/ / __ \\|  |_|  |   |  \\/ /_/  >";
+    std::cout << "\n" << H << "\\____|__  /___|  /___|  /\\___  >____  /____/__|___|  /\\___  / ";
+    std::cout << "\n" << H << "        \\/     \\/     \\/     \\/     \\/             \\//_____/  ";
     std::cout << "\n";
     std::cout << "\n" << W << "          [ -- Please press ENTER to dive in -- ]  \n\n";
 
@@ -70,7 +64,6 @@ void console::ShowHeader() {
     }
 
 }
-
 
 
 /*
@@ -100,32 +93,32 @@ std::vector<std::string> console::helpText(int index) {
     std::vector<std::string> lines;
 
     switch (index) {
-        case 0 : lines.push_back("\033[1;32m - Read Files from Folder -      ");
+        case 0 : lines.push_back("\033[1;32m - Read File -                   ");
                  lines.push_back("                                           ");
-                 lines.push_back("choose a folder with valid PDB-Files       ");
-                 lines.push_back("for create occurrence-, probability- or    ");
-                 lines.push_back("Score matrices for aminoacid-contacts      ");
-            break;
-
-        case 1 : lines.push_back("\033[1;32m - Occurrence Matrix -           ");
+                 lines.push_back("choose a HIN-File with molecule            ");
                  lines.push_back("                                           ");
-                 lines.push_back("Shows how often an amino acid has          ");
-                 lines.push_back("the same number of contacts                ");
-                 lines.push_back("with an another amino acid.                ");
-            break;
-
-        case 2 : lines.push_back("\033[1;32m - Probability Matrix -          ");
-                 lines.push_back("                                           ");
-                 lines.push_back("Shows the probability matrix for           ");
-                 lines.push_back("all occurrences                            ");
                  lines.push_back("                                           ");
             break;
 
-        case 3 : lines.push_back("\033[1;32m - Score Matrix -                ");
+        case 1 : lines.push_back("\033[1;32m - Set Loop count -              ");
                  lines.push_back("                                           ");
-                 lines.push_back("compute the scores for all                 ");
-                 lines.push_back("probabilities                              ");
+                 lines.push_back("Set count of loops for simulated annealing ");
+                 lines.push_back(" -> Example 100 or 1000                    ");
                  lines.push_back("                                           ");
+            break;
+
+        case 2 : lines.push_back("\033[1;32m - Start Simulated Annealing -   ");
+                 lines.push_back("                                           ");
+                 lines.push_back("Start the Simulated Annealing algorithm    ");
+                 lines.push_back(" -> HIN-File will created                  ");
+                 lines.push_back(" -> [Set Loop count] for change loops      ");
+            break;
+
+        case 3 : lines.push_back("\033[1;32m - Simulated Annealing Stats -   ");
+                 lines.push_back("                                           ");
+                 lines.push_back(" Start Simulated Annealing algorithm       ");
+                 lines.push_back(" -> Statistic File will created            ");
+                 lines.push_back(" -> [Set Loop count] for change loops      ");
             break;
 
         case 4 : lines.push_back("\033[1;32m - Exit -                        ");
@@ -154,7 +147,7 @@ std::vector<std::string> console::helpText(int index) {
 
 
 
-int console::ShowChoices(std::string folder, std::string script,int file_count, int prot_count, int as_count) {
+int console::ShowChoices(std::string file, int loop_count) {
 
     int cursor = 0;
 
@@ -165,15 +158,15 @@ int console::ShowChoices(std::string folder, std::string script,int file_count, 
     std::string marked[2] = {"\033[40m" , "\033[44m"};
 
     std::vector<std::string> choice_text = {
-            " Read PDB-Files from Folder   ",
-            " Show Occurrence Matrix       ",
-            " Show Probability Matrix      ",
-            " Show Score Matrix            ",
+            " Read HIN File                ",
+            " Set Loops                    ",
+            " Start Simulated Annealing    ",
+            " Simulated Annealing Stats    ",
             " Exit Program                 "};
 
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " PDB-Folder          : " << C::YELLOW << folder << "\n";
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Files/Protein count : " << C::YELLOW << file_count << " -> " << prot_count << "\n";
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << " Residue count       : " << C::YELLOW << as_count << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " Hin-File   : " << C::YELLOW << file << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Loop count : " << C::BYELLOW << loop_count << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << "   " << "\n";
 
     while (true) {
 

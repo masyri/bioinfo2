@@ -1,15 +1,15 @@
-##   Contact Capacity Potential (CCP)  ##
+##   Simulated Annealing  ##
 
 Start this program with:
 
-``` $ ./ccp``` (without arguments)
+``` $ ./annealing``` (without arguments)
 
-- Load a folder with PDB-Files with this program
+- First: Load a HIN-File with this program
 
-- print an occurrence-matrix of all contacts between amino acids
+- Second: Set the count of loops for simulated annealing
 
-- print a probability-matrix for all occurrences
+ -> create a new HIN-File with simulated annealing
 
-- print a score-matrix for all probabilities
+ -> create a file with optimum data each loop with simulated annealing
 
 

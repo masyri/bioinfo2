@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(CCP VERSION 1.0.0)
+project(SimAnnealing VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
@@ -47,47 +47,35 @@ SET(Boost_LIBRARIES
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Libraries:
-add_library(predbib SHARED Main.cpp
+add_library(predbib SHARED 
+
+        Main.cpp
 
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        matrix/Matrix.h
 
-        ccp/Amino.cpp
-        ccp/Amino.h
-        ccp/CCP.cpp
-        ccp/CCP.h
-        ccp/Occurrence.cpp
-        ccp/Occurrence.h
-        ccp/Probability.cpp
-        ccp/Probability.h
-        ccp/Scoring.cpp
-        ccp/Scoring.h
+        annealing/Annealing.h
+        annealing/Annealing.cpp
 
         )
 
 target_link_libraries(predbib BALL)
 
-add_executable(ccp Main.cpp
+add_executable(annealing 
+
+        Main.cpp
+
         console/console.cpp
         console/console.h
         console/Color.cpp
         console/Color.h
-        
-        ccp/Amino.cpp
-        ccp/Amino.h
-        ccp/CCP.cpp
-        ccp/CCP.h
-        ccp/Occurrence.cpp
-        ccp/Occurrence.h
-        ccp/Probability.cpp
-        ccp/Probability.h
-        ccp/Scoring.cpp
-        ccp/Scoring.h
+
+        annealing/Annealing.h
+        annealing/Annealing.cpp
 )
 
-target_link_libraries(ccp BALL stdc++fs)
+target_link_libraries(annealing BALL stdc++fs)
 
 add_subdirectory(tests)

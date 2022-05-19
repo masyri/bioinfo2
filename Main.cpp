@@ -8,50 +8,35 @@
 #include "ccp/CCP.h"
 #include "ccp/Probability.h"
 #include "ccp/Scoring.h"
+#include "annealing/Annealing.h"
 
 #include <iostream>
 #include <fstream>
 
 #include <sstream>
-#include <BALL/KERNEL/system.h>
-#include <BALL/KERNEL/molecule.h>
-#include <BALL/KERNEL/atom.h>
-#include <BALL/KERNEL/bond.h>
-#include <BALL/KERNEL/PTE.h>
-#include <BALL/STRUCTURE/secondaryStructureProcessor.h>
-#include <BALL/STRUCTURE/fragmentDB.h>
-#include <BALL/STRUCTURE/peptides.h>
-#include <BALL/FORMAT/PDBFile.h>
-#include <vector>
-#include <string>
-#include <experimental/filesystem>
 
+#include <limits>
 using namespace std;
-using namespace BALL;
 
 
 
 int main(int argc, char* argv[])
 {
-    
+
     console::ShowHeader();
 
     // ## Program variables
 
-    string pathPDB       = "---";
     bool file            = false;
-    int filecount        = 0;
-    int as_count        = 0;
-    int proteincount     = 0;
-    vector<string> files = {};
-
-
+    int loopcount        = 100;
+    string filename = " --- ";
+    string output_hin = "result.hin";
+    string output_file = "table.txt";
 
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(pathPDB,"",filecount,proteincount,as_count);
-
+        char chosen = console::ShowChoices(filename,loopcount);
 
         // ### Open Folder ###
         if (chosen == 0) {
@@ -60,99 +45,82 @@ int main(int argc, char* argv[])
             file = false;
             while (!file) {
                 // counter reset
-                filecount = 0;
-                as_count = 0;
-                proteincount  = 0;
-                files = {};
 
                 // wait for filename typing in ...
-                cout << C::BWHITE << "Type a folder-path with PDB-Files in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
-                cin >> pathPDB;
+                cout << C::BWHITE << "Type a file-path for a HIN-File in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
+                cin >> filename;
 
                 // check first char ESC ... -> ABORT
-                if (pathPDB.begin().operator*() == '\033') {file = false;break;}
-                std::ifstream infile(pathPDB);
+                if (filename.begin().operator*() == '\033') {file = false;break;}
+                std::ifstream infile(filename);
 
-                // check folder exists
-                if (!std::experimental::filesystem::is_directory(pathPDB)) {
-                    cout << C::BRED << "\n > Path is invalid or not exist ’" << pathPDB << "’ \n" << C::RESET;
+                // check file exists
+                if (!infile) {
+                    cout << C::BRED << "\n > Path is invalid or not exist ’" << filename << "’ \n" << C::RESET;
                     continue;
                 }
 
-                // check folder is valid + count correct files ...
+                bool isHIN = filename.find(".hin") != string::npos;
 
-                for (const auto & entry : std::experimental::filesystem::directory_iterator(pathPDB))
-                {
-                    std::stringstream fp("");
-                    std::cout << " - ";
-                    fp << entry.path();
-                    bool isPDB = fp.str().find(".pdb") != string::npos;
-                    if (isPDB) {std::cout << C::BGREEN;filecount++;files.push_back(entry.path().string());} else {std::cout << C::BRED;}
-                    std::cout << entry.path() << std::endl << C::RESET;
-
-
-                }
-
-                // files found ? -> if enough break this loop
-                if (filecount < 1) {
-                    cout << C::BRED << "\n > No PDB-Files found in this folder: ’" << pathPDB << "’ \n" << C::RESET;
-                    filecount = 0;
+                // check file is HIN
+                if (!isHIN) {
+                    cout << C::BRED << "\n > Path is invalid or not exist ’" << filename << "’ \n" << C::RESET;
                     continue;
-                } else {
-                    cout << C::BGREEN << "\n\n > " << filecount <<" PDB-Files found in this folder: ’" << pathPDB << "’ \n" << C::RESET;
-                    file = true;
+                }
+                if (isHIN) {
+                    cout << C::BRED << "\n > Your File: ’" << filename << "’ \n" << C::RESET; file = true;
                     break;
-
                 }
+
             }
 
             // if Abort, set file false
-            if (!file) {pathPDB     = "---";continue;}
+            if (!file) {filename     = " --- ";continue;}
 
-            // count proteins
-            for (auto file : files) {
-               PDBFile f(file, ios::in);
-               System S;
-               f >> S;
-               proteincount += S.countProteins();
-               as_count += S.countResidues();
+            console::pressY2continue();
+            continue;
+        }
+
+
+        // ### Set Loop count ###
+        if (chosen == 1) {
+            std::cout << C::BBLUE   <<    "\n" << " > Set Count of Loops for Simulated annealing.";
+            std::cout << C::BBLUE   <<    "\n" << "   Example: 100 or 1000 or more";
+            std::cout << C::BRED    <<    "\n" << "   (Please not to big: your Computer will explode)\n";
+            while (true) {
+                // input
+                string inp;
+                cout << C::BWHITE << " > Choose an integer [ int > 0 ] : \n" << C::RESET;
+                cin >> inp;
+
+                // check positive
+                int val = atoi(inp.c_str());
+                if (val < 1) {cout << C::BRED << " Your input is negative or not a valid integer : '" << val << "' \n" << C::RESET;
+                    continue;}
+
+                //
+                loopcount = val;
+                break;
             }
 
+            std::cout << C::BBLUE   << " Your input : '" << loopcount << "' \n" ;
             console::pressY2continue();
             continue;
         }
 
 
-        // ### Occurrence Matrix ###
-        if (chosen == 1) {
-            std::cout << C::BBLUE   <<    "\n" << " > Show Occurrence Matrix.\n\n";
-
-            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
-            O.print_styled();
-            string B = C::BGREEN;
-            string b = C::YELLOW;
-
-            std::cout << B << "\n" << " > Cutted after 25 columns.";
-            std::cout << B << "\n" << " > [Residue count:] "      << b << O.all_residues  << B << " [ > 0 contacts:] " << b << O.near_residues << B << " [ 0 contacts:] " << b << O.zerocontact_residues;
-            std::cout << B << "\n" << " > [Unknown AminoAcids:] " << b << O.amino_unknown << B << " [residues with contacts to 'Unknown':] " << b << O.contact_unknowns << B;
-            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
-            console::pressY2continue();
-            continue;
-        }
-
-
-        // ### Probability Matrix ###
+        // ### Simulated Annealing ###
         if (chosen == 2) {
-            std::cout << C::BBLUE   <<    "\n" << " > Show Probability Matrix.\n\n";
+            if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
+            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing with " << loopcount << " loops.\n\n";
 
-            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
-            Probability p(O);
-            p.print_styled();
-            string B = C::BGREEN;
-            string b = C::YELLOW;
+            Annealing anneal(filename);
+            anneal.evaluate(loopcount);
 
-            std::cout << B  <<    "\n" << " > Cutted after 20 columns.";
-            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
+            anneal.createHINFile(output_hin);
+
+            std::cout << C::BBLUE   <<    "\n" << " > HIN File created: " << output_hin << ".\n\n";
+
             console::pressY2continue();
             continue;
         }
@@ -160,19 +128,15 @@ int main(int argc, char* argv[])
 
         // ### Scoring Matrix ###
         if (chosen == 3) {
-            std::cout << C::BBLUE   <<    "\n" << " > Show Scoring Matrix.\n\n";
+            if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
+            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing " << loopcount << " loops.\n\n";
 
-            Occurrence O = CCP::createOccurrenceMatrixFromFiles(files);
-            Probability p(O);
-            Scoring s(O,p);
-            s.print_styled();
-            string B = C::BGREEN;
-            string b = C::YELLOW;
+            Annealing anneal(filename);
+            anneal.evaluate(loopcount);
 
-            std::cout << B   <<    "\n" << " > Cutted after 20 columns.";
-            std::cout << B << "\n" << " > Score: [500:] "      << b << s.val500  << B << " [ -500:] " << b << s.valn500 << B << " [ log(Wak):] " << b << s.vallog;
+            anneal.createOptimumFile(output_file);
 
-            std::cout << B << "\n" << " > [Maximum contact] k = " << b << (O.getColumnCount()-1) << B << "\n";
+            std::cout << C::BBLUE   <<    "\n" << " > Optimum File created: " << output_file << ".\n\n";
             console::pressY2continue();
             continue;
         }
