@@ -67,7 +67,7 @@ Occurrence CCP::createOccurrenceMatrixFromFiles(vector<string> files) {
                     // get position
 
                     Atom  *  CA       = iter->getAtom("CA");
-                    if (CA == nullptr) {cout << "null";id++;continue;}
+                    if (CA == nullptr) {id++;continue;}
                     Vector3 position  = CA->getPosition();
 
 
