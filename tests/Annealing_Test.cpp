@@ -40,9 +40,9 @@ TEST(SimAnnealing,Angle_Test) {
 
 TEST(SimAnnealing,Probability_Test) { 
 
-  long double value = Annealing::probability(0,0,0);
+  long double value = Annealing::probability(2.5,3.5,100);
 
-  EXPECT_EQ(8,9);
+  EXPECT_EQ(1.001243008,value);
 
 }
 
