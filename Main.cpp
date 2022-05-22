@@ -5,9 +5,6 @@
 
 #include "console/console.h"
 #include "console/Color.h"
-#include "ccp/CCP.h"
-#include "ccp/Probability.h"
-#include "ccp/Scoring.h"
 #include "annealing/Annealing.h"
 
 #include <iostream>
