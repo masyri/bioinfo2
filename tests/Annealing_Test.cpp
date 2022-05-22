@@ -65,20 +65,3 @@ TEST(SimAnnealing,Eval_Test) {
 }
 
 
-     * */
-    long double calc_single_E_bond(double ks, double r_actual, double r_const) {
-
-        return (ks / 2.0) * (r_actual - r_const) * (r_actual - r_const) ;
-
-    }
-
-    /**
-     * möp as the name implies :D
-     * 
-     * @param ka 
-     * @param psi_actual       
-     * @param psi_const       
-     * 
-     * */
-    long double calc_single_E_angle(double ks, double psi_actual, double psi_const) {
-
