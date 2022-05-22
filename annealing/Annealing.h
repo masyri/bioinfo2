@@ -11,8 +11,8 @@
 using namespace std;
 
 
-#define AvocadoConst 2.3    // Avocado Contant
-#define BoltzConst 3.5      // Boltzmann Constant
+#define AvocadoConst 6.02214086e+23  // Avocado Contant
+#define BoltzConst 1.38064852e-23    // Boltzmann Constant
 #define r_0 0.970           // r_0 0,970 Angström
 #define k_s 1930.0          // k_s 1930 J mol
 #define psi_0 104.5         // psi 104.5 Degree
