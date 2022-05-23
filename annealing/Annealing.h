@@ -7,6 +7,7 @@
 
 #include <complex>
 #include <vector>
+#include <BALL/KERNEL/molecule.h>
 
 using namespace std;
 
@@ -163,9 +164,9 @@ public:
     long double evaluate(int loops);
 
 
-
     int Temperature = 300; // 300K
     vector<long double> loop_results;
+    virtual Molecule* molecule; // Molekül der Hin-Datei
     
     //Molecule Mol;
 
