@@ -114,7 +114,7 @@ std::vector<std::string> console::helpText(int index) {
                  lines.push_back(" -> [Set Loop count] for change loops      ");
             break;
 
-        case 3 : lines.push_back("\033[1;32m - Simulated Annealing Stats -   ");
+        case 3 : lines.push_back("\033[1;32m - Simulated Annealing Optimum - ");
                  lines.push_back("                                           ");
                  lines.push_back(" Start Simulated Annealing algorithm       ");
                  lines.push_back(" -> Statistic File will created            ");
@@ -161,7 +161,7 @@ int console::ShowChoices(std::string file, int loop_count) {
             " Read HIN File                ",
             " Set Loops                    ",
             " Start Simulated Annealing    ",
-            " Simulated Annealing Stats    ",
+            " Simulated Annealing Optimum  ",
             " Exit Program                 "};
 
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " Hin-File   : " << C::YELLOW << file << "\n";
