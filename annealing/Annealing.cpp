@@ -9,13 +9,13 @@ long double Annealing::evaluate(int loops) {
 
     // ## Init
 
-            Water Accepted(this->molecule);
-            Water New(this->molecule);
+            Water Accepted(this->molecule,300);
+            Water New(this->molecule,300);
 
     // ## Calculate start Energy Level and
     // ## add to Optima-List
 
-            Accepted.energy = calc_energy();
+            Accepted.energy = calc_energy(&Accepted);
             this->optima.push_back(Accepted);
 
     // ## loop start
@@ -31,10 +31,10 @@ long double Annealing::evaluate(int loops) {
                     New.energy = 0;
 
                     // change Conformation
-                    assignRandomConformation(New);
+                    assignRandomConformation(&New);
 
                     // Compute E_i
-                    New.energy += calc_energy();
+                    New.energy += calc_energy(&New);
 
                     // -- Decision: If Energy less than last accepted:
 
@@ -43,7 +43,7 @@ long double Annealing::evaluate(int loops) {
 
                     // -- Decision: Energy is same or bigger
 
-                    long double P = probability_formula(New.energy,Accepted.energy,Accepted.Temperature);
+                    long double P = probability_formula(New.energy,Accepted.energy,Accepted.temperature);
 
                     if (probability(P)) { Accepted = New; continue; }
 

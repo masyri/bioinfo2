@@ -107,7 +107,10 @@ public:
 
     // create line for CSV File
 
-    std::string CSV_line(){ return std::string(energy + ";" + temperature + ";" + angle + ";" + length1 + ";" + length2);}
+    std::string CSV_line(){ 
+        std::stringstream s(""); 
+        s << energy << ";" << temperature << ";" << angle << ";" << length1 << ";" << length2; 
+        return s.str();}
 
 };
 
