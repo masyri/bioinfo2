@@ -8,9 +8,14 @@
 #include <complex>
 #include <vector>
 #include <BALL/KERNEL/molecule.h>
+#include <BALL/FORMAT/HINFile.h>
+#include <BALL/KERNEL/atom.h>
+#include <BALL/KERNEL/PTE.h>
+#include <BALL/KERNEL/system.h>
+
 
 using namespace std;
-
+using namespace BALL;
 
 #define AvocadoConst 6.02214086e+23  // Avocado Contant
 #define BoltzConst 1.38064852e-23    // Boltzmann Constant
@@ -32,6 +37,10 @@ public:
      * */
     Annealing(string filename) {
 
+            BALL::HINFile HF("../H2O.hin");
+
+            this->molecule = HF.read();
+
 
     }
 
@@ -44,8 +53,10 @@ public:
      * @param filename output file path
      * */
     void createHINFile(string filename) {
-
-
+        BALL::HINFile out("../out.hin",std::ios::out);
+        System S;
+        S.append(*molecule);
+        out.write(S);
     }
 
 
@@ -106,11 +117,32 @@ public:
      * */
     void assignRandomConformation() {
 
-        double randomlength = random(0.7,1.3);
-        // Mol.set OH Bond
+        BALL::AtomIterator ait = molecule->beginAtom();
 
-        double randomangel = random(100,120);
-        // Mol.set angle
+        BALL::Atom O , H1 , H2 ;
+        O = ait.operator*();        ait++;
+        H1 = ait.operator*();        ait++;
+        H2 = ait.operator*();
+
+        BALL::Vector3 pos_O = O.getPosition();
+        BALL::Vector3 pos_H1 = H1.getPosition();
+        BALL::Vector3 pos_H2 = H2.getPosition();
+
+        double length1 = (pos_O - pos_H1).getLength();
+        double length2 = (pos_O - pos_H2).getLength();
+
+        // Länge
+        double randomlength = random(0.7,1.3);
+
+        // Mittelpunkt H1 - H2
+        Vector3 M_Point = pos_H1 + ((pos_H2 - pos_H1) / 2.0);
+        Vector3 direction = (pos_O - M_Point).normalize() * randomlength;
+
+        // Winkel:
+        double randomangle = random(100,120) / 2.0;
+
+
+
 
     }
 
@@ -163,10 +195,11 @@ public:
      * */
     long double evaluate(int loops);
 
+    long double calc_energy() const;
 
     int Temperature = 300; // 300K
     vector<long double> loop_results;
-    virtual Molecule* molecule; // Molekül der Hin-Datei
+    Molecule* molecule; // Molekül der Hin-Datei
     
     //Molecule Mol;
 

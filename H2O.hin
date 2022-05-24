@@ -1,0 +1,5 @@
+mol 1 "water molecule (example of xyz input)"
+atom 1 - O   **  - -0.41047  0.00000   0.00000   0.00000 2 3 s 2 s
+atom 2 - H   **  -  0.20523  0.00000   0.00000   1.00000 1 1 s
+atom 3 - H   **  -  0.20523  0.00000   1.00000   0.00000 1 1 s
+endmol 1
