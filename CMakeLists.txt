@@ -58,6 +58,7 @@ add_library(predbib SHARED
 
         annealing/Annealing.h
         annealing/Annealing.cpp
+        annealing/Water.h
 
         )
 
@@ -74,7 +75,9 @@ add_executable(annealing
 
         annealing/Annealing.h
         annealing/Annealing.cpp
-)
+        annealing/Water.h
+        
+        )
 
 target_link_libraries(annealing BALL stdc++fs)
 

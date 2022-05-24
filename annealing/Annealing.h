@@ -12,7 +12,8 @@
 #include <BALL/KERNEL/atom.h>
 #include <BALL/KERNEL/PTE.h>
 #include <BALL/KERNEL/system.h>
-
+#include <BALL/KERNEL/bond.h>
+#include "Water.h"
 
 using namespace std;
 using namespace BALL;
@@ -41,8 +42,8 @@ public:
 
             this->molecule = HF.read();
 
-
     }
+
 
 
 
@@ -53,11 +54,15 @@ public:
      * @param filename output file path
      * */
     void createHINFile(string filename) {
+        if (optima.size() < 1) {std::cout << "Error, no annealing started "; return;}
         BALL::HINFile out("../out.hin",std::ios::out);
+        Water best = optima.back();
         System S;
-        S.append(*molecule);
+        S = best.createMoleculeFromTempStats();
         out.write(S);
     }
+
+
 
 
     /**
@@ -68,10 +73,17 @@ public:
      * */
     void createOptimumFile(string filename) {
 
+        std::ofstream out(filename);
 
+        // energy | temperature | angle | length1 | length2
+        out << "\"Energy\";" << "\"temperature\";" << "\"angle\";" << "\"length1\";" << "\"length2\"" << "\n";
+
+        // lines:
+        for (Water mol : this->optima) {
+           out << "\n" << mol.CSV_line();
+        }
 
     }
-
 
 
 
@@ -100,7 +112,7 @@ public:
      * @param E_old : Energy old
      * @param T     : Temperature
      * */
-    static long double probability (long double E_new,long double E_old, long double T) {
+    static long double probability_formula (long double E_new,long double E_old, long double T) {
 
         long double diff = (E_new - E_old);
         long double div = AvocadoConst * BoltzConst * T;
@@ -113,38 +125,42 @@ public:
 
 
     /**
+     * Returns with probability of bigP true otherwise false
+     *
+     * @param bigPee : your probability
+     * */
+     static bool probability(long double bigPee)
+    {
+         if (bigPee <= 0) {return false;}
+         if (bigPee >= 1) {return true;}
+
+         long double smallPee = random(0,1000000000);
+
+         smallPee /= 1000000000;
+
+         return smallPee < bigPee;
+
+    }
+
+
+
+
+
+    /**
      * Change Molecule conformations as the name implies :D
      * */
-    void assignRandomConformation() {
+    void assignRandomConformation(Water* mol) {
 
-        BALL::AtomIterator ait = molecule->beginAtom();
+        // sollen beide Bonds dieselbe oder unterschiedliche Längen bekommen?
+        mol->length1 = random(0.7,1.3);
+        mol->length2 = random(0.7,1.3);
 
-        BALL::Atom O , H1 , H2 ;
-        O = ait.operator*();        ait++;
-        H1 = ait.operator*();        ait++;
-        H2 = ait.operator*();
-
-        BALL::Vector3 pos_O = O.getPosition();
-        BALL::Vector3 pos_H1 = H1.getPosition();
-        BALL::Vector3 pos_H2 = H2.getPosition();
-
-        double length1 = (pos_O - pos_H1).getLength();
-        double length2 = (pos_O - pos_H2).getLength();
-
-        // Länge
-        double randomlength = random(0.7,1.3);
-
-        // Mittelpunkt H1 - H2
-        Vector3 M_Point = pos_H1 + ((pos_H2 - pos_H1) / 2.0);
-        Vector3 direction = (pos_O - M_Point).normalize() * randomlength;
-
-        // Winkel:
-        double randomangle = random(100,120) / 2.0;
-
-
+        // angle
+        mol->angle = random(100,120);
 
 
     }
+
 
 
 
@@ -163,6 +179,9 @@ public:
 
     }
 
+
+
+
     /**
      * möp as the name implies :D
      * 
@@ -179,11 +198,6 @@ public:
 
 
 
-
-
-
-
-
     /**
      * Simulated Annealing Evaluation:
      * A long long loop if you chose the value too high.
@@ -195,15 +209,24 @@ public:
      * */
     long double evaluate(int loops);
 
-    long double calc_energy() const;
 
-    int Temperature = 300; // 300K
-    vector<long double> loop_results;
+
+
+    /**
+     * calc energy of a molecule
+     * 
+     * @param mol 
+     * 
+     * */
+    long double calc_energy(Water* mol) const;
+
+
+    vector<Water> optima;
     Molecule* molecule; // Molekül der Hin-Datei
-    
-    //Molecule Mol;
 
 };
+
+
 
 
 #endif //ANNEALING_H
