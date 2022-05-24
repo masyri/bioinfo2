@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
     bool file            = false;
     int loopcount        = 100;
     string filename = " --- ";
-    string output_hin = "result.hin";
-    string output_file = "table.txt";
+    string output_hin = "../result.hin";
+    string output_file = "../table.csv";
 
     // ## The 'endless' loop
     while (true) {
@@ -123,10 +123,10 @@ int main(int argc, char* argv[])
         }
 
 
-        // ### Scoring Matrix ###
+        // ### Optimum ###
         if (chosen == 3) {
             if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
-            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing " << loopcount << " loops.\n\n";
+            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing " << loopcount << " loops + Optimum-Output.\n\n";
 
             Annealing anneal(filename);
             anneal.evaluate(loopcount);
