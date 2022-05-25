@@ -10,6 +10,8 @@
 #include <BALL/KERNEL/atom.h>
 #include <BALL/KERNEL/PTE.h>
 #include <BALL/KERNEL/system.h>
+#include <BALL/FORMAT/PDBFile.h>
+#include<BALL/KERNEL/bond.h>
 
 
 using namespace std;
@@ -69,6 +71,42 @@ public:
 
     System createMoleculeFromTempStats() {
 
+    System s;
+
+    BALL::Molecule m;
+
+    BALL::Atom Ox;
+    BALL::Atom H1;
+    BALL::Atom H2;
+
+    auto oxy = PTE[Element::O];
+    auto hyd = PTE[Element::H];
+
+    Ox.setElement(oxy);
+    H1.setElement(hyd);
+    H2.setElement(hyd);
+
+    BALL::Bond* a = Ox.createBond(H1);
+    BALL::Bond* b = Ox.createBond(H2);
+
+    Ox.setPosition(Vector3(0,0,0));
+    H1.setPosition(Vector3(0,length1,0));
+    H2.setPosition(Vector3(length2,0,0));
+
+    m.insert(Ox);
+    m.insert(H1);
+    m.insert(H2);
+
+    double angle_i  = angle;
+    Angle angle(angle_i, false);
+    Vector3 rotationaxis(1., 0., 0.);
+
+    Matrix4x4 mat;
+    mat.setRotation(angle, rotationaxis);
+
+    s.insert(m);
+
+    return s;
 
 /*
         BALL::AtomIterator ait = molecule->beginAtom();
