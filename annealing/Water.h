@@ -85,12 +85,32 @@ public:
     Ox.setElement(oxy);
     H1.setElement(hyd);
     H2.setElement(hyd);
+        /* Ox.setPosition(Vector3(0,0,0));
+           H1.setPosition(Vector3(length2,0,0));
+           Ox.createBond(H1);
+           H2.setPosition(Vector3(0,length1,0));
+           Ox.createBond(H2);
+         double angle_i  = angle;
+         Angle angle(angle_i, false);
+        //angle = 90?
+         Vector3 rotationaxis(0., 0., 1.);
+         Matrix4x4 mat;
+         mat.setRotation(angle, rotationaxis);
+         H2.setPosition(mat*H2.getposition());
+          m.insert(Ox);
+          m.insert(H1);
+          m.insert(H2);
+           s.insert(m);
 
+        
+        */
+      
+        
     Ox.createBond(H1);
     Ox.createBond(H2);
     H1.createBond(Ox);
     H2.createBond(Ox);
-
+    
     Ox.setPosition(Vector3(0,0,0));
     H1.setPosition(Vector3(0,length1,0));
     H2.setPosition(Vector3(length2,0,0));
@@ -101,7 +121,9 @@ public:
 
     double angle_i  = angle;
     Angle angle(angle_i, false);
+        //angle = 90?
     Vector3 rotationaxis(1., 0., 0.);
+        //(0,0,1)?
 
     Matrix4x4 mat;
     mat.setRotation(angle, rotationaxis);
