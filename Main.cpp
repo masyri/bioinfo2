@@ -111,9 +111,11 @@ int main(int argc, char* argv[])
             if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
             std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing with " << loopcount << " loops.\n\n";
 
-            Annealing anneal(filename);
-            anneal.evaluate(loopcount);
 
+            Annealing anneal(filename);
+            std::cout << C::BBLUE << "File loaded ..." << "\n";
+            anneal.evaluate(loopcount);
+            std::cout << C::BBLUE << "Annealing finished ..." << "\n";
             anneal.createHINFile(output_hin);
 
             std::cout << C::BBLUE   <<    "\n" << " > HIN File created: " << output_hin << ".\n\n";
@@ -129,7 +131,9 @@ int main(int argc, char* argv[])
             std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing " << loopcount << " loops + Optimum-Output.\n\n";
 
             Annealing anneal(filename);
+            std::cout << C::BBLUE << "File loaded ..." << "\n";
             anneal.evaluate(loopcount);
+            std::cout << C::BBLUE << "Annealing finished ..." << "\n";
 
             anneal.createOptimumFile(output_file);
 
@@ -148,4 +152,5 @@ int main(int argc, char* argv[])
 
     return 1;
 }
+
 
