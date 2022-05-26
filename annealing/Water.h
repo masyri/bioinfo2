@@ -88,6 +88,8 @@ public:
 
     Ox.createBond(H1);
     Ox.createBond(H2);
+    H1.createBond(Ox);
+    H2.createBond(Ox);
 
     Ox.setPosition(Vector3(0,0,0));
     H1.setPosition(Vector3(0,length1,0));
