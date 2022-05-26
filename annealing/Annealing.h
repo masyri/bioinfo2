@@ -54,13 +54,63 @@ public:
      * @param filename output file path
      * */
     void createHINFile(string filename) {
+
         if (optima.size() < 1) {std::cout << "Error, no annealing started "; return;}
-        BALL::HINFile out("../out.hin",std::ios::out);
+
+        BALL::HINFile out(filename,std::ios::out);
+
         Water best = optima.back();
-        System S;
-        S = best.createMoleculeFromTempStats();
+
+        System S("jep");
+
+        Molecule mol("Your temperature stressed and freezed water molecule :D");
+
+        //
+
+        BALL::Atom Ox;
+        BALL::Atom H1;
+        BALL::Atom H2;
+
+        auto oxy = PTE[Element::O];
+        auto hyd = PTE[Element::H];
+
+        Ox.setElement(oxy);
+        H1.setElement(hyd);
+        H2.setElement(hyd);
+
+        Ox.setName("Oxy");
+        H1.setName("Hydro");
+        H2.setName("Hydro");
+
+        Ox.createBond(H1);
+        Ox.createBond(H2);
+        H1.createBond(Ox);
+        H2.createBond(Ox);
+        
+        Ox.setPosition(Vector3(0,0,0));
+        H1.setPosition(Vector3(0,best.length1,0));
+        H2.setPosition(Vector3(best.length2,0,0));
+
+        mol.insert(Ox);
+        mol.insert(H1);
+        mol.insert(H2);
+
+        double angle_i  = best.angle;
+        Angle angle(angle_i, false);
+        Vector3 rotationaxis(1., 0., 0.);
+
+        Matrix4x4 mat;
+        mat.setRotation(angle, rotationaxis);
+
+        //
+
+        S.insert(mol);
+
+        cout << "Atom-Count in Molecule: " << S.countAtoms() <<" \n";
+
         out.write(S);
     }
+
 
 
 
