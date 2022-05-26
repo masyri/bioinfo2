@@ -86,8 +86,8 @@ public:
     H1.setElement(hyd);
     H2.setElement(hyd);
 
-    BALL::Bond* a = Ox.createBond(H1);
-    BALL::Bond* b = Ox.createBond(H2);
+    Ox.createBond(H1);
+    Ox.createBond(H2);
 
     Ox.setPosition(Vector3(0,0,0));
     H1.setPosition(Vector3(0,length1,0));
