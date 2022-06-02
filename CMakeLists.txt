@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(SimAnnealing VERSION 1.0.0)
+project(RMSD VERSION 1.0.0)
 
 # Add C++ compile flags
 set(CXX_FLAGS
@@ -56,15 +56,17 @@ add_library(predbib SHARED
         console/Color.cpp
         console/Color.h
 
-        annealing/Annealing.h
-        annealing/Annealing.cpp
-        annealing/Water.h
+        rmsd/RMSD.h
+        rmsd/RMSD.cpp
+        rmsd/Space.h
+        rmsd/Space.cpp
+
 
         )
 
 target_link_libraries(predbib BALL)
 
-add_executable(annealing 
+add_executable(rmsd 
 
         Main.cpp
 
@@ -73,12 +75,13 @@ add_executable(annealing
         console/Color.cpp
         console/Color.h
 
-        annealing/Annealing.h
-        annealing/Annealing.cpp
-        annealing/Water.h
+        rmsd/RMSD.h
+        rmsd/RMSD.cpp
+        rmsd/Space.h
+        rmsd/Space.cpp
         
         )
 
-target_link_libraries(annealing BALL stdc++fs)
+target_link_libraries(rmsd BALL stdc++fs)
 
 add_subdirectory(tests)
