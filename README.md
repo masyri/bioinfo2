@@ -2,7 +2,7 @@
 
 Start this program with:
 
-``` $ ./annealing``` (without arguments)
+``` $ ./rmsd``` (without arguments)
 
 - First: Load a HIN-File with this program
 
