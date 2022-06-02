@@ -23,20 +23,6 @@
 
 using namespace std;
 
-class Vector3 {
-public:
-    Vector3 (double x, double y, double z) {
-        this->x = x;
-        this->y = y;
-        this->z = z;
-    }
-
-    double x = 0;   // Coordinate x
-    double y = 0;   // Coordinate y
-    double z = 0;   // Coordinate z
-
-};
-
 class Position {
 
 public:
