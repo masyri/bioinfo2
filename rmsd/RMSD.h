@@ -7,12 +7,16 @@
 
 
 #include "Space.h"
+#include "../matrix/Matrix.h"
 
 class RMSD {
 
 public:
 
     RMSD() = default;
+
+    Matrix<Matrix<double>> calcMatrix();
+    Matrix<Matrix<double>> calcMatrix();
 
     Space P;  // Original P
     Space Q;  // Original Q

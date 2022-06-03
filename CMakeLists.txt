@@ -56,6 +56,8 @@ add_library(predbib SHARED
         console/Color.cpp
         console/Color.h
 
+        matrix/Matrix.h
+
         rmsd/RMSD.h
         rmsd/RMSD.cpp
         rmsd/Space.h
@@ -74,6 +76,8 @@ add_executable(rmsd
         console/console.h
         console/Color.cpp
         console/Color.h
+        
+        matrix/Matrix.h
 
         rmsd/RMSD.h
         rmsd/RMSD.cpp

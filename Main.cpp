@@ -5,7 +5,6 @@
 
 #include "console/console.h"
 #include "console/Color.h"
-#include "annealing/Annealing.h"
 
 #include <iostream>
 #include <fstream>
@@ -20,6 +19,8 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
+
+/*
     console::ShowHeader();
 
     // ## Program variables
@@ -147,7 +148,7 @@ int main(int argc, char* argv[])
         if (chosen == '\033') {break;}
 
     }
-
+*/
     std::cout << C::BRED   <<    "\n" << " > Program aborted.\n" << C::RESET;
 
     return 1;
