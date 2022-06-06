@@ -18,8 +18,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-
-
+    
+std::cout << "\n" << C::BWHITE << "Virus downloading ...\n";
+std::cout << "finished.\n";
+    
 /*
     console::ShowHeader();
 
