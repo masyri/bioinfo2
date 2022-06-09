@@ -5,6 +5,9 @@
 
 #include "console/console.h"
 #include "console/Color.h"
+#include "matrix/Matrix.h"
+#include "rmsd/RMSD.h"
+#include "Eigen/Jacobi"
 
 #include <iostream>
 #include <fstream>
@@ -12,6 +15,8 @@
 #include <sstream>
 
 #include <limits>
+#include <Eigen/Core>
+
 using namespace std;
 
 
@@ -21,7 +26,58 @@ int main(int argc, char* argv[])
     
 std::cout << "\n" << C::BWHITE << "Virus downloading ...\n";
 std::cout << "finished.\n";
-    
+
+RMSD rmsd;
+
+rmsd.P = RMSD::getTestSetP();
+rmsd.Q = RMSD::getTestSetQ();
+rmsd.Pc = RMSD::getTestSetP();
+rmsd.Qc = RMSD::getTestSetQ();
+rmsd.Pc.moveCenterCoordinate(rmsd.Pc.calcCenterCoordinate());
+rmsd.Qc.moveCenterCoordinate(rmsd.Pc.calcCenterCoordinate());
+
+Matrix<double> mat = rmsd.calcMatrix();
+mat.print(3);
+
+MatrixXf A = mat.convert();
+cout << "\n A: \n" << A << "\n";
+
+//JacobiSVD<MatrixXf, ComputeThinU | ComputeThinV> svd(A);
+  //  Eigen::JacobiSVD<Eigen::MatrixXf /*Eigen::ComputeFullU | Eigen::ComputeFullV*/> svd(A);
+  //  const MatrixXf& U = svd.matrixU();
+  //  const MatrixXf& V = svd.matrixV();
+
+//
+    const MatrixXf& U =  mat.convert();
+    const MatrixXf& V =  mat.convert();
+
+    cout << "\n U: \n" << U;
+    cout << "\n V: \n" << V;
+
+
+    double det = (V * U.transpose()).determinant();
+    cout << "\n sign: \n" << det;
+
+    int sign = 99;
+    if (det > 0) {sign = 1;}
+    if (det < 0) {sign = -1;}
+    if (det == 0) {sign = 0;}
+    sign = 1;
+
+    MatrixXf R = MatrixXf::Identity(3,3);
+    R(2,2) = sign;
+    cout << "\n R: \n" << R;
+    R = V * R * U.transpose();
+    cout << "\n R': \n" << R;
+    rmsd.Qc.print();
+    Matrix<double> r(3,3,2);
+    rmsd.formulaR(R);
+
+
+    rmsd.Qc.print();
+
+
+
 /*
     console::ShowHeader();
 

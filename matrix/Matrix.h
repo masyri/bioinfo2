@@ -5,6 +5,10 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <Eigen/Dense>
+#include <Eigen/Core>
+
+using Eigen::MatrixXf;
 
 using namespace std;
 
@@ -43,6 +47,33 @@ public:
     }
 
 
+    /**
+     * Matrix -> Matrix
+    * */
+    MatrixXf convert() {
+        MatrixXf mat(3,3);
+
+        for (int r = 0; r < this->_rows.size(); r++) {
+            for (int c = 0; c < this->_rows[0].size(); c++) {
+                mat(r,c) = (float)getValue(r,c);
+            }
+        }
+return mat;
+    }
+
+    /**
+     * Matrix -> Matrix
+    * */
+    Matrix convert_back(MatrixXf xf) {
+        Matrix mat(3,3,0);
+
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                mat.setValue(r,c,xf(r,c));
+            }
+        }
+        return mat;
+    }
 
 
 

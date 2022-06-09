@@ -15,8 +15,10 @@ public:
 
     RMSD() = default;
 
-    Matrix<Matrix<double>> calcMatrix();
-    Matrix<Matrix<double>> calcMatrix();
+    Matrix<double> calcMatrix();
+
+    double formula();
+    double formulaR(MatrixXf xf);
 
     Space P;  // Original P
     Space Q;  // Original Q

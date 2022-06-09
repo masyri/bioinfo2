@@ -10,7 +10,6 @@
 
 
 
-
 // Spaltenvektor mal Zeilenvektor
 Matrix<double> matrixmultiplication(double x1, double x2 ,double x3, double y1 , double y2 ,double y3) {
 
@@ -22,19 +21,20 @@ Matrix<double> matrixmultiplication(double x1, double x2 ,double x3, double y1 ,
 
 }
 
+// Spaltenvektor mal Zeilenvektor
+Matrix<double> matrixaddition3x3(Matrix<double> mat1, Matrix<double> mat2) {
 
-
-
-
-double determinante3x3(Matrix<double> M) {
-
-double a = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
-double b = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
-double c = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
-
-double d = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
-double e = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
-double f = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
+    Matrix<double> M(3,3,0);
+    M.setValue(0,0,mat1.getValue(0,0)+mat2.getValue(0,0));
+    M.setValue(0,1,mat1.getValue(0,1)+mat2.getValue(0,1));
+    M.setValue(0,2,mat1.getValue(0,2)+mat2.getValue(0,2));
+    M.setValue(1,0,mat1.getValue(1,0)+mat2.getValue(1,0));
+    M.setValue(1,1,mat1.getValue(1,1)+mat2.getValue(1,1));
+    M.setValue(1,2,mat1.getValue(1,2)+mat2.getValue(1,2));
+    M.setValue(2,0,mat1.getValue(2,0)+mat2.getValue(2,0));
+    M.setValue(2,1,mat1.getValue(2,1)+mat2.getValue(2,1));
+    M.setValue(2,2,mat1.getValue(2,2)+mat2.getValue(2,2));
+   return M;
 
 }
 
@@ -44,19 +44,25 @@ double f = M.getValue(0,0) * M.getValue(0,0) * M.getValue(0,0);
 
 
 
-Matrix<Matrix<double>> RMSD::calcMatrix() {
+
+
+
+
+Matrix<double> RMSD::calcMatrix() {
 
     int cols = this->Pc.positions.size();
     int rows = this->Qc.positions.size();
     int row = 0;
     double frac = 1.0 / cols;
 
-    Matrix<Matrix<double>> M( rows , cols , Matrix<double>(3,3,0) );
+    Matrix<double> M( rows , cols , 0 );
 
-    for (Position pc : this->Pc.positions) {
+    for (Pos pc : this->Pc.positions) {
     int col = 0;
-    for (Position qc : this->Qc.positions) {
-        M.setValue(row,col,matrixmultiplication(frac * pc.x, frac * pc.y, frac * pc.z, frac * qc.x, frac * qc.y, frac * qc.z));
+    for (Pos qc : this->Qc.positions) {
+        Matrix<double> m( rows , cols , 0 );
+        m = matrixmultiplication(frac * pc.x, frac * pc.y, frac * pc.z, frac * qc.x, frac * qc.y, frac * qc.z);
+        M = matrixaddition3x3(M,m);
         col++;
     }
     row++;
@@ -89,4 +95,41 @@ Space RMSD::getTestSetQ() {
     S.addPosition("Q.05",-3,1,6);
     S.addPosition("Q.06",2,5,1);
     return S;
+}
+
+double RMSD::formula() {
+
+    int l = Pc.positions.size();
+    double sum = 0;
+
+    for (Pos pc : Pc.positions) {
+        for (Pos qc : Qc.positions) {
+            double a = (qc.x - pc.x) * (qc.x - pc.x);
+            double b = (qc.y - pc.y) * (qc.y - pc.y);
+            double c = (qc.z - pc.z) * (qc.z - pc.z);
+            double res = a + b + c;
+            sum +=res * (1/l);
+        }
+
+    }
+    return sqrt(sum);
+}
+
+double RMSD::formulaR(MatrixXf xf) {
+
+    int l = Pc.positions.size();
+    double sum = 0;
+    Matrix<double> mat(3,3,0);
+    mat = mat.convert_back(xf);
+    this->Qc.matrixvector(mat);
+
+    for (Pos pc : Pc.positions) {
+        for (Pos qc : Qc.positions) {
+            double a = (qc.x - pc.x) * (qc.x - pc.x);
+            double b = (qc.y - pc.y) * (qc.y - pc.y);
+            double c = (qc.z - pc.z) * (qc.z - pc.z);
+            double res = a + b + c;
+        }
+    }
+    return sum;
 }
