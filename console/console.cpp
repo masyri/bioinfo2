@@ -93,32 +93,32 @@ std::vector<std::string> console::helpText(int index) {
     std::vector<std::string> lines;
 
     switch (index) {
-        case 0 : lines.push_back("\033[1;32m - Read File -                   ");
+        case 0 : lines.push_back("\033[1;32m - Translation -                 ");
                  lines.push_back("                                           ");
-                 lines.push_back("choose a HIN-File with molecule            ");
-                 lines.push_back("                                           ");
-                 lines.push_back("                                           ");
-            break;
-
-        case 1 : lines.push_back("\033[1;32m - Set Loop count -              ");
-                 lines.push_back("                                           ");
-                 lines.push_back("Set count of loops for simulated annealing ");
-                 lines.push_back(" -> Example 100 or 1000                    ");
+                 lines.push_back(" a) translate Q and P to their             ");
+                 lines.push_back("    center -> Qc,Pc                        ");
                  lines.push_back("                                           ");
             break;
 
-        case 2 : lines.push_back("\033[1;32m - Start Simulated Annealing -   ");
+        case 1 : lines.push_back("\033[1;32m - Matrix A, U and V -           ");
                  lines.push_back("                                           ");
-                 lines.push_back("Start the Simulated Annealing algorithm    ");
-                 lines.push_back(" -> HIN-File will created                  ");
-                 lines.push_back(" -> [Set Loop count] for change loops      ");
+                 lines.push_back(" b) calc Matrix A with translated Qc       ");
+                 lines.push_back("    -> and Pc                              ");
+                 lines.push_back(" c) calc JacobiSVD for Matrix U and V      ");
             break;
 
-        case 3 : lines.push_back("\033[1;32m - Simulated Annealing Optimum - ");
+        case 2 : lines.push_back("\033[1;32m - Rotate Matrix R -             ");
                  lines.push_back("                                           ");
-                 lines.push_back(" Start Simulated Annealing algorithm       ");
-                 lines.push_back(" -> Statistic File will created            ");
-                 lines.push_back(" -> [Set Loop count] for change loops      ");
+                 lines.push_back(" d) calc determinant for sign(x)           ");
+                 lines.push_back(" e) compute rotate Matrix R                ");
+                 lines.push_back("                                           ");
+            break;
+
+        case 3 : lines.push_back("\033[1;32m - RMSD -                        ");
+                 lines.push_back("                                           ");
+                 lines.push_back(" f) calc determinant for sign(x)           ");
+                 lines.push_back(" e) compute rotate Matrix R                ");
+                 lines.push_back("                                           ");
             break;
 
         case 4 : lines.push_back("\033[1;32m - Exit -                        ");
@@ -158,14 +158,14 @@ int console::ShowChoices(std::string file, int loop_count) {
     std::string marked[2] = {"\033[40m" , "\033[44m"};
 
     std::vector<std::string> choice_text = {
-            " Read HIN File                ",
-            " Set Loops                    ",
-            " Start Simulated Annealing    ",
-            " Simulated Annealing Optimum  ",
+            " Translation                  ",
+            " Matrices A, U and V          ",
+            " Rotate Matrix R              ",
+            " RMSD                         ",
             " Exit Program                 "};
 
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " Hin-File   : " << C::YELLOW << file << "\n";
-    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Loop count : " << C::BYELLOW << loop_count << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  Navigate: Arrow Keys [UP/DOWN] " << C::RESET << C::GREEN << " Proteins      : " << C::YELLOW << file << "\n";
+    std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "                    or [+] [-]   " << C::RESET << C::GREEN << " Residue count : " << C::BYELLOW << loop_count << "\n";
     std::cout << C::BWHITE << " \033[41m" << "\033[33m" << "  [Enter] Execute Item           " << C::RESET << C::GREEN << "   " << "\n";
 
     while (true) {

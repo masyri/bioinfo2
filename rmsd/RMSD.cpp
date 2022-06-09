@@ -21,7 +21,15 @@ Matrix<double> matrixmultiplication(double x1, double x2 ,double x3, double y1 ,
 
 }
 
-// Spaltenvektor mal Zeilenvektor
+
+
+/**
+ * @brief Adds two matrices of dimension 3x3
+ * 
+ * @param mat1 
+ * @param mat2 
+ * @return Matrix<double> 3x3
+ */
 Matrix<double> matrixaddition3x3(Matrix<double> mat1, Matrix<double> mat2) {
 
     Matrix<double> M(3,3,0);
@@ -48,6 +56,15 @@ Matrix<double> matrixaddition3x3(Matrix<double> mat1, Matrix<double> mat2) {
 
 
 
+
+
+/**
+ * @brief Exercise b)
+ * 
+ * calc Matrix A
+ * 
+ * @return Matrix<double> 
+ */
 Matrix<double> RMSD::calcMatrix() {
 
     int cols = this->Pc.positions.size();
@@ -74,29 +91,81 @@ Matrix<double> RMSD::calcMatrix() {
 
 
 
+/**
+ * @brief Exercise c)
+ * 
+ * calc Matrix U and V
+ * 
+ */
+void RMSD::JacobiUSV() {
 
-Space RMSD::getTestSetP() {
-    Space S;
-    S.addPosition("P.01",-4,-1,7);
-    S.addPosition("P.02",-1,-2,7);
-    S.addPosition("P.03",-8,4,7);
-    S.addPosition("P.04",-5,4,5);
-    S.addPosition("P.05",-1,-2,11);
-    S.addPosition("P.06",-3,2,6);
-    return S;
+    Matrix<double> mat_A = calcMatrix();
+    this->A = mat_A.convert();
+
+    //  Eigen::JacobiSVD<Eigen::MatrixXf /*Eigen::ComputeFullU | Eigen::ComputeFullV*/> svd(this->A);
+    //  this->U = svd.matrixU();
+    //  this->V = svd.matrixV();
+
 }
 
-Space RMSD::getTestSetQ() {
-    Space S;
-    S.addPosition("Q.01",1,2,3);
-    S.addPosition("Q.02",1,1,6);
-    S.addPosition("Q.03",1,9,-1);
-    S.addPosition("Q.04",3,7,2);
-    S.addPosition("Q.05",-3,1,6);
-    S.addPosition("Q.06",2,5,1);
-    return S;
+
+
+
+
+/**
+ * @brief Exercise d)
+ * 
+ * calc determinant of U and V for sign-value
+ * 
+ * @return double determinant
+ */
+double RMSD::signDet() {
+    return (this->V * this->U.transpose()).determinant();
 }
 
+
+
+/**
+ * @brief Exercise d)
+ * 
+ * calc rotate matrix value sign(x)
+ * 
+ * @param determinant set value with method "signDet()"
+ * @return int value for rotate matrix
+ */
+int RMSD::sign(double determinant) {
+    int sign = 99;
+    if (determinant > 0) {sign = 1;}
+    if (determinant < 0) {sign = -1;}
+    if (determinant == 0) {sign = 0;}
+    return sign;
+}
+
+
+
+
+/**
+ * @brief Exercise e)
+ * 
+ * Calc rotate matrix from the matrices V U and the identity matrix with the sign value
+ *  
+ * @param sign set value with method "sign(double determinant)"
+ */
+void RMSD::rotateR(int sign) {
+        this->R(2,2) = sign;
+        this->R = this->V * this->R * this->U.transpose();
+}
+
+
+
+
+/**
+ * @brief Exercise f)
+ * 
+ * Formula for RMSD
+ * 
+ * @return double 
+ */
 double RMSD::formula() {
 
     int l = Pc.positions.size();
@@ -115,6 +184,16 @@ double RMSD::formula() {
     return sqrt(sum);
 }
 
+
+
+
+/**
+ * @brief Exercise f)
+ * 
+ * Formula for RMSD with rotate matrix
+ * 
+ * @return double 
+ */
 double RMSD::formulaR(MatrixXf xf) {
 
     int l = Pc.positions.size();
@@ -128,8 +207,49 @@ double RMSD::formulaR(MatrixXf xf) {
             double a = (qc.x - pc.x) * (qc.x - pc.x);
             double b = (qc.y - pc.y) * (qc.y - pc.y);
             double c = (qc.z - pc.z) * (qc.z - pc.z);
-            double res = a + b + c;
+            sum += a + b + c;
         }
     }
     return sum;
+}
+
+
+
+
+
+
+
+
+
+/**
+ * @brief Test Set P
+ * 
+ * @return Space P
+ */
+Space RMSD::getTestSetP() {
+    Space S;
+    S.addPosition("P.01",-4,-1,7);
+    S.addPosition("P.02",-1,-2,7);
+    S.addPosition("P.03",-8,4,7);
+    S.addPosition("P.04",-5,4,5);
+    S.addPosition("P.05",-1,-2,11);
+    S.addPosition("P.06",-3,2,6);
+    return S;
+}
+
+
+/**
+ * @brief Test Set Q
+ * 
+ * @return Space Q
+ */
+Space RMSD::getTestSetQ() {
+    Space S;
+    S.addPosition("Q.01",1,2,3);
+    S.addPosition("Q.02",1,1,6);
+    S.addPosition("Q.03",1,9,-1);
+    S.addPosition("Q.04",3,7,2);
+    S.addPosition("Q.05",-3,1,6);
+    S.addPosition("Q.06",2,5,1);
+    return S;
 }

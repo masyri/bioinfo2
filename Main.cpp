@@ -8,6 +8,7 @@
 #include "matrix/Matrix.h"
 #include "rmsd/RMSD.h"
 #include "Eigen/Jacobi"
+#include "BALL/MATHS/vector3.h"
 
 #include <iostream>
 #include <fstream>
@@ -24,179 +25,138 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     
-std::cout << "\n" << C::BWHITE << "Virus downloading ...\n";
-std::cout << "finished.\n";
-
-RMSD rmsd;
-
-rmsd.P = RMSD::getTestSetP();
-rmsd.Q = RMSD::getTestSetQ();
-rmsd.Pc = RMSD::getTestSetP();
-rmsd.Qc = RMSD::getTestSetQ();
-rmsd.Pc.moveCenterCoordinate(rmsd.Pc.calcCenterCoordinate());
-rmsd.Qc.moveCenterCoordinate(rmsd.Pc.calcCenterCoordinate());
-
-Matrix<double> mat = rmsd.calcMatrix();
-mat.print(3);
-
-MatrixXf A = mat.convert();
-cout << "\n A: \n" << A << "\n";
-
-//JacobiSVD<MatrixXf, ComputeThinU | ComputeThinV> svd(A);
-  //  Eigen::JacobiSVD<Eigen::MatrixXf /*Eigen::ComputeFullU | Eigen::ComputeFullV*/> svd(A);
-  //  const MatrixXf& U = svd.matrixU();
-  //  const MatrixXf& V = svd.matrixV();
-
-//
-    const MatrixXf& U =  mat.convert();
-    const MatrixXf& V =  mat.convert();
-
-    cout << "\n U: \n" << U;
-    cout << "\n V: \n" << V;
-
-
-    double det = (V * U.transpose()).determinant();
-    cout << "\n sign: \n" << det;
-
-    int sign = 99;
-    if (det > 0) {sign = 1;}
-    if (det < 0) {sign = -1;}
-    if (det == 0) {sign = 0;}
-    sign = 1;
-
-    MatrixXf R = MatrixXf::Identity(3,3);
-    R(2,2) = sign;
-    cout << "\n R: \n" << R;
-    R = V * R * U.transpose();
-    cout << "\n R': \n" << R;
-    rmsd.Qc.print();
-    Matrix<double> r(3,3,2);
-    rmsd.formulaR(R);
-
-
-    rmsd.Qc.print();
-
-
-
-/*
-    console::ShowHeader();
-
     // ## Program variables
 
-    bool file            = false;
-    int loopcount        = 100;
-    string filename = " --- ";
-    string output_hin = "../result.hin";
-    string output_file = "../table.csv";
+    RMSD rmsd;
+    Space P = RMSD::getTestSetP();
+    Space Q = RMSD::getTestSetQ();
+    rmsd.P = P;
+    rmsd.Q = Q;
+    rmsd.Pc = P;
+    rmsd.Qc = Q;
+
 
     // ## The 'endless' loop
     while (true) {
 
-        char chosen = console::ShowChoices(filename,loopcount);
+        char chosen = console::ShowChoices("2",6);
 
-        // ### Open Folder ###
+
+        // ### Translation###
         if (chosen == 0) {
-            std::cout << C::BBLUE   <<    "\n" << " > Open folder ...\n";
+            std::cout << C::BBLUE   <<    "\n" << " > Translation ...\n";
 
-            file = false;
-            while (!file) {
-                // counter reset
+            Vector3 midP = rmsd.Pc.calcCenterCoordinate();
+            Vector3 midQ = rmsd.Pc.calcCenterCoordinate();
 
-                // wait for filename typing in ...
-                cout << C::BWHITE << "Type a file-path for a HIN-File in and press Enter: " << C::BRED << "(type ESC and Enter to abort)\n" << C::RESET;
-                cin >> filename;
+            std::cout << C::BBLUE   <<    "\n Protein P input : \n";rmsd.P.print();
+            std::cout << C::BBLUE   <<    "\n Protein Q input : \n";rmsd.Q.print();
 
-                // check first char ESC ... -> ABORT
-                if (filename.begin().operator*() == '\033') {file = false;break;}
-                std::ifstream infile(filename);
+            std::cout << C::BBLUE   <<    "\n\n Center P : " << midP;
+            std::cout << C::BBLUE   <<      "\n Center Q : " << midQ << "\n";
 
-                // check file exists
-                if (!infile) {
-                    cout << C::BRED << "\n > Path is invalid or not exist ’" << filename << "’ \n" << C::RESET;
-                    continue;
-                }
+            rmsd.Pc.moveCenterCoordinate(midP);
+            rmsd.Qc.moveCenterCoordinate(midQ);
 
-                bool isHIN = filename.find(".hin") != string::npos;
+            std::cout << C::BBLUE   <<    "\n Protein P centered : \n"; rmsd.Pc.print();
+            std::cout << C::BBLUE   <<    "\n Protein Q centered : \n";rmsd.Qc.print();
 
-                // check file is HIN
-                if (!isHIN) {
-                    cout << C::BRED << "\n > Path is invalid or not exist ’" << filename << "’ \n" << C::RESET;
-                    continue;
-                }
-                if (isHIN) {
-                    cout << C::BRED << "\n > Your File: ’" << filename << "’ \n" << C::RESET; file = true;
-                    break;
-                }
-
-            }
-
-            // if Abort, set file false
-            if (!file) {filename     = " --- ";continue;}
+            std::cout << C::BBLUE   <<    "\n";
 
             console::pressY2continue();
             continue;
         }
 
 
-        // ### Set Loop count ###
+        // ### Matrix A ###
         if (chosen == 1) {
-            std::cout << C::BBLUE   <<    "\n" << " > Set Count of Loops for Simulated annealing.";
-            std::cout << C::BBLUE   <<    "\n" << "   Example: 100 or 1000 or more";
-            std::cout << C::BRED    <<    "\n" << "   (Please not to big: your Computer will explode)\n";
-            while (true) {
-                // input
-                string inp;
-                cout << C::BWHITE << " > Choose an integer [ int > 0 ] : \n" << C::RESET;
-                cin >> inp;
+            std::cout << C::BBLUE   <<    "\n" << " > Matrix A, U, V ...\n";
 
-                // check positive
-                int val = atoi(inp.c_str());
-                if (val < 1) {cout << C::BRED << " Your input is negative or not a valid integer : '" << val << "' \n" << C::RESET;
-                    continue;}
+            Vector3 midP = rmsd.Pc.calcCenterCoordinate();
+            Vector3 midQ = rmsd.Pc.calcCenterCoordinate();
 
-                //
-                loopcount = val;
-                break;
-            }
+            rmsd.Pc.moveCenterCoordinate(midP);
+            rmsd.Qc.moveCenterCoordinate(midQ);
 
-            std::cout << C::BBLUE   << " Your input : '" << loopcount << "' \n" ;
+            Matrix<double> mat = rmsd.calcMatrix();
+
+            std::cout << C::BBLUE << "\n";
+
+            rmsd.JacobiUSV();
+
+            std::cout << C::BWHITE << "\n\n Matrix A: \n" << C::BBLUE << rmsd.A;
+            std::cout << C::BWHITE << "\n\n Matrix U: \n" << C::BBLUE << rmsd.U;
+            std::cout << C::BWHITE << "\n\n Matrix V: \n" << C::BBLUE << rmsd.V;
+
+
             console::pressY2continue();
             continue;
         }
 
 
-        // ### Simulated Annealing ###
+        // ### sign(x) and rotate Matrix ###
         if (chosen == 2) {
-            if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
-            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing with " << loopcount << " loops.\n\n";
+            std::cout << C::BBLUE   <<    "\n" << " > sign(x) and rotate Matrix ...\n";
 
+            Vector3 midP = rmsd.Pc.calcCenterCoordinate();
+            Vector3 midQ = rmsd.Pc.calcCenterCoordinate();
 
-            Annealing anneal(filename);
-            std::cout << C::BBLUE << "File loaded ..." << "\n";
-            anneal.evaluate(loopcount);
-            std::cout << C::BBLUE << "Annealing finished ..." << "\n";
-            anneal.createHINFile(output_hin);
+            rmsd.Pc.moveCenterCoordinate(midP);
+            rmsd.Qc.moveCenterCoordinate(midQ);
 
-            std::cout << C::BBLUE   <<    "\n" << " > HIN File created: " << output_hin << ".\n\n";
+            Matrix<double> mat = rmsd.calcMatrix();
+
+            std::cout << C::BBLUE << "\n";
+
+            rmsd.JacobiUSV();
+
+            std::cout << C::BWHITE << "\n\n Matrix A: \n" << C::BBLUE << rmsd.A;
+            std::cout << C::BWHITE << "\n\n Matrix U: \n" << C::BBLUE << rmsd.U;
+            std::cout << C::BWHITE << "\n\n Matrix V: \n" << C::BBLUE << rmsd.V;
+
+            double det = rmsd.signDet();
+
+            int sign = rmsd.sign(det);
+
+            rmsd.rotateR(sign);
+
+            std::cout << C::BWHITE << "\nDeterminant :" << C::BBLUE << det << " -> sign :" << sign;
+
+            std::cout << C::BWHITE << "\n\n Matrix V: \n" << C::BBLUE << rmsd.R;
 
             console::pressY2continue();
             continue;
         }
 
 
-        // ### Optimum ###
+        // ### RMSD ###
         if (chosen == 3) {
-            if (!file) {std::cout << C::BBLUE   <<    "\n" << " > Please choose a file first.";console::pressY2continue();;continue;}
-            std::cout << C::BBLUE   <<    "\n" << " > Start Simulated Annealing " << loopcount << " loops + Optimum-Output.\n\n";
+            std::cout << C::BBLUE   <<    "\n" << " > RMSD ...\n";
 
-            Annealing anneal(filename);
-            std::cout << C::BBLUE << "File loaded ..." << "\n";
-            anneal.evaluate(loopcount);
-            std::cout << C::BBLUE << "Annealing finished ..." << "\n";
+            Vector3 midP = rmsd.Pc.calcCenterCoordinate();
+            Vector3 midQ = rmsd.Pc.calcCenterCoordinate();
 
-            anneal.createOptimumFile(output_file);
+            rmsd.Pc.moveCenterCoordinate(midP);
+            rmsd.Qc.moveCenterCoordinate(midQ);
 
-            std::cout << C::BBLUE   <<    "\n" << " > Optimum File created: " << output_file << ".\n\n";
+            Matrix<double> mat = rmsd.calcMatrix();
+
+            std::cout << C::BBLUE << "\n";
+
+            rmsd.JacobiUSV();
+
+            double det = rmsd.signDet();
+
+            int sign = rmsd.sign(det);
+
+            rmsd.rotateR(sign);
+
+            rmsd.formula();
+            rmsd.formulaR(rmsd.R);
+
+            std::cout << C::BBLUE   <<    "\n Protein P optimum : \n"; rmsd.Pc.print();
+            std::cout << C::BBLUE   <<    "\n Protein Q optimum : \n"; rmsd.Qc.print();
+
             console::pressY2continue();
             continue;
         }
@@ -206,7 +166,7 @@ cout << "\n A: \n" << A << "\n";
         if (chosen == '\033') {break;}
 
     }
-*/
+
     std::cout << C::BRED   <<    "\n" << " > Program aborted.\n" << C::RESET;
 
     return 1;

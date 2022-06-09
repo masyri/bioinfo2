@@ -12,6 +12,7 @@
 #include <BALL/FORMAT/PDBFile.h>
 #include <string>
 #include <experimental/filesystem>
+#include "../rmsd/Space.h"
 
 
 TEST(SPACE,getCenter) {
@@ -33,7 +34,7 @@ TEST(SPACE,getCenter) {
     d.addPosition("a",0,0,-4);
     d.addPosition("a",0,0,-8);
 
-    Vector3 center = d.calcCenterCoordinate(); // -> (0,0,0)
+BALL::Vector3 center = d.calcCenterCoordinate(); // -> (0,0,0)
     
 EXPECT_TRUE(false);
 
@@ -44,7 +45,7 @@ EXPECT_TRUE(false);
 
 
 TEST(SPACE,MoveCenter) {
-
+/*
     Space S;
 
     S.addPosition("O",3,3,2);   // -> (0,0,0)
@@ -57,13 +58,14 @@ TEST(SPACE,MoveCenter) {
        
     S.moveCenterCoordinate(newCenter);
 
-    Position _1 = S.positions[0];
-    Position _2 = S.positions[1];
-    Position _3 = S.positions[2];
-    Position _4 = S.positions[3];
-    Position _5 = S.positions[4];
+    Pos p_1 = S.positions[0];
+    Pos p_2 = S.positions[1];
+    Pos p_3 = S.positions[2];
+    Pos p_4 = S.positions[3];
+    Pos p_5 = S.positions[4];
 
-EXPECT_TRUE(_1.index == "0" && _1.x == 0 && _1.y == 0 && _1.z == 0 );
+EXPECT_TRUE(p_1.index == "0" && p_1.x == 0 && p_1.y == 0 && p_1.z == 0 );
+*/
 EXPECT_TRUE(false);
 
 }

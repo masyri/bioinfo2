@@ -4,9 +4,10 @@ Start this program with:
 
 ``` $ ./rmsd``` (without arguments)
 
-- jep
-
--
+- in-build Test-Set P and Q
+- translation to center
+- create rotation matrix
+- RMSD without minimize and with rotation matrix
 
 
 
