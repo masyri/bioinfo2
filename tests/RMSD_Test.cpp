@@ -13,7 +13,7 @@
 #include <string>
 #include <experimental/filesystem>
 #include "../rmsd/Space.h"
-
+#include "../rmsd/RMSD.h"
 
 TEST(SPACE,getCenter) {
     
@@ -67,5 +67,119 @@ TEST(SPACE,MoveCenter) {
 EXPECT_TRUE(p_1.index == "0" && p_1.x == 0 && p_1.y == 0 && p_1.z == 0 );
 */
 EXPECT_TRUE(false);
+
+}
+
+TEST(RMSD,calcMatrix) {
+    RMSD rmsd;
+    Space P = RMSD::getTestSetP();
+    Space Q = RMSD::getTestSetQ();
+    rmsd.P = P;
+    rmsd.Q = Q;
+    rmsd.Pc = P;
+    rmsd.Qc = Q;
+
+    Matrix<double> M( 3 , 3 , 0 );
+    M.setValue(0,0,0);
+    M.setValue(0,1,0);
+    M.setValue(0,2,0);
+    M.setValue(1,0,0);
+    M.setValue(1,1,0);
+    M.setValue(1,2,0);
+    M.setValue(2,0,0);
+    M.setValue(2,1,0);
+    M.setValue(2,2,0);
+
+    EXPECT_EQ(M.getValue(0,0), rmsd.calcMatrix().getValue(0,0));
+    EXPECT_EQ(M.getValue(0,1), rmsd.calcMatrix().getValue(0,1));
+    EXPECT_EQ(M.getValue(0,2), rmsd.calcMatrix().getValue(0,2));
+    EXPECT_EQ(M.getValue(1,0), rmsd.calcMatrix().getValue(1,0));
+    EXPECT_EQ(M.getValue(1,1), rmsd.calcMatrix().getValue(1,1));
+    EXPECT_EQ(M.getValue(1,2), rmsd.calcMatrix().getValue(1,2));
+    EXPECT_EQ(M.getValue(2,0), rmsd.calcMatrix().getValue(2,0));
+    EXPECT_EQ(M.getValue(2,1), rmsd.calcMatrix().getValue(2,1));
+    EXPECT_EQ(M.getValue(2,2), rmsd.calcMatrix().getValue(2,2));
+}
+
+TEST(RMSD,JacobiUSV) {
+
+}
+
+TEST(RMSD,signDet) {
+    RMSD rmsd;
+    Space P = RMSD::getTestSetP();
+    Space Q = RMSD::getTestSetQ();
+    rmsd.P = P;
+    rmsd.Q = Q;
+    rmsd.Pc = P;
+    rmsd.Qc = Q;
+
+    MatrixXf U = MatrixXf::Identity(3,3);
+    MatrixXf V = MatrixXf::Identity(3,3);
+    V(1,0)= 2;
+    V(2,0)= 3;
+
+    U(0,1)= 2;
+    U(0,2)= 3;
+    rmsd.V = V;
+    rmsd.U = U;
+
+    EXPECT_EQ(1, rmsd.signDet());
+}
+
+TEST(RMSD,sign) {
+    RMSD rmsd;
+    Space P = RMSD::getTestSetP();
+    Space Q = RMSD::getTestSetQ();
+    rmsd.P = P;
+    rmsd.Q = Q;
+    rmsd.Pc = P;
+    rmsd.Qc = Q;
+
+    EXPECT_EQ(1, rmsd.sign(2.0));
+    EXPECT_EQ(-1, rmsd.sign(-2.0));
+    EXPECT_EQ(0, rmsd.sign(0.0));
+
+}
+
+TEST(RMSD,rotateR) {
+    RMSD rmsd;
+    Space P = RMSD::getTestSetP();
+    Space Q = RMSD::getTestSetQ();
+    rmsd.P = P;
+    rmsd.Q = Q;
+    rmsd.Pc = P;
+    rmsd.Qc = Q;
+
+    MatrixXf U = MatrixXf::Identity(3,3);
+    MatrixXf V = MatrixXf::Identity(3,3);
+    V(1,0)= 2;
+    V(2,0)= 3;
+
+    U(0,1)= 2;
+    U(0,2)= 3;
+    rmsd.V = V;
+    rmsd.U = U;
+
+    MatrixXf R = MatrixXf::Identity(3,3);
+    R(0,0) = 1;
+    R(0,1) = 0;
+    R(0,2) = 0;
+    R(1,0) = 4;
+    R(1,1) = 1;
+    R(1,2) = 0;
+    R(2,0) = 12;
+    R(2,1) = 0;
+    R(2,2) = 3;
+
+    rmsd.rotateR(3);
+    
+    EXPECT_EQ(R, rmsd.R);
+}
+TEST(RMSD,formula) {
+
+}
+
+TEST(RMSD,formulaR) {
 
 }
