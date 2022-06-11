@@ -80,15 +80,15 @@ TEST(RMSD,calcMatrix) {
     rmsd.Qc = Q;
 
     Matrix<double> M( 3 , 3 , 0 );
-    M.setValue(0,0,0);
-    M.setValue(0,1,0);
-    M.setValue(0,2,0);
-    M.setValue(1,0,0);
-    M.setValue(1,1,0);
-    M.setValue(1,2,0);
-    M.setValue(2,0,0);
-    M.setValue(2,1,0);
-    M.setValue(2,2,0);
+    M.setValue(0,0,-3.05556);
+    M.setValue(0,1,-15.2778);
+    M.setValue(0,2,-10.3889);
+    M.setValue(1,0,0.694444);
+    M.setValue(1,1,3.47222);
+    M.setValue(1,2,2.36111);
+    M.setValue(2,0,5.97222);
+    M.setValue(2,1,29.8611);
+    M.setValue(2,2,20.3056);
 
     EXPECT_EQ(M.getValue(0,0), rmsd.calcMatrix().getValue(0,0));
     EXPECT_EQ(M.getValue(0,1), rmsd.calcMatrix().getValue(0,1));
@@ -173,7 +173,7 @@ TEST(RMSD,rotateR) {
     R(2,2) = 3;
 
     rmsd.rotateR(3);
-    
+
     EXPECT_EQ(R, rmsd.R);
 }
 TEST(RMSD,formula) {
