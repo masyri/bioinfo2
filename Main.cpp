@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 
             std::cout << C::BWHITE << "\nDeterminant :" << C::BBLUE << det << " -> sign :" << sign;
 
-            std::cout << C::BWHITE << "\n\n Matrix V: \n" << C::BBLUE << rmsd.R;
+            std::cout << C::BWHITE << "\n\n Matrix R: \n" << C::BBLUE << rmsd.R;
 
             console::pressY2continue();
             continue;
