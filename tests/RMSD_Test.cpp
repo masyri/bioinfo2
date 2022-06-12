@@ -36,7 +36,7 @@ TEST(SPACE,getCenter) {
 
 BALL::Vector3 center = d.calcCenterCoordinate(); // -> (0,0,0)
     
-EXPECT_TRUE(false);
+EXPECT_TRUE(center.x == 0 && center.y == 0 && center.z == 0);
 
 }
 
@@ -45,7 +45,7 @@ EXPECT_TRUE(false);
 
 
 TEST(SPACE,MoveCenter) {
-/*
+
     Space S;
 
     S.addPosition("O",3,3,2);   // -> (0,0,0)
@@ -64,9 +64,11 @@ TEST(SPACE,MoveCenter) {
     Pos p_4 = S.positions[3];
     Pos p_5 = S.positions[4];
 
-EXPECT_TRUE(p_1.index == "0" && p_1.x == 0 && p_1.y == 0 && p_1.z == 0 );
-*/
-EXPECT_TRUE(false);
+EXPECT_EQ(p_1.index,"O");
+EXPECT_EQ(p_2.index,"a");
+EXPECT_EQ(p_3.index,"b");
+EXPECT_EQ(p_4.index,"c");
+EXPECT_EQ(p_5.index,"z");
 
 }
 
@@ -90,20 +92,19 @@ TEST(RMSD,calcMatrix) {
     M.setValue(2,1,29.8611);
     M.setValue(2,2,20.3056);
 
-    EXPECT_EQ(M.getValue(0,0), rmsd.calcMatrix().getValue(0,0));
-    EXPECT_EQ(M.getValue(0,1), rmsd.calcMatrix().getValue(0,1));
-    EXPECT_EQ(M.getValue(0,2), rmsd.calcMatrix().getValue(0,2));
-    EXPECT_EQ(M.getValue(1,0), rmsd.calcMatrix().getValue(1,0));
-    EXPECT_EQ(M.getValue(1,1), rmsd.calcMatrix().getValue(1,1));
-    EXPECT_EQ(M.getValue(1,2), rmsd.calcMatrix().getValue(1,2));
-    EXPECT_EQ(M.getValue(2,0), rmsd.calcMatrix().getValue(2,0));
-    EXPECT_EQ(M.getValue(2,1), rmsd.calcMatrix().getValue(2,1));
-    EXPECT_EQ(M.getValue(2,2), rmsd.calcMatrix().getValue(2,2));
+
+
+    EXPECT_NEAR(M.getValue(0,0), rmsd.calcMatrix().getValue(0,0), 0.0001);
+    EXPECT_NEAR(M.getValue(0,1), rmsd.calcMatrix().getValue(0,1), 0.0001);
+    EXPECT_NEAR(M.getValue(0,2), rmsd.calcMatrix().getValue(0,2), 0.0001);
+    EXPECT_NEAR(M.getValue(1,0), rmsd.calcMatrix().getValue(1,0), 0.0001);
+    EXPECT_NEAR(M.getValue(1,1), rmsd.calcMatrix().getValue(1,1), 0.0001);
+    EXPECT_NEAR(M.getValue(1,2), rmsd.calcMatrix().getValue(1,2), 0.0001);
+    EXPECT_NEAR(M.getValue(2,0), rmsd.calcMatrix().getValue(2,0), 0.0001);
+    EXPECT_NEAR(M.getValue(2,1), rmsd.calcMatrix().getValue(2,1), 0.0001);
+    EXPECT_NEAR(M.getValue(2,2), rmsd.calcMatrix().getValue(2,2), 0.0001);
 }
 
-TEST(RMSD,JacobiUSV) {
-
-}
 
 TEST(RMSD,signDet) {
     RMSD rmsd;
@@ -175,11 +176,4 @@ TEST(RMSD,rotateR) {
     rmsd.rotateR(3);
 
     EXPECT_EQ(R, rmsd.R);
-}
-TEST(RMSD,formula) {
-
-}
-
-TEST(RMSD,formulaR) {
-
 }
