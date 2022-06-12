@@ -61,7 +61,6 @@ add_library(predbib SHARED
         rmsd/RMSD.h
         rmsd/RMSD.cpp
         rmsd/Space.h
-        rmsd/Space.cpp
 
 
         )
@@ -82,7 +81,6 @@ add_executable(rmsd
         rmsd/RMSD.h
         rmsd/RMSD.cpp
         rmsd/Space.h
-        rmsd/Space.cpp
         
         )
 
