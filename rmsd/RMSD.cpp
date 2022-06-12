@@ -102,9 +102,9 @@ void RMSD::JacobiUSV() {
     Matrix<double> mat_A = calcMatrix();
     this->A = mat_A.convert();
 
-    //  Eigen::JacobiSVD<Eigen::MatrixXf /*Eigen::ComputeFullU | Eigen::ComputeFullV*/> svd(this->A);
-    //  this->U = svd.matrixU();
-    //  this->V = svd.matrixV();
+    Eigen::JacobiSVD<Eigen::MatrixXf> svd( this->A, Eigen::ComputeFullV | Eigen::ComputeFullU );
+    this->U = svd.matrixU();
+    this->V = svd.matrixV();
 
 }
 
