@@ -1,13 +1,10 @@
-##   Root Mean Square Deviation (RMSD)  ##
+##   Blatt 9 - Aufgabe 3  ##
 
 Start this program with:
 
-``` $ ./rmsd``` (without arguments)
+``` $ ./Rscript Main``` (without arguments)
 
-- in-build Test-Set P and Q
-- translation to center
-- create rotation matrix
-- RMSD without minimize and with rotation matrix
+- 
 
 
 
