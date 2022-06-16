@@ -4,9 +4,7 @@
 
 
 library(randomForest)
-library(tidyverse)
 library(caret)
-library(mlbench)
 source("data.R")
 source("training.R")
 
@@ -43,7 +41,7 @@ pred <- predict(fit, newdata = test_set, type = 'prob')
 pred
 
 ## confusionmatrix ##
-confusionMatrix(as.factor(pred),test_set$Methotrexate)
+confusionMatrix(pred,test_set$Methotrexate)
 
 
 #v
