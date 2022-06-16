@@ -12,7 +12,10 @@ source("training.R")
 
 ## Data
 
-genes <- openTable('data/gene_expression.txt')
+genes <- openTable('data/gene_small2.txt')
+drugs <- openTable('data/drug_small.txt')
+
+genes <- cbind(genes, drugs)
 
 split <- Splitter(genes,0.8)
 
@@ -20,23 +23,18 @@ training_set <- getTrain(genes,split)
 
 test_set <- getTest(genes,split)
 
-drugs <- openTable('data/drug_response.txt')
-
-split_drug <- Splitter(drugs,0.8)
-
-training_set_drug <- getTrain(drugs,split_drug)
-
-test_set_drug <- getTest(drugs,split_drug)
-
 # ii
 ## 5-Fold Crossvalidation ##
-trC <- trainControl(method = 'cv', number = 5)
+trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, summaryFunction = twoClassSummary)
 
 ## mtry ###
-tunegrid <- expand.grid(.mtry=c(1:70))
+tunegrid <- expand.grid(.mtry=c(1:3))
+
+training_set$Methotrexate = factor(training_set$Methotrexate)
+levels(training_set$Methotrexate) <- make.names(levels(factor(training_set$Methotrexate)))
 
 ## Train ##
-fit <- train(training_set_drug~., data = training_set, method = 'rf', metric = "ROC", tuneGrid=tunegrid, trControl = trC)
+fit <- train(Methotrexate~., data = training_set, method = 'rf', metric = "ROC", tuneGrid=tunegrid, trControl = trC)
 
 
 # iv
