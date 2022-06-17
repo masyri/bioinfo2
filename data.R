@@ -1,5 +1,62 @@
 
 
+
+
+
+
+
+#
+# Datensatz für die Argumente nach Programmaufruf
+#
+setClass(Class="Inputs",
+         representation(
+           gene_expressions="character",
+           drug="character",
+           training_set="character",
+           test_set="character"
+         )
+)
+
+
+
+#
+# Checkt Argumente 
+#
+loadArgs <- function(args) {
+  
+  cat("\n[Classificator] args:",length(args),"\n")
+
+  #
+  # Hier kommen die Strings der Dateipfade rein, wenn keine Argumente geladen wurden
+  # = Zum Ausführen in RStudio
+  #
+  input <- new("Inputs",
+               gene_expressions = 'data/expression_data.txt',
+               drug             = 'data/IC50_data.txt',
+               training_set     = 'data/binary_data.txt',
+               test_set         = 'data/cancer_gene_list.txt'
+  )
+  
+  if (length(args) == 1 ) {
+    return(input)
+  }
+  
+  if (length(args) == 4 ) {
+    input@gene_expressions = args[1]
+    input@drug             = args[2]
+    input@training_set     = args[3]
+    input@test_set         = args[4]
+    return(input)
+  }
+  
+  
+  stop("\n | You need four arguments: \n | $ ./Rscript Classificator.R <gene expression> <drug> <training set 80%> <test set 20%>\n | example: \n | $ ./Rscript Classificator.R <gene expression> <drug> <training set 80%> <test set 20%>\n\n", call.=FALSE)
+  
+  return(input)
+  
+}
+
+
 # Timer
 startTimer <- function() {
   start_time <- Sys.time()
