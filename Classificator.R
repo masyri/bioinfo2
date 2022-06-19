@@ -5,6 +5,7 @@ library(randomForest)
 library(caret)
 library(tidyselect)
 library(mltools)
+library(readtext)
 source("data.R")
 
 ## load and check arguments
@@ -27,12 +28,11 @@ drug_name = names(drugs)[1]
 
 ## feature selection
 ## selektieren von bestimmten Krebsgenen 
+text = readtext('data/cancer_gene_list.txt')
 cancer.genes <- openTable('data/cancer_gene_list.txt')
 
-str(cancer.genes[1])
-
 cancer.genes = as.vector(cancer.genes)
-genes <- subset(genes, select = c(TP53, PIK3CA, KRAS))
+genestxt <- subset(genes, select = text)
 
 ## reduse cell-line 
 # bind same cell-lines
@@ -78,8 +78,11 @@ confusionMatrix(pred,test_set$Camptothecin)
 mcc = mcc(preds = pred, actuals = training_set$Camptothecin)
 
 ## files ##
+write.table(data, file = "error_file.txt", dec = ',', sep = '\t')
 
+write.table(data, file = "trainng_file.txt", dec = ',', sep = '\t')
 
+write.table(data, file = "test_file.txt", dec = ',', sep = '\t')
 
 ## PROGRAM END
 
