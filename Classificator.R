@@ -32,13 +32,18 @@ text = readtext('data/cancer_gene_list.txt')
 cancer.genes <- openTable('data/cancer_gene_list.txt')
 
 cancer.genes = as.vector(cancer.genes)
-genestxt <- subset(genes, select = text)
+
+genes <- subset(genes, select = c(PIK3CA, KRAS))
 
 ## reduse cell-line 
 # bind same cell-lines
+##genes$new.col <- c(drugs$Camptothecin, rep(NA, nrow(genes)-length(drugs$Camptothecin)))
+#genes <- merge(x= genes,y = drugs, all.x = FALSE , all.y = FALSE)
+
 gesamt <- merge(x= genes,y = drugs, by = "row.names")
 #erase NA values
 gesamt = gesamt[complete.cases(gesamt), ]
+
 
 ## Bind and Split
 
@@ -55,6 +60,8 @@ trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, summaryFunctio
 ## mtry ###
 tunegrid <- expand.grid(.mtry=c(1:3))
 
+training_set[,c(drug_name)]
+
 training_set$Camptothecin = factor(training_set$Camptothecin)
 levels(training_set$Camptothecin) <- make.names(levels(factor(training_set$Camptothecin)))
 
@@ -63,7 +70,7 @@ fit <- train(Camptothecin~., data = training_set, method = 'rf', metric = "ROC",
 fit
 
 
-## predict ##
+## predict #
 pred <- predict(fit, newdata = test_set, type = 'prob')
 pred
 
@@ -75,7 +82,12 @@ confusionMatrix(pred,test_set$Camptothecin)
 
 ## sensitivity, specificity, Matthew’s correlation coefficient ##
 
+#  Matthew’s correlation coefficient
 mcc = mcc(preds = pred, actuals = training_set$Camptothecin)
+
+#  sensitivity
+
+#  specificity
 
 ## files ##
 write.table(data, file = "error_file.txt", dec = ',', sep = '\t')
