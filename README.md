@@ -16,7 +16,6 @@
 - caret
 - tidyselect
 - mltools
-- readtext
 
 
 > This project contains two programs, one **classificator** and one **regressor**
