@@ -10,7 +10,7 @@
 
 # 1.1 Program call: 
 
-> Before call, you need following **packages**:
+> Before start, you need following **packages**:
 
 - library(randomForest)
 - library(caret)
