@@ -15,21 +15,20 @@ timestamp <- startTimer()
 input <- loadArgs(args)
 
 
-
 ## open files from arguments
 
 drugs <- openTable(input@drug)            
-training_set <- openTable(input@training_set)    
-test_set <- openTable(input@test_set)         
 genes <- openTable(input@gene_expressions)
+
 
 ## get current Drug Name
 drug_name = names(drugs)[1]
 
 ## feature selection
 ## selektieren von bestimmten Krebsgenen 
-text = readtext('data/cancer_gene_list.txt')
-cancer.genes <- openTable('data/cancer_gene_list.txt')
+
+text = readtext(input@gene_expressions)
+cancer.genes <- openTable(input@gene_expressions)
 
 cancer.genes = as.vector(cancer.genes)
 
@@ -89,12 +88,15 @@ mcc = mcc(preds = pred, actuals = training_set$Camptothecin)
 
 #  specificity
 
+
+
 ## files ##
-write.table(data, file = "error_file.txt", dec = ',', sep = '\t')
+write.table(data, file = input@error_file, dec = ',', sep = '\t')
 
-write.table(data, file = "trainng_file.txt", dec = ',', sep = '\t')
+write.table(data, file = input@training_set, dec = ',', sep = '\t')
 
-write.table(data, file = "test_file.txt", dec = ',', sep = '\t')
+write.table(data, file = input@test_set, dec = ',', sep = '\t') 
+
 
 ## PROGRAM END
 

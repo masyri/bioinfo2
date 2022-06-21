@@ -13,7 +13,8 @@ setClass(Class="Inputs",
            gene_expressions="character",
            drug="character",
            training_set="character",
-           test_set="character"
+           test_set="character",
+           error_file="character"
          )
 )
 
@@ -33,8 +34,9 @@ loadArgs <- function(args) {
   input <- new("Inputs",
                gene_expressions = 'data/expression_data.txt',
                drug             = 'data/binary_data.txt',
-               training_set     = 'data/binary_data.txt',
-               test_set         = 'data/cancer_gene_list.txt'
+               training_set     = 'output/training_set.txt',
+               test_set         = 'output/test_set.txt',
+               error_file       = 'output/error_file.txt'
   )
   
   if (length(args) == 1 ) {

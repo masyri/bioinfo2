@@ -10,13 +10,13 @@
 
 # 1.1 Program call: 
 
-> Before start, you need following **packages**:
+> Before start, you need following **R-packages**:
 
-- library(randomForest)
-- library(caret)
-- library(tidyselect)
-- library(mltools)
-- library(readtext)
+- randomForest
+- caret
+- tidyselect
+- mltools
+- readtext
 
 
 > This project contains two programs, one **classificator** and one **regressor**
@@ -32,13 +32,13 @@
 |3          |`<training set 80%>`  |"Isn't this fun?"   
 |4          |`<test set 20%>`      |"Yes, this is fun!"   
 
- - Output:
+ - Program Output: (default folder: output/)
  
- -- Test-File
+ -> Test-File
  
- -- Training-File
+ -> Training-File
  
- -- Error-File
+ -> Error-File
 
 
 ```mermaid
