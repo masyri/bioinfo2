@@ -1,46 +1,55 @@
-##  Drug Sensitivity Prediction Challenge :smile: ##
+## Drug Sensitivity Prediction Challenge :smile:
 
-1.1 Program call
+1.0 Starting
 
-1.2 without arguments
+1.1 Program requirements
 
-2.1 Classificator description
+1.2 Program call
 
-2.2 Regressor description :smiley:
+2.0 Output :smiley:
 
-# 1.1 Program call: 
+2.1 Classificator output
 
-> Before start, you need following **R-packages**:
+2.2 Regressor output
 
-- randomForest
-- caret
-- tidyselect
-- mltools
+3.0 Default program call
 
+# 1.0 Starting
+
+## 1.1 Program requirements
+
+> Before starting the program, the following **R-packages**:
+>
+> should already be installed:
+
+-   randomForest
+-   caret
+-   tidyselect
+-   mltools
+
+## 1.2 Program call
 
 > This project contains two programs, one **classificator** and one **regressor**
+>
 > Start this programs with Rscript and the following arguments :
 
- - ``` $ ./Rscript Classificator.R <gene expression> <drug> <training set 80%> <test set 20%>``` 
- - ``` $ ./Rscript Regressor.R <gene expression> <drug> <training set 80%> <test set 20%>```
+-   `$ ./Rscript Classificator.R <gene expression> <drug> <training set 80%> <test set 20%>`
+-   `$ ./Rscript Regressor.R <gene expression> <drug> <training set 80%> <test set 20%>`
 
-|                |Argument                          |Value                         |
-|----------------|-------------------------------|-----------------------------|
-|1          |`<gene expression>`   |'Your genes'            |
-|2          |`<drug>`              |"Funny drugs :pill::see_no_evil:"            |
-|3          |`<training set 80%>`  |"Isn't this fun?"   
-|4          |`<test set 20%>`      |"Yes, this is fun!"   
+|     | Argument             | Value                             |
+|-----|----------------------|-----------------------------------|
+| 1   | `<gene expression>`  | 'Your genes'                      |
+| 2   | `<drug>`             | "Funny drugs :pill::see_no_evil:" |
+| 3   | `<training set 80%>` | "Isn't this fun?"                 |
+| 4   | `<test set 20%>`     | "Yes, this is fun!"               |
 
- - Program Output: (default folder: output/)
- 
- -> Test-File
- 
- -> Training-File
- 
- -> Error-File
+# 2.0 Output
 
+> ### A complete documentation about the results can be found in the \``/documentation`\` folder.
 
-```mermaid
+### 
+
+``` mermaid
 flowchart LR
 A[Input Data] -- split 20% --> B((Training Set))
 A[Input Data] -- split 80% --> C((Test Set))
@@ -48,24 +57,27 @@ B -- 5 fold CV --> D{Model}
 D -- obtain test error --> C
 ```
 
+## 2.1 Classificator output
 
+> coming soon
 
-# 1.2 Without Arguments: 
-> For Testing, call this program without arguments:
-``` $ ./Rscript Classificator.R ```  or
-``` $ ./Rscript Regressor.R ``` 
-> The files will search in the folder \data
+## 2.2 Regressor output
 
-
-
-
-
-# 2.1 Classificator
 > coming soon :eyes:
 
+# 
 
+# 3.0 Default call
 
+> For Testing, call this program without arguments: `$ ./Rscript Classificator.R` or `$ ./Rscript Regressor.R` The files will search in the folder \data
 
+## 
 
-# 2.2 Regressor
-> coming soon
+| arg | type                 | default value |
+|:---:|----------------------|---------------|
+|  1  | `<gene expression>`  |               |
+|  2  | `<drug>`             |               |
+|  3  | `<training set 80%>` |               |
+|  4  | `<test set 20%>`     |               |
+
+# 
