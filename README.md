@@ -9,6 +9,16 @@
 2.2 Regressor description :smiley:
 
 # 1.1 Program call: 
+
+> Before call, you need following **packages**:
+
+- library(randomForest)
+- library(caret)
+- library(tidyselect)
+- library(mltools)
+- library(readtext)
+
+
 > This project contains two programs, one **classificator** and one **regressor**
 > Start this programs with Rscript and the following arguments :
 
