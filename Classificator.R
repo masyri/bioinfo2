@@ -41,6 +41,12 @@ drug_name = names(drugs)[1]
 #genes %>% filter(if_any(.cols = all_of(cancer)))
 #genes <- subset(genes, select = cancer)
 
+cancer.genes <- openTable("data/cancer_gene_list.txt")
+
+cancer.genes <- as.character(cancer.genes[,1])
+
+genes <- subset(genes, select = cancer.genes)
+
 # fragen ob wir als input nur 1 drug bekommen oder matrix an drugs
 drugs <- subset(drugs, select = c(Camptothecin))
 genes <- subset(genes, select = c(TSPAN6, TNMD, DPM1))
