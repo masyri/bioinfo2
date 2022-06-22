@@ -54,14 +54,8 @@ gesamt = gesamt[complete.cases(gesamt), ]
 
 
 ## Bind and Split
-
-p_split <- 0.2
-
-size_data = ceiling(p_split*nrow(gesamt))
-
-test = sample(rownames(gesamt), size = size_data, replace = TRUE)
-
-training = setdiff(rownames(gesamt),test)
+training <- as.character(training_set[,1])
+test <- as.character(test_set[,1])
 
 training_matrix = gesamt[training,]
 test_matrix = gesamt[test,]
