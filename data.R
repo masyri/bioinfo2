@@ -2,9 +2,6 @@
 
 
 
-
-
-
 #
 # Datensatz für die Argumente nach Programmaufruf
 #
@@ -12,11 +9,14 @@ setClass(Class="Inputs",
          representation(
            gene_expressions="character",
            drug="character",
+           drug_data="character",
            training_set="character",
            test_set="character",
            error_file="character"
          )
 )
+
+
 
 
 
@@ -34,6 +34,7 @@ loadArgs <- function(args) {
   input <- new("Inputs",
                gene_expressions = 'data/expression_data.txt',
                drug             = 'Camptothecin',
+               drug_data        = 'data/binary_data.txt',
                training_set     = 'data/training_set.txt',
                test_set         = 'data/test_set.txt',
                error_file       = 'output/error_file.txt'
@@ -118,5 +119,4 @@ getTest <- function(table, splitter) {
   cat("[getTest] rows: ",nrow(table)," -> ",nrow(test_set),"\n")
   return(test_set)
 }
-
 
