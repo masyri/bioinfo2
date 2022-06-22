@@ -34,8 +34,8 @@ loadArgs <- function(args) {
   input <- new("Inputs",
                gene_expressions = 'data/expression_data.txt',
                drug             = 'data/binary_data.txt',
-               training_set     = 'output/training_set.txt',
-               test_set         = 'output/test_set.txt',
+               training_set     = 'data/training_set.txt',
+               test_set         = 'data/test_set.txt',
                error_file       = 'output/error_file.txt'
   )
   
