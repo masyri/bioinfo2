@@ -18,6 +18,6 @@ train  <- rownames(getTrain(table, splitter))
 
 test  <- rownames(getTest(table, splitter))
 
-write.csv(train,file="training_set.txt",row.names= FALSE, col.names = FALSE )
+write.table(train,file="training_set.txt",row.names= FALSE, col.names = FALSE )
 
-write.csv(test,file="test_set.txt",row.names= FALSE, col.names = FALSE )
+write.table(test,file="test_set.txt",row.names= FALSE, col.names = FALSE )
