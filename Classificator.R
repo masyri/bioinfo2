@@ -138,17 +138,17 @@ test_mcc <- mcc(TP = tp, FP = fp, TN = tn, FN = fn)
 
 tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, test_spec), mcc = c(cv_mcc,test_mcc))
 rownames(tab) <- c("CV Error","Test Error")
-write.table(tab, file = input@error_file, dec = ',', sep = '\t')
+write.table(tab, file = "error_file.txt", dec = ',', sep = '\t')
 
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-write.table(train_result, file = input@training_set, dec = ',', sep = '\t')
+write.table(train_result, file = "training_set_results.txt", dec = ',', sep = '\t')
 
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-write.table(test_result, file = input@test_set, dec = ',', sep = '\t') 
+write.table(test_result, file = "test_set_results.txt", dec = ',', sep = '\t') 
 
 
 ## PROGRAM END
