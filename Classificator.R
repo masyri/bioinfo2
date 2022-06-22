@@ -6,7 +6,6 @@ library(caret)
 library(tidyselect)
 library(mccr)
 library(mltools)
-#library(readtext)
 source("data.R")
 
 
