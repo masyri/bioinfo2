@@ -54,10 +54,11 @@ gesamt = gesamt[complete.cases(gesamt), ]
 training <- as.character(training_set[,1])
 test <- as.character(test_set[,1])
 
-
-
 training_matrix = gesamt[training,]
 test_matrix = gesamt[test,]
+
+training_matrix = training_matrix[complete.cases(training_matrix), ]
+test_matrix = test_matrix[complete.cases(test_matrix), ]
 
 
 ## 5-Fold Crossvalidation ##
