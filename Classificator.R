@@ -54,6 +54,8 @@ gesamt = gesamt[complete.cases(gesamt), ]
 training <- as.character(training_set[,1])
 test <- as.character(test_set[,1])
 
+
+
 training_matrix = gesamt[training,]
 test_matrix = gesamt[test,]
 
