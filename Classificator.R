@@ -22,17 +22,6 @@ genes <- openTable(input@gene_expressions)
 training_set <- openTable(input@training_set)
 test_set <- openTable(input@test_set)
 
-split <- Splitter(genes,0.8)
-tr <- getTrain(genes,split)
-te <- getTest(genes,split)
-
-tra <- rownames(tr)
-tes <- rownames(te)
-
-write.table(tra, file = "training_set.txt", dec = ',', sep = '\t',row.names = FALSE, col.names = FALSE) 
-write.table(tes, file = "test_set.txt", dec = ',', sep = '\t',row.names = FALSE, col.names = FALSE) 
-
-trai <- openTable("training_set.txt")
 drugs <- drugs[row.names(genes),, drop = FALSE]
 
 ## get current Drug Name
