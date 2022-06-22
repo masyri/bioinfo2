@@ -40,8 +40,8 @@
 |-----|----------------------|-----------------------------------|
 | 1   | `<gene expression>`  | 'Your genes'                      |
 | 2   | `<drug>`             | "Funny drugs :pill::see_no_evil:" |
-| 3   | `<training set 80%>` | "Isn't this fun?"                 |
-| 4   | `<test set 20%>`     | "Yes, this is fun!"               |
+| 3   | `<training set 80%>` | "Part of Cell-Lines for train"    |
+| 4   | `<test set 20%>`     | "Part of Cell-Lines for test"     |
 
 # 2.0 Output
 
@@ -51,8 +51,8 @@
 
 ``` mermaid
 flowchart LR
-A[Input Data] -- split 20% --> B((Training Set))
-A[Input Data] -- split 80% --> C((Test Set))
+A[Input Data] -- split 80% --> B((Training Set))
+A[Input Data] -- split 20% --> C((Test Set))
 B -- 5 fold CV --> D{Model}
 D -- obtain test error --> C
 ```
