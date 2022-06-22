@@ -4,6 +4,7 @@
 library(randomForest)
 library(caret)
 library(tidyselect)
+library(mccr)
 library(mltools)
 library(readtext)
 source("data.R")
@@ -21,7 +22,17 @@ genes <- openTable(input@gene_expressions)
 training_set <- openTable(input@training_set)
 test_set <- openTable(input@test_set)
 
+split <- Splitter(genes,0.8)
+tr <- getTrain(genes,split)
+te <- getTest(genes,split)
 
+tra <- rownames(tr)
+tes <- rownames(te)
+
+write.table(tra, file = "training_set.txt", dec = ',', sep = '\t',row.names = FALSE, col.names = FALSE) 
+write.table(tes, file = "test_set.txt", dec = ',', sep = '\t',row.names = FALSE, col.names = FALSE) 
+
+trai <- openTable("training_set.txt")
 drugs <- drugs[row.names(genes),, drop = FALSE]
 
 ## get current Drug Name
@@ -29,6 +40,9 @@ drug_name = names(drugs)[1]
 
 ## feature selection
 ## selektieren von bestimmten Krebsgenen 
+
+#correlationMatrix <- cor(genes)
+#highlyCorrelated <- findCorrelation(correlationMatrix, cutoff=0.5)
 
 #text = readtext(input@gene_expressions)
 #cancer.genes <- openTable("data/cancer_gene_list.txt")
@@ -40,9 +54,11 @@ drug_name = names(drugs)[1]
 
 # fragen ob wir als input nur 1 drug bekommen oder matrix an drugs
 drugs <- subset(drugs, select = c(Camptothecin))
+genes <- subset(genes, select = c(TSPAN6, TNMD, DPM1))
 
 ## combind data
 gesamt <- cbind(drugs, genes)
+
 
 #erase NA values
 gesamt = gesamt[complete.cases(gesamt), ]
@@ -69,13 +85,13 @@ trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, summaryFunctio
 tunegrid <- expand.grid(.mtry=c(1:3))
 
 # values from 0, 1 to factor
+training_matrix[,drug_name] = factor(training_matrix[,drug_name])
+levels(training_matrix[,drug_name]) <- make.names(levels(factor(training_matrix[,drug_name])))
 
-training_matrix[,c(drug_name)]
+test_matrix[,drug_name] = factor(test_matrix[,drug_name])
+levels(test_matrix[,drug_name]) <- make.names(levels(factor(test_matrix[,drug_name])))
 
-training_matrix$Camptothecin = factor(training_matrix$Camptothecin)
-levels(training_matrix$Camptothecin) <- make.names(levels(factor(training_matrix$Camptothecin)))
-
-# split matix again
+# split train_matrix again
 train_response = training_matrix[, drug_name]
 train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
@@ -93,11 +109,11 @@ pred_train <- predict(fit, newdata = training_matrix, type = 'prob')
 pred_train
 
 ## confusionmatrix ##
-test_matrix$Camptothecin = factor(test_matrix$Camptothecin)
-levels(test_matrix$Camptothecin) <- make.names(levels(factor(test_matrix$Camptothecin)))
+pred_test2 <- predict(fit, newdata = test_matrix)
+pred_test2
+con_m <- confusionMatrix(pred_test2, test_matrix[,drug_name])
+con_m
 
-con_m <- confusionMatrix(table(pred_test, test_matrix[,drug_name]))
-test_matrix[,drug_name]
 ## Plot
 
 varImpPlot(x = fit$finalModel , sort = TRUE)
@@ -106,33 +122,40 @@ varImpPlot(x = fit$finalModel , sort = TRUE)
 ## output ##
 
 ## sensitivity, specificity, Matthew’s correlation coefficient ##
-
-#  Matthew’s correlation coefficient
-mcc = mcc(preds = pred_test, actuals = training_set$Camptothecin)
-
 #  cross validation results
 finalm <- fit$bestTune$mtry
 cv_results <- fit$results
 cv_sens <- cv_results[cv_results$mtry == finalm , "Sens"]
 cv_spec <- cv_results[cv_results$mtry == finalm , "Spec"]
+cv_mcc <- mccr(act = test_matrix[,drug_name],pred = pred_test)
 
 #  specificity
 test_sens <- as.numeric(con_m$byClass["Sensitivity"])
 test_spec <- as.numeric(con_m$byClass["Specificity"])
 
+tp <- as.numeric(con_m$table[1])   # true positives
+fn <- as.numeric(con_m$table[2])   # false negatives
+fp <- as.numeric(con_m$table[3])   # false positives
+tn <- as.numeric(con_m$table[4])   # true negatives
+
+test_mcc <- mcc(TP = tp, FP = fp, TN = tn, FN = fn)
 
 ## files ##
 
-tab <- data.frame(sensitivity= c(cv_sens, 1), specificity= c(cv_spec, 1), mcc = c(1,1))
+tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, test_spec), mcc = c(cv_mcc,test_mcc))
 rownames(tab) <- c("CV Error","Test Error")
 write.table(tab, file = input@error_file, dec = ',', sep = '\t')
 
 write.table(pred_train, file = input@training_set, dec = ',', sep = '\t')
 
-write.table(pred_test, file = input@test_set, dec = ',', sep = '\t') 
+write.table(pred_test2, file = input@test_set, dec = ',', sep = '\t') 
 
 
 ## PROGRAM END
 
 cat("\n\n => Program finished in ",endTimer(timestamp),"seconds\n")
+
+pred_test2 <- predict(fit, newdata = test_matrix)
+pred_test2
+
 
