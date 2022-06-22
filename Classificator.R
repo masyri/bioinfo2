@@ -17,7 +17,8 @@ input <- loadArgs(args)
 
 ## open files from arguments
 
-drugs <- openTable(input@drug)            
+drug <- input@drug
+drugs <- openTable('data/binary_data.txt')
 genes <- openTable(input@gene_expressions)
 training_set <- openTable(input@training_set)
 test_set <- openTable(input@test_set)
