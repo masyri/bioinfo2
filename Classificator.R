@@ -18,12 +18,12 @@ input <- loadArgs(args)
 ## open files from arguments
 
 drug <- input@drug
-drugs <- openTable('data/binary_data.txt')
+drug_data <- openTable(input@drug_data)            
 genes <- openTable(input@gene_expressions)
 training_set <- openTable(input@training_set)
 test_set <- openTable(input@test_set)
 
-drugs <- drugs[row.names(genes),, drop = FALSE]
+drugs <- drug_data[row.names(genes),, drop = FALSE]
 
 ## get current Drug Name
 drug_name = names(drugs)[1]
