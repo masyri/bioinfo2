@@ -123,23 +123,33 @@ tn <- as.numeric(con_m$table[4])   # true negatives
 
 test_mcc <- mcc(TP = tp, FP = fp, TN = tn, FN = fn)
 
-## files ##
+
+## -- OUTPUT -- ##
+
+dir.create("output")
+folderpath <- paste("output/",drug,"/", sep = "")
+dir.create(folderpath)
+
+dev.copy(jpeg,filename=paste(folderpath,"plot.jpg"));
+dev.off ();
 
 tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, test_spec), mcc = c(cv_mcc,test_mcc))
 rownames(tab) <- c("CV Error","Test Error")
-write.table(tab, file = "error_file.txt", dec = ',', sep = '\t')
+write.table(tab, file = paste(folderpath,"error_file.txt"), dec = ',', sep = '\t')
 
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-write.table(train_result, file = "training_set_results.txt", dec = ',', sep = '\t')
+write.table(train_result, file = paste(folderpath,"training_set_results.txt"), dec = ',', sep = '\t')
 
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-write.table(test_result, file = "test_set_results.txt", dec = ',', sep = '\t') 
+write.table(test_result, file = paste(folderpath,"test_set_results.txt"), dec = ',', sep = '\t') 
+
+cat("\n\n => Output-Files saved in ",folderpath,"\n")
 
 
-## PROGRAM END
+## -- PROGRAM END -- ##
 
 cat("\n\n => Program finished in ",endTimer(timestamp),"seconds\n")
