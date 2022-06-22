@@ -19,8 +19,8 @@ input <- loadArgs(args)
 drug <- input@drug
 drug_data <- openTable(input@drug_data)            
 genes <- openTable(input@gene_expressions)
-training_set <- openTable(input@training_set)
-test_set <- openTable(input@test_set)
+training_set <- read.table(input@training_set, header = FALSE)
+test_set <- read.table(input@test_set, header = FALSE)
 
 drugs <- drug_data[row.names(genes),, drop = FALSE]
 
@@ -30,26 +30,17 @@ drug_name = names(drugs)[1]
 ## feature selection
 ## selektieren von bestimmten Krebsgenen 
 
-#correlationMatrix <- cor(genes)
-#highlyCorrelated <- findCorrelation(correlationMatrix, cutoff=0.5)
-
-#text = readtext(input@gene_expressions)
 #cancer.genes <- openTable("data/cancer_gene_list.txt")
-#cancer <- cancer.genes$TP53
-#cancer.genes = as.vector(cancer.genes)
 
-#genes %>% filter(if_any(.cols = all_of(cancer)))
-#genes <- subset(genes, select = cancer)
+#cancer.genes <- as.character(cancer.genes[,1])
 
-cancer.genes <- openTable("data/cancer_gene_list.txt")
+#genes <- genes[, colnames(genes) %in% cancer.genes]
 
-cancer.genes <- as.character(cancer.genes[,1])
-
-genes <- subset(genes, select = cancer.genes)
 
 # fragen ob wir als input nur 1 drug bekommen oder matrix an drugs
 drugs <- subset(drugs, select = c(Camptothecin))
-genes <- subset(genes, select = c(TSPAN6, TNMD, DPM1))
+#genes <- subset(genes, select = c(TSPAN6, TNMD, DPM1))
+
 
 ## combind data
 gesamt <- cbind(drugs, genes)
