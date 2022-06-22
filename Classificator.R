@@ -101,12 +101,6 @@ fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "ROC", tu
 fit
 
 
-## predict #
-pred_test <- predict(fit, newdata = test_matrix, type = 'prob')
-pred_test
-
-pred_train <- predict(fit, newdata = training_matrix, type = 'prob')
-pred_train
 
 ## confusionmatrix ##
 pred_test2 <- predict(fit, newdata = test_matrix)
@@ -127,7 +121,7 @@ finalm <- fit$bestTune$mtry
 cv_results <- fit$results
 cv_sens <- cv_results[cv_results$mtry == finalm , "Sens"]
 cv_spec <- cv_results[cv_results$mtry == finalm , "Spec"]
-cv_mcc <- mccr(act = test_matrix[,drug_name],pred = pred_test)
+cv_mcc <- mccr(act = test_matrix[,drug_name],pred = pred_test2)
 
 #  specificity
 test_sens <- as.numeric(con_m$byClass["Sensitivity"])
@@ -146,16 +140,17 @@ tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, te
 rownames(tab) <- c("CV Error","Test Error")
 write.table(tab, file = input@error_file, dec = ',', sep = '\t')
 
-write.table(pred_train, file = input@training_set, dec = ',', sep = '\t')
+pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
+train_result <- data.frame(Predicted_Response = pred_train3)
+rownames(train_result) <- rownames(training_matrix)
+write.table(train_result, file = input@training_set, dec = ',', sep = '\t')
 
-write.table(pred_test2, file = input@test_set, dec = ',', sep = '\t') 
+pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
+test_result <- data.frame(Predicted_Response = pred_test3)
+rownames(test_result) <- rownames(test_matrix)
+write.table(test_result, file = input@test_set, dec = ',', sep = '\t') 
 
 
 ## PROGRAM END
 
 cat("\n\n => Program finished in ",endTimer(timestamp),"seconds\n")
-
-pred_test2 <- predict(fit, newdata = test_matrix)
-pred_test2
-
-
