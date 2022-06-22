@@ -73,11 +73,11 @@ D -- obtain test error --> C
 
 ## 
 
-| arg | type                 | default value |
-|:---:|----------------------|---------------|
-|  1  | `<gene expression>`  |               |
-|  2  | `<drug>`             |               |
-|  3  | `<training set 80%>` |               |
-|  4  | `<test set 20%>`     |               |
+| arg | type                 | default PATH                   |
+|:---:|----------------------|--------------------------------|
+|  1  | `<gene expression>`  | "/data/expression_data.txt"    |
+|  2  | `<drug>`             | "/data/binary_data.txt"        |
+|  3  | `<training set 80%>` | "/data/training_set.txt"       |
+|  4  | `<test set 20%>`     | "/data/test_set.txt"           |
 
 # 
