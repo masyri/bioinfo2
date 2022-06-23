@@ -8,7 +8,6 @@
 setClass(Class="Inputs",
          representation(
            gene_expressions="character",
-           drug="character",
            drug_data="character",
            training_set="character",
            test_set="character",
@@ -33,22 +32,25 @@ loadArgs <- function(args) {
   #
   input <- new("Inputs",
                gene_expressions = 'data/expression_data.txt',
-               drug             = 'Camptothecin',
-               drug_data        = 'data/binary_data.txt',
+               drug_data        = 'd4.txt',
                training_set     = 'data/training_set.txt',
                test_set         = 'data/test_set.txt',
                error_file       = 'output/error_file.txt'
   )
   
-  if (length(args) == 1 ) {
+  if (length(args) == 0 ) {
     return(input)
   }
   
   if (length(args) == 4 ) {
     input@gene_expressions = args[1]
-    input@drug             = args[2]
+    input@drug_data        = args[2]
     input@training_set     = args[3]
     input@test_set         = args[4]
+    cat(" 1 :",input@gene_expressions,"\n")
+    cat(" 2 :",input@drug_data,"\n")
+    cat(" 3 :",input@training_set,"\n")
+    cat(" 4 :",input@test_set,"\n")
     return(input)
   }
   
