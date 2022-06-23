@@ -22,10 +22,11 @@
 >
 > should already be installed:
 
--   randomForest
--   caret
--   tidyselect
--   mltools
+- randomForest
+- caret
+- tidyselect
+- mltools
+- ROSE
 
 ## 1.2 Program call
 
@@ -59,7 +60,12 @@ D -- obtain test error --> C
 
 ## 2.1 Classificator output
 
-> coming soon
+> Files will be saved in folder `output\drugname`
+
+- Plots
+- Test-Result-File
+- Error-Result-File
+- Training-Result-File
 
 ## 2.2 Regressor output
 
@@ -76,7 +82,7 @@ D -- obtain test error --> C
 | arg | type                 | default PATH                   |
 |:---:|----------------------|--------------------------------|
 |  1  | `<gene expression>`  | "/data/expression_data.txt"    |
-|  2  | `<drug>`             | "Camptothecin"                 |
+|  2  | `<drug>`             | "/data/binary_data.txt"        |
 |  3  | `<training set 80%>` | "/data/training_set.txt"       |
 |  4  | `<test set 20%>`     | "/data/test_set.txt"           |
 
