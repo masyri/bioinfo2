@@ -24,6 +24,7 @@ test_set <- read.table(input@test_set, header = FALSE)
 
 drugs <- drug_data[row.names(genes),, drop = FALSE]
 
+cat("\n => prepare data ...","\n")
 ## get current Drug Name
 drug_name = names(drugs)[1]
 
@@ -80,6 +81,7 @@ train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
 
 ## Train ##
+cat("\n => start training ...","\n")
 fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "ROC", tuneGrid=tunegrid, trControl = trC)
 fit
 
