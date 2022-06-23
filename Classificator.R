@@ -138,7 +138,7 @@ cat("\nplot 4\n")
 
 ## Plot 5
 b_plot <- c(cv_sens,cv_spec,cv_mcc)
-barplot(b_plot,horiz = FALSE)
+barplot(b_plot,horiz = FALSE , ylim = c(-1,1), ylab = "value", col = c("red","orange","yellow"), names.arg = c("Sensitivity", "Specificity", "Matthew’s correlation coefficient"))
 dev.copy(jpeg,filename=paste(folderpath,"plot5.jpg"));
 dev.off ();
 cat("\nplot 5\n")
