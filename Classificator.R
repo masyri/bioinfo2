@@ -105,60 +105,57 @@ test_mcc <- mcc(TP = tp, FP = fp, TN = tn, FN = fn)
 
 ## -- OUTPUT -- ##
 
-dir.create("output_classificator",showWarnings = FALSE)
-folderpath <- paste("output/",drug_name,"/", sep = "")
-dir.create(folderpath,showWarnings = FALSE)
-
+folderpath <- createFolderAndPath("output_classificator",drug_name)
 
 ## Plots ##
 
 ## Plot 1
 varImpPlot(x = fit$finalModel , sort = TRUE, main = drug_name)
-dev.copy(jpeg,filename=paste(folderpath,"plot1.jpg", sep = "")));
+dev.copy(jpeg,filename = concat(folderpath,"plot1.jpg") );
 dev.off ();
-cat("\nplot 1\n")
+
 
 ## Plot 2
 plot(fit, main = drug_name)
-dev.copy(jpeg,filename=paste(folderpath,"plot2.jpg", sep = "")));
+dev.copy(jpeg,filename = concat(folderpath,"plot2.jpg") );
 dev.off ();
-cat("\nplot 2\n")
+
 
 ## Plot 3
 plot(fit$finalModel, main = "Barplot")
-dev.copy(jpeg,filename=paste(folderpath,"plot3.jpg", sep = "")));
+dev.copy(jpeg,filename = concat(folderpath,"plot3.jpg") );
 dev.off ();
-cat("\nplot 3\n")
+
 
 ## Plot 4
 plot(pred_test2, test_matrix[,drug_name], xlab = "predicted", ylab = "actuals")
-dev.copy(jpeg,filename=paste(folderpath,"plot4.jpg", sep = "")));
+dev.copy(jpeg,filename = concat(folderpath,"plot4.jpg") );
 dev.off ();
-cat("\nplot 4\n")
+
 
 ## Plot 5
 b_plot <- c(cv_sens,cv_spec,cv_mcc)
 barplot(b_plot,horiz = FALSE , ylim = c(-1,1), ylab = "value", col = c("red","orange","yellow"), names.arg = c("Sensitivity", "Specificity", "Matthew’s correlation coefficient"))
-dev.copy(jpeg,filename=paste(folderpath,"plot5.jpg", sep = "")));
+dev.copy(jpeg,filename = concat(folderpath,"plot5.jpg") );
 dev.off ();
-cat("\nplot 5\n")
+
 
 ## Error File
 tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, test_spec), mcc = c(cv_mcc,test_mcc))
 rownames(tab) <- c("CV Error","Test Error")
-write.table(tab, file = paste(folderpath,"error_file.txt", sep = "")), dec = ',', sep = '\t')
+write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\t')
 
 ## Training result file
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-write.table(train_result, file = paste(folderpath,"training_set_results.txt", sep = "")), dec = ',', sep = '\t')
+write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t')
 
 ## Test result file
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-write.table(test_result, file = paste(folderpath,"test_set_results.txt", sep = "")), dec = ',', sep = '\t') 
+write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t') 
 
 ## out
 cat("\n\n => Output-Files saved in ",folderpath,"\n")
