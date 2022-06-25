@@ -14,7 +14,7 @@ source("data.R")
 ## load and check arguments
 args = commandArgs(trailingOnly=TRUE)
 timestamp <- startTimer()
-input <- loadArgs(args,"Regressor")
+input <- loadArgs(args, "Regressor")
 
 ## open files from arguments
 cat("\n => load argument files ... \n")
@@ -25,9 +25,7 @@ test_set <- read.table(input@test_set, header = FALSE)
 
 drugs <- drug_data[row.names(genes),, drop = FALSE]
 
-
 ## get current Drug Name
-
 cat("\n => prepare data ... \n")
 drug_name = names(drugs)[1]
 
@@ -138,19 +136,25 @@ dev.off ();
 ## Error File
 tab <- data.frame(MSE= c(cv_mse, test_mse))
 rownames(tab) <- c("CV Error","Test Error")
-write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\t')
+write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Training result file
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t')
+# factor back to 0 and 1
+levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X0"] <- "0"
+levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X1"] <- "1"
+write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Test result file
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t') 
+# factor back to 0 and 1
+levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X0"] <- "0"
+levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X1"] <- "1"
+write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t', quote = FALSE) 
 
 
 ## out

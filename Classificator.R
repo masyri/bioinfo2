@@ -13,7 +13,7 @@ source("data.R")
 ## load and check arguments
 args = commandArgs(trailingOnly=TRUE)
 timestamp <- startTimer()
-input <- loadArgs(args,"Classificator")
+input <- loadArgs(args, "Classificator")
 
 ## open files from arguments
 cat("\n => load argument files ... \n")
@@ -92,8 +92,10 @@ finalm <- fit$bestTune$mtry
 cv_results <- fit$results
 cv_sens <- cv_results[cv_results$mtry == finalm , "Sens"]
 cv_spec <- cv_results[cv_results$mtry == finalm , "Spec"]
-cv_mcc <- mcc(actuals = test_matrix[,drug_name],preds = pred_test2)
+cv_results
 
+cv_mcc <- mcc(confusionM =  actuals = test_matrix[,drug_name],preds = pred_test2)
+mcc <-mcc(confusionM =  fit$finalModel$confusion[1:2])
 #  test results
 test_sens <- as.numeric(con_m$byClass["Sensitivity"])
 test_spec <- as.numeric(con_m$byClass["Specificity"])
@@ -102,6 +104,7 @@ tp <- as.numeric(con_m$table[1])   # true positives
 fn <- as.numeric(con_m$table[2])   # false negatives
 fp <- as.numeric(con_m$table[3])   # false positives
 tn <- as.numeric(con_m$table[4])   # true negatives
+
 
 test_mcc <- mcc(TP = tp, FP = fp, TN = tn, FN = fn)
 
