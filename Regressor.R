@@ -14,7 +14,7 @@ source("data.R")
 ## load and check arguments
 args = commandArgs(trailingOnly=TRUE)
 timestamp <- startTimer()
-input <- loadArgs(args)
+input <- loadArgs(args,"Regressor")
 
 ## open files from arguments
 cat("\n => load argument files ... \n")
@@ -25,8 +25,9 @@ test_set <- read.table(input@test_set, header = FALSE)
 
 drugs <- drug_data[row.names(genes),, drop = FALSE]
 
-cat("\n => prepare data ...","\n")
+
 ## get current Drug Name
+
 cat("\n => prepare data ... \n")
 drug_name = names(drugs)[1]
 
