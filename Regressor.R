@@ -14,7 +14,7 @@ source("data.R")
 ## load and check arguments
 args = commandArgs(trailingOnly=TRUE)
 timestamp <- startTimer()
-input <- loadArgs(args)
+input <- loadArgs(args,"Regressor")
 
 ## open files from arguments
 cat("\n => load argument files ... \n")
