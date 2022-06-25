@@ -55,7 +55,7 @@ training_matrix = training_matrix[complete.cases(training_matrix), ]
 test_matrix = test_matrix[complete.cases(test_matrix), ]
 
 ## 5-Fold Crossvalidation ##
-trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, sampling = "rose", verboseIter = T)
+trC <- trainControl(method = 'cv', number = 5, verboseIter = T)
 
 ## mtry ###
 tunegrid <- expand.grid(.mtry=c(2:10))
@@ -66,7 +66,7 @@ train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
 ## Train ##
 cat("\n => training ... \n")
-fit <- train(x = train_exe, y= train_response, method = 'rf', importance = TRUE, tuneGrid=tunegrid, trControl = trC)
+fit <- train(x = train_exe, y= train_response, method = 'rf',tuneGrid=tunegrid, trControl = trC)
 fit
 cat("\n => training finished \n")
 
@@ -84,8 +84,8 @@ cv_mse <- MSE(y_pred = data, y_true = data2)
 cv_mse2 <- mse(preds = data, actuals = data2)
 
 #Test Error
-test_mse <- MSE(y_pred = data, y_true = data2)
-test_mse2 <- mse(preds = data, actuals = data2)
+test_mse <- MSE(y_pred = pred_test2, y_true = test_matrix[,drug_name])
+test_mse2 <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
 
 
 ## -- OUTPUT -- ##
