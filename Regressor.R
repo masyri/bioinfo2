@@ -60,13 +60,6 @@ trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, sampling = "ro
 ## mtry ###
 tunegrid <- expand.grid(.mtry=c(2:10))
 
-# values from 0, 1 to factor X0 X1
-#training_matrix[,drug_name] = factor(training_matrix[,drug_name])
-#levels(training_matrix[,drug_name]) <- make.names(levels(factor(training_matrix[,drug_name])))
-
-#test_matrix[,drug_name] = factor(test_matrix[,drug_name])
-#levels(test_matrix[,drug_name]) <- make.names(levels(factor(test_matrix[,drug_name])))
-
 # split train_matrix again
 train_response = training_matrix[, drug_name]
 train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
@@ -142,18 +135,12 @@ write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-# factor back to 0 and 1
-levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X0"] <- "0"
-levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X1"] <- "1"
 write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Test result file
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-# factor back to 0 and 1
-levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X0"] <- "0"
-levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X1"] <- "1"
 write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t', quote = FALSE) 
 
 
