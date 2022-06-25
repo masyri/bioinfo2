@@ -122,3 +122,27 @@ getTest <- function(table, splitter) {
   return(test_set)
 }
 
+
+
+#
+# erstellt Ordner und Unterordner und gibt den Pfad zurück
+#
+createFolderAndPath <-function(foldername,subfolder){
+  dir.create(foldername,showWarnings = FALSE)
+  folderpath <- paste(foldername,"/",subfolder,"/", sep = "")
+  dir.create(folderpath,showWarnings = FALSE)
+  return(folderpath)
+}
+
+#
+# Fügt Dateinamen zusammen
+#
+concat <-function(foldername,filename){
+  path <- paste(foldername,filename, sep = "")
+  cat( " :: File created ->",path,"\n")
+  return(path)
+}
+
+
+
+
