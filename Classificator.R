@@ -68,6 +68,9 @@ levels(test_matrix[,drug_name]) <- make.names(levels(factor(test_matrix[,drug_na
 train_response = training_matrix[, drug_name]
 train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
+#seed
+set.seed(45)
+
 ## Train ##
 cat("\n => training ... \n")
 fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "ROC", tuneGrid=tunegrid, trControl = trC)
@@ -143,19 +146,25 @@ dev.off ();
 ## Error File
 tab <- data.frame(sensitivity= c(cv_sens, test_sens), specificity= c(cv_spec, test_spec), mcc = c(cv_mcc,test_mcc))
 rownames(tab) <- c("CV Error","Test Error")
-write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\t')
+write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Training result file
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
-write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t')
+# factor back to 0 and 1
+levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X0"] <- "0"
+levels(train_result$Predicted_Response)[levels(train_result$Predicted_Response) == "X1"] <- "1"
+write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Test result file
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
-write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t') 
+# factor back to 0 and 1
+levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X0"] <- "0"
+levels(test_result$Predicted_Response)[levels(test_result$Predicted_Response) == "X1"] <- "1"
+write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t', quote = FALSE) 
 
 ## out
 cat("\n\n => Output-Files saved in ",folderpath,"\n")
