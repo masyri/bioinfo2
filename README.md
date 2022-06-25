@@ -69,7 +69,7 @@ D -- obtain test error --> C
 
 ## 2.2 Regressor output
 
-> Files will be saved in folder `output_classificator\drugname` :eyes:
+> Files will be saved in folder `output_regressor\drugname` :eyes:
 
 - Plots
 - Test-Result-File
