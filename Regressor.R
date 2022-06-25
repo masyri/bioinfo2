@@ -1,5 +1,5 @@
 #
-#  ``` $ ./Rscript Regressor.R <gene expression> <drug> <training set 80%> <test set 20%>``` 
+#  ``` $ Rscript Regressor.R <gene expression> <drug> <training set 80%> <test set 20%>``` 
 #
 library(randomForest)
 library(caret)
