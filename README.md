@@ -60,7 +60,7 @@ D -- obtain test error --> C
 
 ## 2.1 Classificator output
 
-> Files will be saved in folder `output\drugname`
+> Files will be saved in folder `output_classificator\drugname`
 
 - Plots
 - Test-Result-File
@@ -69,7 +69,12 @@ D -- obtain test error --> C
 
 ## 2.2 Regressor output
 
-> coming soon :eyes:
+> Files will be saved in folder `output_classificator\drugname` :eyes:
+
+- Plots
+- Test-Result-File
+- Error-Result-File
+- Training-Result-File 
 
 # 
 
