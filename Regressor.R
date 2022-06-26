@@ -57,7 +57,7 @@ test_matrix = test_matrix[complete.cases(test_matrix), ]
 ## 5-Fold Crossvalidation ##
 trC <- trainControl(method = 'cv', number = 5, verboseIter = T)
 
-## mtry ###
+## mtry ### hohe mytry ist gut 
 tunegrid <- expand.grid(.mtry=c(2:10))
 
 # split train_matrix again
@@ -69,7 +69,7 @@ set.seed(45)
 
 ## Train ##
 cat("\n => training ... \n")
-fit <- train(x = train_exe, y= train_response, method = 'rf',tuneGrid=tunegrid, trControl = trC)
+fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "RMSE",tuneGrid=tunegrid, trControl = trC)
 fit
 cat("\n => training finished \n")
 
@@ -89,7 +89,7 @@ cv_results$mtry
 cv_mse <- mse(preds = data, actuals = data2)
 
 #Test Error
-test_mse <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
+test_mse4 <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
 
 ## -- OUTPUT -- ##
 
