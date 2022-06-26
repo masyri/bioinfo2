@@ -80,12 +80,13 @@ con_m
 ## results ##
 ## mean squared error ##
 # CV Error
-cv_mse <- MSE(y_pred = data, y_true = data2)
-cv_mse2 <- mse(preds = data, actuals = data2)
+finalm <- fit$bestTune$mtry
+cv_results <- fit$results
+cv_results$mtry
+cv_mse <- mse(y_pred = data, y_true = data2)
 
 #Test Error
-test_mse <- MSE(y_pred = pred_test2, y_true = test_matrix[,drug_name])
-test_mse2 <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
+test_mse <- mse(y_pred = pred_test2, y_true = test_matrix[,drug_name])
 
 
 ## -- OUTPUT -- ##
