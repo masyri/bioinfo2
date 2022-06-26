@@ -64,6 +64,9 @@ tunegrid <- expand.grid(.mtry=c(2:10))
 train_response = training_matrix[, drug_name]
 train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
+#seed
+set.seed(45)
+
 ## Train ##
 cat("\n => training ... \n")
 fit <- train(x = train_exe, y= train_response, method = 'rf',tuneGrid=tunegrid, trControl = trC)
@@ -83,11 +86,10 @@ con_m
 finalm <- fit$bestTune$mtry
 cv_results <- fit$results
 cv_results$mtry
-cv_mse <- mse(y_pred = data, y_true = data2)
+cv_mse <- mse(preds = data, actuals = data2)
 
 #Test Error
-test_mse <- mse(y_pred = pred_test2, y_true = test_matrix[,drug_name])
-
+test_mse <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
 
 ## -- OUTPUT -- ##
 
@@ -136,12 +138,14 @@ write.table(tab, file = concat(folderpath,"error_file.txt"), dec = ',', sep = '\
 pred_train3 <- predict(fit, newdata = training_matrix, type = 'raw')
 train_result <- data.frame(Predicted_Response = pred_train3)
 rownames(train_result) <- rownames(training_matrix)
+train_result
 write.table(train_result, file = concat(folderpath,"training_set_results.txt"), dec = ',', sep = '\t', quote = FALSE)
 
 ## Test result file
 pred_test3 <- predict(fit, newdata = test_matrix, type = 'raw')
 test_result <- data.frame(Predicted_Response = pred_test3)
 rownames(test_result) <- rownames(test_matrix)
+test_result
 write.table(test_result, file = concat(folderpath,"test_set_results.txt"), dec = ',', sep = '\t', quote = FALSE) 
 
 

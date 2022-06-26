@@ -93,7 +93,7 @@ cv_results <- fit$results
 cv_sens <- cv_results[cv_results$mtry == finalm , "Sens"]
 cv_spec <- cv_results[cv_results$mtry == finalm , "Spec"]
 cv_results
-
+fit$bestTune
 cv_mcc <- mcc(confusionM =  actuals = test_matrix[,drug_name],preds = pred_test2)
 mcc <-mcc(confusionM =  fit$finalModel$confusion[1:2])
 #  test results
