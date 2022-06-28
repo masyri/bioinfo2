@@ -25,8 +25,9 @@ test_set <- read.table(input@test_set, header = FALSE)
 drugs <- drug_data[row.names(genes),, drop = FALSE]
 
 cat("\n => prepare data ...","\n")
+
 ## get current Drug Name
-cat("\n => prepare data ... \n")
+
 drug_name = names(drugs)[1]
 
 ## feature selection
