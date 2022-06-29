@@ -53,7 +53,7 @@ training_matrix = training_matrix[complete.cases(training_matrix), ]
 test_matrix = test_matrix[complete.cases(test_matrix), ]
 
 ## 5-Fold Crossvalidation ##
-trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, summaryFunction = twoClassSummary, sampling = "rose", verboseIter = T)
+trC <- trainControl(method = 'cv', number = 5, classProbs = TRUE, summaryFunction = twoClassSummary, sampling = "rose", verboseIter = T, savePredictions = "final")
 
 ## mtry ###
 tunegrid <- expand.grid(.mtry=c(2:10))
@@ -93,10 +93,11 @@ finalm <- fit$bestTune$mtry
 cv_results <- fit$results
 cv_sens <- cv_results[cv_results$mtry == finalm , "Sens"]
 cv_spec <- cv_results[cv_results$mtry == finalm , "Spec"]
-cv_results
-fit$bestTune
-cv_mcc <- mcc(confusionM =  actuals = test_matrix[,drug_name],preds = pred_test2)
-mcc <-mcc(confusionM =  fit$finalModel$confusion[1:2])
+
+pred <- fit$pred
+pred
+cv_mcc <- mcc(actuals = pred$obs,preds = pred$pred)
+
 #  test results
 test_sens <- as.numeric(con_m$byClass["Sensitivity"])
 test_spec <- as.numeric(con_m$byClass["Specificity"])

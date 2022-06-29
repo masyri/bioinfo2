@@ -55,7 +55,7 @@ training_matrix = training_matrix[complete.cases(training_matrix), ]
 test_matrix = test_matrix[complete.cases(test_matrix), ]
 
 ## 5-Fold Crossvalidation ##
-trC <- trainControl(method = 'cv', number = 5, verboseIter = T)
+trC <- trainControl(method = 'cv', number = 5, verboseIter = T, savePredictions = "final")
 
 ## mtry ### hohe mytry ist gut 
 tunegrid <- expand.grid(.mtry=c(2:10))
@@ -85,11 +85,12 @@ con_m
 # CV Error
 finalm <- fit$bestTune$mtry
 cv_results <- fit$results
-cv_results$mtry
-cv_mse <- mse(preds = data, actuals = data2)
+pred <- fit$pred
+pred
+cv_mse <- mse(preds = pred$pred, actuals = pred$obs)
 
 #Test Error
-test_mse4 <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
+test_mse <- mse(preds = pred_test2, actuals = test_matrix[,drug_name])
 
 ## -- OUTPUT -- ##
 
@@ -109,13 +110,6 @@ plot(fit, main = drug_name)
 dev.copy(jpeg,filename = concat(folderpath,"plot2.jpg") );
 dev.off ();
 
-
-## Plot 3
-plot(fit$finalModel, main = "Barplot")
-dev.copy(jpeg,filename = concat(folderpath,"plot3.jpg") );
-dev.off ();
-
-
 ## Plot 4
 plot(pred_test2, test_matrix[,drug_name], xlab = "predicted", ylab = "actuals")
 dev.copy(jpeg,filename = concat(folderpath,"plot4.jpg") );
@@ -123,8 +117,8 @@ dev.off ();
 
 
 ## Plot 5
-b_plot <- c(cv_sens,cv_spec,cv_mcc)
-barplot(b_plot,horiz = FALSE , ylim = c(-1,1), ylab = "value", col = c("red","orange","yellow"), names.arg = c("Sensitivity", "Specificity", "Matthew’s correlation coefficient"))
+b_plot <-  c(cv_mse, test_mse)
+barplot(b_plot,horiz = FALSE , ylab = "value", col = c("red","orange"), names.arg =  c("CV Error","Test Error"))
 dev.copy(jpeg,filename = concat(folderpath,"plot5.jpg") );
 dev.off ();
 
