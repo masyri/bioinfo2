@@ -74,11 +74,9 @@ fit
 cat("\n => training finished \n")
 
 
-## confusionmatrix ##
+## predict ##
 pred_test2 <- predict(fit, newdata = test_matrix)
 pred_test2
-con_m <- confusionMatrix(pred_test2, test_matrix[,drug_name])
-con_m
 
 ## results ##
 ## mean squared error ##
