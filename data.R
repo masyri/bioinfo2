@@ -22,9 +22,10 @@ setClass(Class="Inputs",
 #
 # Checkt Argumente 
 #
-loadArgs <- function(args) {
+loadArgs <- function(args,programname) {
   
-  cat("\n[Classificator] args:",length(args),"\n")
+  cat("\n[",programname,"] args:",length(args),"\n")
+
 
   #
   # Hier kommen die Strings der Dateipfade rein, wenn keine Argumente geladen wurden
