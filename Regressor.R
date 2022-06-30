@@ -5,7 +5,6 @@ library(randomForest)
 library(caret)
 library(tidyselect)
 library(mltools)
-library(ROSE)
 library(MLmetrics)
 source("data.R")
 
@@ -22,6 +21,7 @@ training_set <- read.table(input@training_set, header = FALSE)
 test_set <- read.table(input@test_set, header = FALSE)
 
 drugs <- drug_data[row.names(genes),, drop = FALSE]
+
 
 ## get current Drug Name
 cat("\n => prepare data ... \n")
@@ -61,6 +61,7 @@ train_exe = training_matrix[, !(colnames(training_matrix)%in% drug_name)]
 
 #seed
 set.seed(45)
+
 
 ## Train ##
 cat("\n => training ... \n")
