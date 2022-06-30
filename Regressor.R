@@ -25,10 +25,7 @@ drugs <- drug_data[row.names(genes),, drop = FALSE]
 
 ## get current Drug Name
 cat("\n => prepare data ... \n")
-drug_name = names(drugs)[3]
-
-### subset von Medikaments bilden
-drugs <- subset(drugs, select = c(Afatinib))
+drug_name = names(drugs)[1]
 
 ## feature selection
 ## selektieren von bestimmten Krebsgenen
