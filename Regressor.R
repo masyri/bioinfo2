@@ -9,8 +9,6 @@ library(ROSE)
 library(MLmetrics)
 source("data.R")
 
-
-
 ## load and check arguments
 args = commandArgs(trailingOnly=TRUE)
 timestamp <- startTimer()
@@ -27,10 +25,10 @@ drugs <- drug_data[row.names(genes),, drop = FALSE]
 
 ## get current Drug Name
 cat("\n => prepare data ... \n")
-drug_name = names(drugs)[1]
+drug_name = names(drugs)[3]
 
 ### subset von Medikaments bilden
-drugs <- subset(drugs, select = c(Camptothecin))
+drugs <- subset(drugs, select = c(Afatinib))
 
 ## feature selection
 ## selektieren von bestimmten Krebsgenen
@@ -58,7 +56,7 @@ test_matrix = test_matrix[complete.cases(test_matrix), ]
 trC <- trainControl(method = 'cv', number = 5, verboseIter = T, savePredictions = "final")
 
 ## mtry ### hohe mytry ist gut 
-tunegrid <- expand.grid(.mtry=c(2:10))
+tunegrid <- expand.grid(.mtry=c(2:15))
 
 # split train_matrix again
 train_response = training_matrix[, drug_name]
@@ -69,7 +67,7 @@ set.seed(45)
 
 ## Train ##
 cat("\n => training ... \n")
-fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "RMSE",tuneGrid=tunegrid, trControl = trC)
+fit <- train(x = train_exe, y= train_response, method = 'rf', metric = "RMSE", tuneGrid=tunegrid, trControl = trC)
 fit
 cat("\n => training finished \n")
 
@@ -97,15 +95,10 @@ folderpath <- createFolderAndPath("output_regressor",drug_name)
 
 ## Plots ##
 
-## Plot 1
-varImpPlot(x = fit$finalModel , sort = TRUE, main = drug_name)
-dev.copy(jpeg,filename = concat(folderpath,"plot1.jpg") );
-dev.off ();
-
-
-## Plot 2
-plot(fit, main = drug_name)
-dev.copy(jpeg,filename = concat(folderpath,"plot2.jpg") );
+## Plot 3
+pred_train2 <- predict(fit, newdata = training_matrix)
+plot(pred_train2, training_matrix[,drug_name], xlab = "predicted", ylab = "actuals")
+dev.copy(jpeg,filename = concat(folderpath,"plot3.jpg") );
 dev.off ();
 
 ## Plot 4
